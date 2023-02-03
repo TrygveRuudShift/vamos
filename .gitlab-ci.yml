@@ -17,6 +17,7 @@ deploy:
   image: node:19
   script:
     - echo "Deploying to Vercel"
+    - echo $VERCEL_TOKEN
     - npx vercel login --token $VERCEL_TOKEN
     - npx vercel 
   only:
