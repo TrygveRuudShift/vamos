@@ -5,12 +5,21 @@ stages:
 build:
   stage: build
   script:
+    - echo "Building the project"
     - npm ci
     - npm run build
+  only:
+    - master
 
 deploy:
   stage: deploy
   script:
-    - vercel deploy
+    - echo "Deploying to Vercel"
+    - npx vercel login --token $VERCEL_TOKEN
+    - npx vercel
   only:
-    - main
+    - master
+  environment:
+    name: production
+  variables:
+    VERCEL_TOKEN: $VERCEL_TOKEN
