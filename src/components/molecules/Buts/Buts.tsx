@@ -1,4 +1,4 @@
-import {Butt} from '../atoms/Butt';
+import {Butt} from "../../atoms/Button/Butt"
 
 interface ButtonProps {
   children: React.ReactNode;
