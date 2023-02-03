@@ -16,7 +16,7 @@ deploy:
   script:
     - echo "Deploying to Vercel"
     - npx vercel login --token $VERCEL_TOKEN
-    - npx vercel
+    - npx vercel 
   only:
     - master
   environment:
