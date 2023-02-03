@@ -18,7 +18,6 @@ export default function Login() {
   const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.400", "white");
 
-  console.log(signInImage);
   return (
     <Flex position="relative" mb="40px">
       <Flex
