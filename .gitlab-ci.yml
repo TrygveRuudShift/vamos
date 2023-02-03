@@ -18,6 +18,10 @@ deploy:
   script:
     - echo "Deploying to Vercel"
     - npx vercel --token $VERCEL_TOKEN
+    # ? Set up and deploy “${CI_PROJECT_NAME}”? [Y/n]
+    - echo "Y"
+    
+
   only:
     - main
     - merge_requests
