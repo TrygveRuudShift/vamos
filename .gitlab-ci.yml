@@ -18,7 +18,7 @@ deploy:
   script:
     - echo "Deploying to Vercel"
     # ? Which scope do you want to deploy to? 
-    - echo "y\n" | npx vercel --token $VERCEL_TOKEN
+    - echo "\n" | echo "y" | npx vercel --token $VERCEL_TOKEN
   only:
     - main
     - merge_requests
