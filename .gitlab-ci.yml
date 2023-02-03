@@ -10,18 +10,16 @@ build:
     - npm ci
     - npm run build
   only:
-    - main
+    - merge_requests
 
 deploy:
   stage: deploy
   image: node:19
   script:
     - echo "Deploying to Vercel"
-    # ? Which scope do you want to deploy to? 
     - npx vercel --token $VERCEL_TOKEN --confirm=n 
   only:
     - main
-    - merge_requests
   environment:
     name: production
   variables:
