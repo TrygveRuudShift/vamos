@@ -4,7 +4,7 @@ stages:
 
 build:
   stage: build
-  image: node:14
+  image: node:19
   script:
     - echo "Building the project"
     - npm ci
@@ -14,7 +14,7 @@ build:
 
 deploy:
   stage: deploy
-  image: node:14
+  image: node:19
   script:
     - echo "Deploying to Vercel"
     - npx vercel login --token $VERCEL_TOKEN
