@@ -17,7 +17,8 @@ deploy:
   image: node:19
   script:
     - echo "Deploying to Vercel"
-    - echo "y" | npx vercel --token $VERCEL_TOKEN
+    # ? Which scope do you want to deploy to? 
+    - echo "y\n" | npx vercel --token $VERCEL_TOKEN
   only:
     - main
     - merge_requests
