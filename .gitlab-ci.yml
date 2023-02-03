@@ -20,7 +20,8 @@ deploy:
     - npx vercel login --token $VERCEL_TOKEN
     - npx vercel 
   only:
-    - master
+    - main
+    - merge_requests
   environment:
     name: production
   variables:
