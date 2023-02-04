@@ -1,4 +1,18 @@
 export default {
+  colorTheme1: {
+    100: "#f79afc",
+    main: {},
+    secondary: {},
+    third: {},
+    fourth: {},
+  },
+
+  colorTheme2: {
+    100: "#4FD1C5",
+  },
+
+  colorTheme3: {},
+
   brand: {
     100: "#f79afc",
     900: "#1af02c",

@@ -11,7 +11,7 @@ export const SignInButton: React.FC<ButtonProps> = ({ children, ...props }) => {
       <Button
         fontSize="10px"
         type="submit"
-        bg={colors.teal[300]}
+        bg={colors.colorTheme1[100]}
         w="100%"
         h="45"
         mb="20px"
