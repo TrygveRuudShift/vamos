@@ -1,8 +1,7 @@
-import React from 'react';
 import { Butt } from './Butt';
 
 export default {
-  title: 'Button',
+  title: 'atom/Button',
   component: Butt,
 };
 
