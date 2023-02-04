@@ -12,7 +12,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import signInImage from "assets/img/signInImage.png";
-import {SignInButton} from "components/atoms/SignInButton/SignInButton";
+import { SignInButton } from "components/atoms/SignInButton/SignInButton";
 
 export default function Login() {
   // Chakra color mode
@@ -89,9 +89,7 @@ export default function Login() {
                   Remember me
                 </FormLabel>
               </FormControl>
-              <SignInButton  href="/register">
-                SIGN IN
-              </SignInButton>
+              <SignInButton href="/register">SIGN IN</SignInButton>
             </FormControl>
             <Flex
               flexDirection="column"
@@ -102,7 +100,12 @@ export default function Login() {
             >
               <Text color={textColor} fontWeight="medium">
                 Don't have an account?
-                <Link color={titleColor}  ms="5px" fontWeight="bold" href="/register" >
+                <Link
+                  color={titleColor}
+                  ms="5px"
+                  fontWeight="bold"
+                  href="/register"
+                >
                   Sign Up
                 </Link>
               </Text>
@@ -125,8 +128,7 @@ export default function Login() {
             bgPosition="50%"
             position="absolute"
             borderBottomLeftRadius="20px"
-          >
-          </Box>
+          ></Box>
         </Box>
       </Flex>
     </Flex>
