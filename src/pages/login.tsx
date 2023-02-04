@@ -11,8 +11,8 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import signInImage from "../assets/img/signInImage.png";
-import {SignInButton} from "../components/atoms/SignInButton/SignInButton";
+import signInImage from "assets/img/signInImage.png";
+import {SignInButton} from "components/atoms/SignInButton/SignInButton";
 
 export default function Login() {
   // Chakra color mode
