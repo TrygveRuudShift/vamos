@@ -1,8 +1,7 @@
-import React from 'react';
 import { Buts } from './Buts';
 
 export default {
-  title: 'BUTS',
+  title: 'molecules/BUTS',
   component: Buts,
 };
 
