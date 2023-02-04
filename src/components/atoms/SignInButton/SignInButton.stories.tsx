@@ -5,4 +5,4 @@ export default {
   component: SignInButton,
 };
 
-export const Text = () => <SignInButton>Sign in here</SignInButton>;
+export const Sign_In = () => <SignInButton>Sign in here</SignInButton>;

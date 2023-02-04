@@ -1,7 +1,6 @@
 import { Button } from "@chakra-ui/react";
 import colors from "../../../styles/colors";
 
-
 interface ButtonProps {
   children: React.ReactNode;
   [key: string]: any;
