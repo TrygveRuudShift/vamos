@@ -3,6 +3,7 @@ import { SignInButton } from "./SignInButton";
 export default {
   title: 'atom/Sign_in_button',
   component: SignInButton,
+  args : { children : 'Sign in' },
 };
 
-export const Sign_In = () => <SignInButton>Sign in here</SignInButton>;
+export const Default = {}
