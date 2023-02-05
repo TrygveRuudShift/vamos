@@ -4,6 +4,7 @@ import {
   Button,
   FormControl,
   FormLabel,
+  Badge,
   Heading,
   Input,
   Link,
@@ -89,7 +90,7 @@ export default function Login() {
                   Remember me
                 </FormLabel>
               </FormControl>
-              <SignInButton href="/register">SIGN IN</SignInButton>
+              <SignInButton>SIGN IN</SignInButton>
             </FormControl>
             <Flex
               flexDirection="column"

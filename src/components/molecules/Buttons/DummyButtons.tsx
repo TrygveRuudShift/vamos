@@ -1,18 +1,19 @@
 import { DummyButton } from "../../atoms/Button/DummyButton";
+import { Box } from "@chakra-ui/react";
 
 interface ButtonsProps {
-  children: React.ReactNode;
   size?: "small" | "medium" | "large";
+  onClick?: () => void;
   [key: string]: any;
 }
 
-export const DummyButtons: React.FC<ButtonsProps> = ({size, children, ...props}) => {
+export const DummyButtons: React.FC<ButtonsProps> = ({size, onClick, children, ...props}) => {
   return (
-    <div>
-      <DummyButton size={size} {...props}>{children}</DummyButton>
-      <DummyButton size={size} {...props}>{children}</DummyButton>
-      <DummyButton size={size} {...props}>{children}</DummyButton>
-    </div>
+    <Box>
+      <DummyButton size={size} onClick={onClick} {...props}>{children}</DummyButton>
+      <DummyButton size={size} onClick={onClick} {...props}>{children}</DummyButton>
+      <DummyButton size={size} onClick={onClick} {...props}>{children}</DummyButton>
+    </Box>
   );
     
 };

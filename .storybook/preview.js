@@ -1,14 +1,18 @@
-// colortheme for storybook chakra ui
+import { extendTheme } from '@chakra-ui/react'
+import colors from "../src/styles/colors";
+const theme = extendTheme({
+  colors,
+  });
 
-// import { extendTheme, ChakraProvider } from '@chakra-ui/react'
-// import { addDecorator } from '@storybook/react'
-import theme from '../src/styles/theme'
-
-// addDecorator((storyFn) => (
-//   <ChakraProvider theme={theme}
-//   >
-//     {storyFn()}
-//   </ChakraProvider>
-// ))
-
-
+export const parameters = {
+  actions: { argTypesRegex: "^on[A-Z].*" },
+  controls: {
+    matchers: {
+      color: /(background|color)$/i,
+      date: /Date$/,
+    },
+  },
+  chakra: {
+    theme,
+  },
+};
