@@ -1,12 +1,11 @@
+import { Button } from "@chakra-ui/react"; 
 interface ButtonProps {
-  children: React.ReactNode;
   size?: "small" | "medium" | "large";
+  onClick?: () => void;
   [key: string]: any;
 }
 
-
-// Small is the default size
-export const DummyButton: React.FC<ButtonProps> = ({ children, size, ...props }) => {
+export const DummyButton: React.FC<ButtonProps> = ({ children, onClick, size, ...props }) => {
 
   let fontsize = undefined;
   if (size) {
@@ -15,12 +14,9 @@ export const DummyButton: React.FC<ButtonProps> = ({ children, size, ...props })
     if (size === "large") fontsize = 20;
   }
 
-  return (
-    <button
-      {...props}
-      style={{ fontSize: fontsize }}
-    >
+  return ( 
+    <Button onClick={onClick} bg="teal.300" fontSize={fontsize} {...props}>
       {children}
-    </button>
+      </Button>
   );
 };

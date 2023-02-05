@@ -1,10 +1,9 @@
-import React from 'react';
 import { DummyButton } from './DummyButton';
 
 export default {
   title: 'atom/DummyButton',
   component: DummyButton,
-  args : { children : 'Button' },
+  args : { children : 'Button', size : "small" },
 };
 
 export const Default = {}

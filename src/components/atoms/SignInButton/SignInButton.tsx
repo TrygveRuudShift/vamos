@@ -1,8 +1,5 @@
 import { Button } from "@chakra-ui/react";
-import colors from "../../../styles/colors";
-
 interface ButtonProps {
-  children: React.ReactNode;
   [key: string]: any;
 }
 
@@ -11,7 +8,7 @@ export const SignInButton: React.FC<ButtonProps> = ({ children, ...props }) => {
       <Button
         fontSize="10px"
         type="submit"
-        bg={colors.colorTheme1[100]}
+        bg="brand.100"
         w="100%"
         h="45"
         mb="20px"
@@ -20,10 +17,10 @@ export const SignInButton: React.FC<ButtonProps> = ({ children, ...props }) => {
         border={0}
         borderRadius="5px"
         _hover={{
-          bg: colors.teal[200],
+          bg: "teal.200"
         }}
         _active={{
-          bg: colors.teal[400]
+          bg: "teal.400"
         }}
       >
         {children}

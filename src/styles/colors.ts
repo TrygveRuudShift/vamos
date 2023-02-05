@@ -1,6 +1,6 @@
 export default {
   colorTheme1: {
-    100: "#f79afc",
+    "100": "#f79afc",
     main: {},
     secondary: {},
     third: {},
@@ -8,14 +8,21 @@ export default {
   },
 
   colorTheme2: {
-    100: "#4FD1C5",
+    "100": "#4FD1C5",
   },
 
   colorTheme3: {},
 
   brand: {
-    100: "#f79afc",
-    900: "#1af02c",
+    "100": "#f79afc",
+    "200": "#f79afc",
+    "300": "#f79afc",
+    "400": "#f79afc",
+    "500": "#f79afc",
+    "600": "#f79afc",
+    "700": "#f79afc",
+    "800": "#f79afc",
+    "900": "#1af02c",
   },
   transparent: "transparent",
   current: "currentColor",
