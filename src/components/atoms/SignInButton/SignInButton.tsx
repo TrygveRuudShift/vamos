@@ -6,7 +6,7 @@ interface ButtonProps {
 export const SignInButton: React.FC<ButtonProps> = ({ children, ...props }) => {
   return (
       <Button
-        fontSize="10px"
+        fontSize="14px"
         type="submit"
         bg="brand.100"
         w="100%"
