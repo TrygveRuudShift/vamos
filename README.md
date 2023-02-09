@@ -3,6 +3,13 @@ This is a project for the course [TDT4140 - Software Engineering](https://www.nt
 
 The application is built using [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/), [Storybook](https://storybook.js.org/), [Vercel](https://vercel.com/), [Firebase](https://firebase.google.com/) and [Chakra UI](https://chakra-ui.com/).
 
+## For developers
+For insparation [GitHub Repo](https://github.com/creativetimofficial/purity-ui-dashboard)
+
+This is the repository for the example project that is used in the figma. Would recommend to clone this repo and use it as a starting point for your issues.
+
+For a live demo of the repo, check out [Purity UI Dashboard](https://demos.creative-tim.com/purity-ui-dashboard).
+
 ## Getting Started
 
 First install the dependencies:
