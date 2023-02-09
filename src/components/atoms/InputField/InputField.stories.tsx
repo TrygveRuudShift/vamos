@@ -3,7 +3,7 @@ import { InputField } from './InputField';
 export default {
     title: 'atom/InputField',
     component: InputField,
-    args : { children : 'InputField', type : "text" },
+    args : { children : 'InputField', type : "text", borderWidth : "thin", borderRadius : "medium" },
 };
 
 export const Default = {}
