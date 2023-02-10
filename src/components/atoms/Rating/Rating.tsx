@@ -5,7 +5,7 @@ import { Text } from '@chakra-ui/react'
 interface RatingProps {
     size?: "small" | "medium" | "large";
     [key: string]: any;
-    stars?: number;
+    stars: number;
   }
   
   export const Rating: React.FC<RatingProps> = ({ size, stars, ...props }) => {
@@ -28,7 +28,7 @@ interface RatingProps {
     }
   
     return ( 
-        <Box display='flex' alignItems='center'>
+        <Box display='flex' alignItems='center' {...props}>
             <StarIcon boxSize={boxsize} color='yellow.300' />
             <Text fontSize={fontsize}> {stars + "/5"}</Text>
         </Box>
