@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // Assets
-import BgSignUp from "../assets/img/BgSignUp.png";
+import BgSignUp from "assets/img/BgSignUp.png";
 import { SignInButton } from "components/atoms/SignInButton/SignInButton";
 
 export default function Register() {
