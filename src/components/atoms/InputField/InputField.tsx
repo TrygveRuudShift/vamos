@@ -5,12 +5,11 @@ interface InputFieldProps {
     type?: "text" | "password";
     size?: "thin" | "medium" | "thick";
     radius?: "short" | "medium" | "long";
-    value: string;
-    [key: string]: any;
+    style: React.CSSProperties;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const InputField = ({ placeholder, type, value, size, radius, onChange, ...props }: InputFieldProps) => {
+export const InputField: React.FC<InputFieldProps> = ({ placeholder, type, size, radius, onChange, style }: InputFieldProps) => {
 
     let borderWidth = undefined;
     if (size) {
@@ -27,7 +26,7 @@ export const InputField = ({ placeholder, type, value, size, radius, onChange, .
     }
 
     return (
-        <Input placeholder={placeholder} type={type} value={value} borderWidth={borderWidth} borderRadius={borderRadius} {...props} onChange={onChange} />
+        <Input placeholder={placeholder} type={type} borderWidth={borderWidth} borderRadius={borderRadius} style={style} onChange={onChange} />
     )
 }
 
