@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 // Assets
 import BgSignUp from "assets/img/BgSignUp.png";
-import { SignInButton } from "components/atoms/SignInButton/SignInButton";
+import { SignInButton, InputField } from "components/atoms/";
 
 export default function Register() {
   const titleColor = useColorModeValue("teal.300", "teal.200");
@@ -91,39 +91,15 @@ export default function Register() {
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Name
             </FormLabel>
-            <Input
-              fontSize="sm"
-              ms="4px"
-              borderRadius="15px"
-              type="text"
-              placeholder="Your full name"
-              mb="24px"
-              size="lg"
-            />
+            <InputField placeholder="Your full name" radius="medium"></InputField>
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Email
             </FormLabel>
-            <Input
-              fontSize="sm"
-              ms="4px"
-              borderRadius="15px"
-              type="email"
-              placeholder="Your email address"
-              mb="24px"
-              size="lg"
-            />
+            <InputField placeholder="Your email address" radius="medium"></InputField>
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Password
             </FormLabel>
-            <Input
-              fontSize="sm"
-              ms="4px"
-              borderRadius="15px"
-              type="password"
-              placeholder="Your password"
-              mb="24px"
-              size="lg"
-            />
+            <InputField placeholder="Your password" radius="medium" type="password"></InputField>
             <FormControl display="flex" alignItems="center" mb="24px">
               <Switch id="remember-login" colorScheme="teal" me="10px" />
               <FormLabel htmlFor="remember-login" mb="0" fontWeight="normal">
