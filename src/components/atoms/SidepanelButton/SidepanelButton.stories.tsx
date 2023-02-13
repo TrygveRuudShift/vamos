@@ -5,4 +5,4 @@ export default {
   component: SidepanelButton,
 };
 
-export const Default = { args : { selected : true, children : 'Sidepanel' } }
+export const Default = { args : { size : 'medium', iconString : 'AiFillHome', selected : true, children : 'Sidepanel' } }
