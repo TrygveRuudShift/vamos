@@ -125,7 +125,7 @@ export default function Index() {
           </Box>
         </Box>
 
-        {/* PROSJECT panels */}
+        {/* PROJECT PANELS */}
         <Flex mt="70px" flexDirection="column" gap="20px">
           <Card p="16px" display="inline-block" borderRadius="2xl">
             <CardHeader p="12px">
