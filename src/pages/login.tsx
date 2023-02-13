@@ -60,11 +60,11 @@ export default function Login() {
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Email
               </FormLabel>
-              <InputField placeholder="Your email address" radius="medium"></InputField>
+              <InputField placeholder="Your email address" radius="medium"/>
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Password
               </FormLabel>
-              <InputField placeholder="Your password" radius="medium" type="password"></InputField>
+              <InputField placeholder="Your password" radius="medium" type="password"/>
               <FormControl display="flex" alignItems="center">
                 <Switch id="remember-login" colorScheme="teal" me="10px" />
                 <FormLabel
