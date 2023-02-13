@@ -1,6 +1,7 @@
 import { Button } from "@chakra-ui/react";
 interface ButtonProps {
   [key: string]: any;
+  onclick?: () => void;
 }
 
 export const SignInButton: React.FC<ButtonProps> = ({ children, ...props }) => {
@@ -22,6 +23,7 @@ export const SignInButton: React.FC<ButtonProps> = ({ children, ...props }) => {
         _active={{
           bg: "teal.400"
         }}
+        {...props}
       >
         {children}
       </Button>
