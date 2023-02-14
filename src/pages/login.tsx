@@ -70,25 +70,11 @@ export default function Login() {
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Email
               </FormLabel>
-              <Input
-                borderRadius="15px"
-                mb="14px"
-                fontSize="sm"
-                type="text"
-                placeholder="Your email adress"
-                size="lg"
-              />
+              <InputField placeholder="Your email address" radius="medium"/>
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Password
               </FormLabel>
-              <Input
-                borderRadius="15px"
-                mb="18px"
-                fontSize="sm"
-                type="password"
-                placeholder="Your password"
-                size="lg"
-              />
+              <InputField placeholder="Your password" radius="medium" type="password"/>
               <FormControl display="flex" alignItems="center">
                 <Switch id="remember-login" colorScheme="teal" me="10px" />
                 <FormLabel

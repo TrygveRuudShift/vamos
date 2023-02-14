@@ -26,7 +26,7 @@ export const InputField: React.FC<InputFieldProps> = ({ placeholder, type, size,
     }
 
     return (
-        <Input fontSize="sm" ms="4px" mb="24px" size="lg" placeholder={placeholder} type={type} borderWidth={borderWidth} borderRadius={borderRadius} style={style} onChange={onChange} />
+        <Input fontSize="sm" ms="4px" mb="14px" size="lg" placeholder={placeholder} type={type} borderWidth={borderWidth} borderRadius={borderRadius} style={style} onChange={onChange} />
     )
 }
 
