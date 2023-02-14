@@ -14,9 +14,25 @@ import {
   Avatar,
 } from "@chakra-ui/react";
 import BgSignUp from "assets/img/BgSignUp.png";
+import { useState } from "react";
+
+// firebase
+import { auth } from "../firebase/clientApp";
+
 
 export default function Index() {
   const textColor = useColorModeValue("gray.700", "white");
+
+
+  // Logic to set user state
+  const [user, setUser] = useState(auth.currentUser);
+  auth.onAuthStateChanged((user) => {
+    setUser(user);
+  });
+
+
+
+
   return (
     <Flex pt="20px">
       {/* SIDEPANEL */}
@@ -75,7 +91,8 @@ export default function Index() {
                 showBorder={true}
               />
               <Text fontWeight="bold" mr="10px">
-                Hi, Full Name!{" "}
+                {/* Hi, Full Name!{" "} */}
+                {user ? `Hello ${user.displayName}` : "You are logged out"}
               </Text>
               <SettingsIcon boxSize="20px" />
             </Flex>
