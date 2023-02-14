@@ -8,9 +8,9 @@ export default {
     args : {},
 };
 
-export const Default = { args : {title : 'VAMOS', backgroundtype : 'blur', children : 'NavBar'} }
+export const Default = { args : {backgroundtype : 'blur', children : 'NavBar'} }
 
-export const Clear = { args : {title : 'Title', backgroundtype : 'clear', children : 'Clear'} }
-export const Blur = { args : {title : 'Title', backgroundtype : 'blur', children : 'Blur'} }
+export const Clear = { args : {backgroundtype : 'clear', children : 'Clear'} }
+export const Blur = { args : {backgroundtype : 'blur', children : 'Blur'} }
 
 
