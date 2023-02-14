@@ -23,15 +23,11 @@ import { auth } from "../firebase/clientApp";
 export default function Index() {
   const textColor = useColorModeValue("gray.700", "white");
 
-
   // Logic to set user state
   const [user, setUser] = useState(auth.currentUser);
   auth.onAuthStateChanged((user) => {
     setUser(user);
   });
-
-
-
 
   return (
     <Flex pt="20px">
