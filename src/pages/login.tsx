@@ -25,7 +25,7 @@ export default function Login() {
       <NavBar 
         backgroundtype="blur"
         position="absolute"
-        w="70vw"
+        w="80vw"
         mt="50px"
         left="50%"
         transform="translate(-50%, -50%)"
