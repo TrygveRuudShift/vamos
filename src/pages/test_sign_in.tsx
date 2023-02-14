@@ -22,7 +22,8 @@ const list_of_cities = [
   { name: "Dallas", state: "TX", country: "USA" },
   { name: "San Jose", state: "CA", country: "USA" },
   { name: "Austin", state: "TX", country: "USA" },
-  { name: "Indianapolis", state: "IN", country: "USA" }
+  { name: "Indianapolis", state: "IN", country: "USA" },
+  { name: "Jacksonville", state: "FL", country: "USA" }
 ];
 
 const login = () => {
