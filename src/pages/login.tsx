@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import signInImage from "assets/img/signInImage.png";
-import { SignInButton, InputField } from "components/atoms/";
+import { SignInButton, InputField, NavBar } from "components/atoms/";
 
 export default function Login() {
   // Chakra color mode
@@ -21,7 +21,16 @@ export default function Login() {
   const textColor = useColorModeValue("gray.400", "white");
 
   return (
-    <Flex position="relative" mb="40px">
+    <Flex position="relative" mb="0px">
+      <NavBar 
+        backgroundtype="blur"
+        position="absolute"
+        w="70vw"
+        mt="50px"
+        left="50%"
+        transform="translate(-50%, -50%)"
+        zIndex="1000"
+      />
       <Flex
         h={{ sm: "initial", md: "75vh", lg: "85vh" }}
         w="100%"
@@ -32,6 +41,7 @@ export default function Login() {
         pt={{ sm: "100px", md: "0px" }}
       >
         <Flex
+          mt="90px"
           alignItems="center"
           justifyContent="start"
           style={{ userSelect: "none" }}
@@ -44,11 +54,11 @@ export default function Login() {
             p="48px"
             mt={{ md: "150px", lg: "80px" }}
           >
-            <Heading color={titleColor} fontSize="32px" mb="10px">
+            <Heading color={titleColor} fontSize="28px" mb="5px">
               Welcome Back
             </Heading>
             <Text
-              mb="36px"
+              mb="15px"
               ms="4px"
               color={textColor}
               fontWeight="bold"
@@ -60,11 +70,25 @@ export default function Login() {
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Email
               </FormLabel>
-              <InputField placeholder="Your email address" radius="medium"/>
+              <Input
+                borderRadius="15px"
+                mb="14px"
+                fontSize="sm"
+                type="text"
+                placeholder="Your email adress"
+                size="lg"
+              />
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Password
               </FormLabel>
-              <InputField placeholder="Your password" radius="medium" type="password"/>
+              <Input
+                borderRadius="15px"
+                mb="18px"
+                fontSize="sm"
+                type="password"
+                placeholder="Your password"
+                size="lg"
+              />
               <FormControl display="flex" alignItems="center">
                 <Switch id="remember-login" colorScheme="teal" me="10px" />
                 <FormLabel

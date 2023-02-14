@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 // Assets
 import BgSignUp from "assets/img/BgSignUp.png";
-import { SignInButton, InputField } from "components/atoms/";
+import { SignInButton, InputField, NavBar } from "components/atoms/";
 
 export default function Register() {
   const titleColor = useColorModeValue("teal.300", "teal.200");
@@ -28,6 +28,15 @@ export default function Register() {
       justifySelf="center"
       overflow="hidden"
     >
+      <NavBar 
+        backgroundtype="clear"
+        position="absolute"
+        w="70vw"
+        mt="70px"
+        left="50%"
+        transform="translate(-50%, -50%)"
+        zIndex="1000"
+      />
       <Box
         position="absolute"
         minH={{ base: "70vh", md: "50vh" }}
@@ -49,7 +58,7 @@ export default function Register() {
         textAlign="center"
         justifyContent="center"
         align="center"
-        mt="6.5rem"
+        mt="8.5rem"
         mb="30px"
       >
         <Text fontSize="4xl" color="white" fontWeight="bold">
