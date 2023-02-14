@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import signInImage from "assets/img/signInImage.png";
-import { SignInButton } from "components/atoms/SignInButton/SignInButton";
+import { SignInButton, InputField } from "components/atoms/";
 
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase/clientApp";
@@ -90,6 +90,7 @@ export default function Login() {
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Email
               </FormLabel>
+              <InputField placeholder="Your email address" radius="medium"/>
               <Input
                 borderRadius="15px"
                 mb="24px"
@@ -101,14 +102,7 @@ export default function Login() {
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Password
               </FormLabel>
-              <Input
-                borderRadius="15px"
-                mb="36px"
-                fontSize="sm"
-                type="password"
-                placeholder="Your password"
-                size="lg"
-              />
+              <InputField placeholder="Your password" radius="medium" type="password"/>
               <FormControl display="flex" alignItems="center">
                 <Switch id="remember-login" colorScheme="teal" me="10px" />
                 <FormLabel

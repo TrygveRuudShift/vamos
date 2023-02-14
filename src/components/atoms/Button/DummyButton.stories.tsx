@@ -8,7 +8,7 @@ export default {
 
 export const Default = {}
 
-export const Large = { args : { size : 'large', children: "Large" } }
+export const Large = { args : { size : 'large' } }
 export const Medium = { args : { size : 'medium', children: "Medium" } }
 export const Small = { args : { size : 'small', children: "Small" } }
 
