@@ -46,7 +46,7 @@ export default function Login() {
   // redirect to home page when user is logged in
   auth.onAuthStateChanged((user) => {
     if (user) {
-      window.location.href = "/test_sign_in";
+      window.location.href = "/homepage";
     }
   });
 
