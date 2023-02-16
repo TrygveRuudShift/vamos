@@ -1,53 +1,63 @@
 import { Button } from "@chakra-ui/react";
-import { AiFillHome, AiOutlineHome } from "react-icons/ai";
-import { MdBackpack } from "react-icons/md";
+import { IconType } from "react-icons";
 interface SidepanelProps {
     selected: boolean,
     [key: string]: any;
     href: string;
-    iconString: "AiFillHome" | "MdBackPack";
+    icon: IconType;
     size?: "small" | "medium" | "large";
+    onClick?: () => void;
 }
 
-export const SidepanelButton: React.FC<SidepanelProps> = ({ children, ...props }) => {
-    let colorActive = "lightgray"
+export const SidepanelButton: React.FC<SidepanelProps> = ({ onClick,children, size, ...props }) => {
+    let colorActive = "#ededed"
     let borderStyle = "none"
     let inverseColor = "white"
-    let size = 15;
+    let textColor = "#868e98"
+    
     if (props.selected) {
       colorActive = "white"
-      borderStyle = "outset"
-      inverseColor = "#80CBC4"
+      borderStyle = "1px 3px 8px 0px rgba(0,0,0,0.10)"
+      inverseColor = "#79d2c9"
+      textColor = "black"
     }
-    if (props.size === "medium") size = 20;
-    if (props.size === "large") size = 25; 
+    
+    let widthDiv: string = "30px";
+    let heightDiv: string = "25px";
+    let iconSize: number;
+    if (size) {
+      if (size === "small") iconSize = 15, widthDiv = "30px", heightDiv = "25px";
+      if (size === "medium") iconSize = 20, widthDiv = "40px", heightDiv = "30px";
+      if (size === "large") iconSize = 25, widthDiv = "50px", heightDiv = "35px"; 
+    }
+    
     const icon = () => {
-      if (props.iconString == "AiFillHome") {
-        if (props.selected) {
-          return <AiFillHome size={size} color={"white"}></AiFillHome>;
-        }
-        return <AiFillHome size={size} color={"#80CBC4"}></AiFillHome>;
-      }
-      if (props.iconString == "MdBackPack") {
-        if (props.selected) {
-          return <MdBackpack size={size} color={"white"}></MdBackpack>;
-        }
-        return <MdBackpack size={size} color={"#80CBC4"}></MdBackpack>;
-      }
+      const iconColor = props.selected ? "white" : "#79d2c9";
+      return <props.icon size={iconSize} color={iconColor}></props.icon>;
+    }
+
+    const handleClick = () => {
+      props.selected = props.selected ? false : true;
+      console.log("clicked")
     }
   return (
-    <div>
-      <a href={props.href}>
+    <div
+      //onClick={handleClick()}
+    >
+      <a href={props.href}
+        style={{height: "100%",
+          display: "flex"}}
+      >
         <Button
           fontSize="12px"
           type="submit"
           bg={colorActive}
           w="100%"
           h="45"
-          mb="20px"
-          color="black"
-          mt="20px"
-          border = {borderStyle}
+          //mb="20px"
+          color={textColor}
+          //mt="20px"
+          boxShadow = {borderStyle}
           border-radius="10px"
           _hover={{
             bg: "teal.200"
@@ -58,8 +68,9 @@ export const SidepanelButton: React.FC<SidepanelProps> = ({ children, ...props }
         > 
           <div
             style={{background: inverseColor,
-              width: "40px",
-              height: "25px",
+              display: "flex",
+              width: widthDiv,
+              height: heightDiv,
               position: "absolute",
               alignItems: "center",
               justifyContent: "center",
