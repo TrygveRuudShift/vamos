@@ -3,3 +3,4 @@
 
 export { SignInButton } from './SignInButton/SignInButton'
 export { InputField } from './InputField/InputField'
+export { SidepanelButton } from './SidepanelButton/SidepanelButton'
