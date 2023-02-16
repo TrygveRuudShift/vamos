@@ -37,6 +37,8 @@ export default function Login() {
         const token = credential?.accessToken;
         const user = result.user;
         console.log({ credential, token, user });
+        // TODO: remove this line when login page is done
+        window.location.href = "/homepage";
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -50,7 +52,8 @@ export default function Login() {
   // redirect to home page when user is logged in
   auth.onAuthStateChanged((user) => {
     if (user) {
-      window.location.href = "/homepage";
+      // TODO: add this line when login page is done
+      // window.location.href = "/homepage";
     }
   });
 
