@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 // Assets
 import BgSignUp from "assets/img/BgSignUp.png";
-import { SignInButton, InputField } from "components/atoms/";
+import { SignInButton, InputField, NavBar } from "components/atoms/";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 
 export default function Register() {
@@ -29,6 +29,9 @@ export default function Register() {
       justifySelf="center"
       overflow="hidden"
     >
+      <NavBar 
+        backgroundtype="clear"
+      />
       <Box
         position="absolute"
         minH={{ base: "70vh", md: "50vh" }}
@@ -50,8 +53,8 @@ export default function Register() {
         textAlign="center"
         justifyContent="center"
         align="center"
-        mt="6.5rem"
-        mb="30px"
+        mt="85px"
+        mb="0px"
       >
         <Text fontSize="4xl" color="white" fontWeight="bold">
           Welcome!

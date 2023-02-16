@@ -15,9 +15,9 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import signInImage from "assets/img/signInImage.png";
-import { SignInButton, InputField } from "components/atoms/";
+import { SignInButton, InputField, NavBar } from "components/atoms/";
+import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase/clientApp";
 
@@ -58,7 +58,10 @@ export default function Login() {
   });
 
   return (
-    <Flex position="relative" mb="40px">
+    <Flex position="relative" mb="0px">
+      <NavBar 
+        backgroundtype="blur"
+      />
       <Flex
         h={{ sm: "initial", md: "75vh", lg: "85vh" }}
         w="100%"
@@ -69,6 +72,7 @@ export default function Login() {
         pt={{ sm: "100px", md: "0px" }}
       >
         <Flex
+          mt="90px"
           alignItems="center"
           justifyContent="start"
           style={{ userSelect: "none" }}
@@ -81,7 +85,7 @@ export default function Login() {
             p="48px"
             mt={{ md: "150px", lg: "80px" }}
           >
-            <Heading color={titleColor} fontSize="32px" mb="10px">
+            <Heading color={titleColor} fontSize="28px" mb="5px" mt="120px">
               Welcome Back
             </Heading>
             <Text
