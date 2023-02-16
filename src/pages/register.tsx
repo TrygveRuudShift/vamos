@@ -30,12 +30,6 @@ export default function Register() {
     >
       <NavBar 
         backgroundtype="clear"
-        position="absolute"
-        w="80vw"
-        mt="70px"
-        left="50%"
-        transform="translate(-50%, -50%)"
-        zIndex="1000"
       />
       <Box
         position="absolute"

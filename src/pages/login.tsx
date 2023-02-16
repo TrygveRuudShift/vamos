@@ -24,12 +24,6 @@ export default function Login() {
     <Flex position="relative" mb="0px">
       <NavBar 
         backgroundtype="blur"
-        position="absolute"
-        w="80vw"
-        mt="50px"
-        left="50%"
-        transform="translate(-50%, -50%)"
-        zIndex="1000"
       />
       <Flex
         h={{ sm: "initial", md: "75vh", lg: "85vh" }}
