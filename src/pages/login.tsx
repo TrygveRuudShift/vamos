@@ -11,9 +11,12 @@ import {
   Switch,
   Text,
   useColorModeValue,
+  HStack,
+  Icon,
 } from "@chakra-ui/react";
 import signInImage from "assets/img/signInImage.png";
 import { SignInButton, InputField } from "components/atoms/";
+import { FcGoogle } from "react-icons/fc";
 
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase/clientApp";
@@ -22,6 +25,7 @@ export default function Login() {
   // Chakra color mode
   const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.400", "white");
+  const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
 
   // firebase auth
   const provider = new GoogleAuthProvider();
@@ -78,27 +82,53 @@ export default function Login() {
               Welcome Back
             </Heading>
             <Text
-              mb="36px"
+              mb="26px"
               ms="4px"
               color={textColor}
               fontWeight="bold"
               fontSize="14px"
             >
-              Enter your email and password to sign in
+              LOGIN WITH
             </Text>
+
+            <HStack spacing='15px' justify='center' mb='10px'>
+            <Flex
+              onClick={login}
+              justify='center'
+              align='center'
+              w='40vw'
+              h='75px'
+              borderRadius='15px'
+              border='1px solid lightgray'
+              cursor='pointer'
+              transition='all .25s ease'
+              _hover={{ filter: "brightness(120%)", bg: bgIcons }}>
+              
+              <Icon
+                as={FcGoogle}
+                w='30px'
+                h='30px'
+                _hover={{ filter: "brightness(120%)" }}
+                marginRight='10px'
+              />
+              Sign in with Google
+            </Flex>
+          </HStack>
+          <Text
+            fontSize='lg'
+            color='gray.400'
+            fontWeight='bold'
+            textAlign='center'
+            mb='5px'
+            >
+            or
+          </Text>
+
             <FormControl>
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Email
               </FormLabel>
               <InputField placeholder="Your email address" radius="medium"/>
-              <Input
-                borderRadius="15px"
-                mb="24px"
-                fontSize="sm"
-                type="text"
-                placeholder="Your email address"
-                size="lg"
-              />
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Password
               </FormLabel>
@@ -115,7 +145,6 @@ export default function Login() {
                 </FormLabel>
               </FormControl>
               <SignInButton>SIGN IN</SignInButton>
-              <SignInButton onClick={login}>SIGN IN WITH GOOGLE</SignInButton>
             </FormControl>
             <Flex
               flexDirection="column"
