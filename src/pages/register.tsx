@@ -52,8 +52,8 @@ export default function Register() {
         textAlign="center"
         justifyContent="center"
         align="center"
-        mt="8.5rem"
-        mb="30px"
+        mt="85px"
+        mb="0px"
       >
         <Text fontSize="4xl" color="white" fontWeight="bold">
           Welcome!
