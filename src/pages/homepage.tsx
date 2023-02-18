@@ -14,11 +14,11 @@ import {
   Avatar,
 } from "@chakra-ui/react";
 import BgSignUp from "assets/img/BgSignUp.png";
+import { ContactUs } from "components/atoms";
 import { useState } from "react";
 
 // firebase
 import { auth } from "../firebase/clientApp";
-
 
 export default function Index() {
   const textColor = useColorModeValue("gray.700", "white");
@@ -32,31 +32,20 @@ export default function Index() {
   return (
     <Flex pt="20px">
       {/* SIDEPANEL */}
-      <Box
+      <Flex
         minH={"100vh"}
         w="270px"
-        display="inline-block"
         flexDirection="column"
-        textAlign="center"
         pt="30px"
+        alignItems="center"
+        gap="20px"
       >
         <Text fontSize="xl">VAMOS</Text>
-        <Box borderBottom="1px" mx="25px" mb="20px" />
 
-        <Box
-          bg="teal.100"
-          borderRadius="lg"
-          height="40px"
-          display="inline-block"
-        />
-        <Box
-          bg="teal.100"
-          borderRadius="lg"
-          width="80%"
-          height="40px"
-          display="inline-block"
-        />
-      </Box>
+        <Box bg="teal.100" borderRadius="lg" width="80%" height="40px" />
+
+        <ContactUs />
+      </Flex>
 
       <Flex w="80%" display="inline-block">
         {/* HEADER */}
@@ -212,7 +201,7 @@ export default function Index() {
               </Grid>
             </CardBody>
           </Card>
-          
+
           <Card p="16px" display="inline-block" borderRadius="2xl">
             <CardHeader p="12px">
               <Flex direction="column">
