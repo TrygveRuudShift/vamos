@@ -17,6 +17,7 @@ import BgSignUp from "assets/img/BgSignUp.png";
 import { ContactUs } from "components/atoms";
 import { ProjectPanel, DefaultHeader } from "components/molecules";
 import { useState } from "react";
+import { SidebarButtons } from "components/molecules"
 
 // firebase
 import { auth } from "../firebase/clientApp";
@@ -26,7 +27,7 @@ export default function Index() {
 
   // Logic to set user state
   const [user, setUser] = useState(auth.currentUser);
-  auth.onAuthStateChanged((user) => {
+  auth.onAuthStateChanged((user: any) => {
     setUser(user);
   });
 
@@ -41,10 +42,10 @@ export default function Index() {
         alignItems="center"
         gap="20px"
       >
-        <Text fontSize="xl">VAMOS</Text>
-
-        <Box bg="teal.100" borderRadius="lg" width="80%" height="40px" />
-
+        <Box borderBottom="1px" mx="25px" mb="20px" w="80%" textAlign="center" >
+          <Text fontSize="xl">VAMOS</Text>
+        </Box>
+        <SidebarButtons size={"medium"} gapSize={"3px"} width={"100%"}></SidebarButtons>
         <ContactUs />
       </Flex>
 
