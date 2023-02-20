@@ -15,13 +15,18 @@ import {
 // Assets
 import BgSignUp from "assets/img/BgSignUp.png";
 import { SignInButton, InputField, NavBar } from "components/atoms/";
-import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
+import { auth } from "../firebase/clientApp";
+import { useState } from "react";
 
 export default function ContactUs() {
-  const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.600", "white");
   const bgColor = useColorModeValue("white", "gray.700");
-  const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
+
+  const [user, setUser] = useState(auth.currentUser);
+  auth.onAuthStateChanged((user) => {
+    setUser(user);
+  });
+  
   return (
     <Flex
       direction="column"
@@ -29,7 +34,7 @@ export default function ContactUs() {
       justifySelf="center"
       overflow="hidden"
     >
-      <NavBar backgroundtype="clear" />
+      <NavBar backgroundtype="clear" login={user ? "logged_in" : "logged_out"} />
       <Box
         position="absolute"
         minH={{ base: "70vh", md: "50vh" }}

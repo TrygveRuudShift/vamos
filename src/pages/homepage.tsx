@@ -6,6 +6,7 @@ import {
   Box,
   Text,
   Button,
+  Image,
   Card,
   CardBody,
   CardHeader,
@@ -17,14 +18,13 @@ import BgSignUp from "assets/img/BgSignUp.png";
 import { ContactUs } from "components/atoms";
 import { ProjectPanel, DefaultHeader } from "components/molecules";
 import { useState } from "react";
-import { SidebarButtons } from "components/molecules"
+import { SidebarButtons } from "components/molecules";
+import logo from "assets/img/logo2.png";
 
 // firebase
 import { auth } from "../firebase/clientApp";
 
 export default function Index() {
-  const textColor = useColorModeValue("gray.700", "white");
-
   // Logic to set user state
   const [user, setUser] = useState(auth.currentUser);
   auth.onAuthStateChanged((user: any) => {
@@ -32,7 +32,7 @@ export default function Index() {
   });
 
   return (
-    <Flex pt="20px">
+    <Flex pt="5px">
       {/* SIDEPANEL */}
       <Flex
         minH={"100vh"}
@@ -42,19 +42,27 @@ export default function Index() {
         alignItems="center"
         gap="20px"
       >
-        <Box borderBottom="1px" mx="25px" mb="20px" w="80%" textAlign="center" >
-          <Text fontSize="xl">VAMOS</Text>
+        <Box mx="25px" pb="15px" mb="5px" w="80%" borderBottom="1px" borderColor="blackAlpha.200" >
+        <Image src={logo.src} alt="sign in image" h="40px" display="block" m="auto" />
         </Box>
-        <SidebarButtons size={"medium"} gapSize={"3px"} width={"100%"}></SidebarButtons>
+        <SidebarButtons
+          size={"medium"}
+          gapSize={"10px"}
+          width={"100%"}
+          type={user ? "logged_in" : "logged_out"}
+        />
         <ContactUs />
       </Flex>
 
-
       <Flex w="80%" flexWrap="wrap">
-        <DefaultHeader img_src={`url(${BgSignUp.src})`} title={user ? `Hello ${user.displayName}` : "You are logged out"} />
+        <DefaultHeader
+          profilePic={user ? user.photoURL : undefined}
+          img_src={`url(${BgSignUp.src})`}
+          title={user ? `Hello ${user.displayName}` : "You are logged out"}
+        />
 
         {/* PROJECT PANELS */}
-        <Flex mt="70px" flexDirection="column" gap="20px">
+        <Flex mt="70px" flexDirection="column" gap="20px" w="full">
           <ProjectPanel />
 
           <ProjectPanel />

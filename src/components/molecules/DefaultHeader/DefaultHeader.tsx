@@ -18,13 +18,13 @@ interface HeaderProps {
   img_src: any;
   title: string;
   type?: "profile" | "homepage" | "newTrip";
+  profilePic?: string | undefined | null;
   [key: string]: any;
 }
 
 const AvatarIcon = ({ ...props }: { [key: string]: any }) => {
   return (
     <Avatar
-      name="Dan Abrahmov"
       src="https://bit.ly/dan-abramov"
       color="white"
       size="md"
@@ -39,6 +39,7 @@ export const DefaultHeader: React.FC<HeaderProps> = ({
   img_src,
   title,
   type,
+  profilePic,
   ...props
 }) => {
   if (!type) {
@@ -47,16 +48,19 @@ export const DefaultHeader: React.FC<HeaderProps> = ({
 
   if (type === "newTrip") {
     return (
-      <Flex h="50px" w="100%" bgSize="cover" px="0px" justifyContent="space-between">
+      <Flex
+        h="50px"
+        w="100%"
+        bgSize="cover"
+        px="0px"
+        justifyContent="space-between"
+      >
         <Box>
           <Text> Pages / Backpack Trips</Text>
-          <Text fontWeight="bold">
-            {" "}
-            Backpack Trips
-          </Text>
+          <Text fontWeight="bold"> Backpack Trips</Text>
         </Box>
         <Flex alignItems="center">
-          <AvatarIcon />
+          <AvatarIcon src={profilePic} name={title} />
           <Text fontWeight="bold" mr="10px">
             {title}
           </Text>
@@ -85,7 +89,9 @@ export const DefaultHeader: React.FC<HeaderProps> = ({
           </Text>
         </Box>
         <Flex color="white" alignItems="center" mt="20px">
-          {type === "profile" ? null : <AvatarIcon />}
+          {type === "profile" ? null : (
+            <AvatarIcon src={profilePic} name={title} />
+          )}
           <Text fontWeight="bold" mr="10px">
             {title}
           </Text>
@@ -104,7 +110,13 @@ export const DefaultHeader: React.FC<HeaderProps> = ({
         >
           {type === "profile" ? (
             <>
-              <AvatarIcon borderRadius="15px" ml="20px" size="lg" />
+              <AvatarIcon
+                borderRadius="15px"
+                ml="20px"
+                size="lg"
+                src={profilePic}
+                name={title}
+              />
             </>
           ) : (
             <>
@@ -118,6 +130,9 @@ export const DefaultHeader: React.FC<HeaderProps> = ({
                   width="100px"
                   backgroundColor="white"
                   boxShadow="base"
+                  onClick={() => {
+                    window.location.href = "/addTrip";
+                  }}
                 >
                   ADD A TRIP
                 </Button>

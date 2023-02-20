@@ -12,20 +12,24 @@ import {
   Icon,
   useColorModeValue,
   Input,
+  Image,
   Avatar,
-  Textarea
+  Textarea,
 } from "@chakra-ui/react";
 import BgSignUp from "assets/img/BgSignUp.png";
+import logo from "assets/img/logo2.png";
 import { ContactUs } from "components/atoms";
-import { ProjectPanel, DefaultHeader } from "components/molecules";
+import {
+  ProjectPanel,
+  DefaultHeader,
+  SidebarButtons,
+} from "components/molecules";
 import { useState } from "react";
 
 // firebase
 import { auth } from "../firebase/clientApp";
 
 export default function Index() {
-  const textColor = useColorModeValue("gray.700", "white");
-
   // Logic to set user state
   const [user, setUser] = useState(auth.currentUser);
   auth.onAuthStateChanged((user) => {
@@ -38,16 +42,16 @@ export default function Index() {
     "Italy",
     "Germany",
     "...",
-    "Add destination"
-  ]
+    "Add destination",
+  ];
 
   const images = [
     "", // Spain
     "", // France
-  ]
+  ];
 
   return (
-    <Flex pt="20px">
+    <Flex pt="5px">
       {/* SIDEPANEL */}
       <Flex
         minH={"100vh"}
@@ -57,10 +61,16 @@ export default function Index() {
         alignItems="center"
         gap="20px"
       >
-        <Text fontSize="xl">VAMOS</Text>
-
-        <Box bg="teal.100" borderRadius="lg" width="80%" height="40px" />
-
+        <Box mx="25px" pb="15px" mb="5px" w="80%" borderBottom="1px" borderColor="blackAlpha.200" >
+        <Image src={logo.src} alt="sign in image" h="40px" display="block" m="auto" />
+        </Box>
+        <SidebarButtons
+          size={"medium"}
+          gapSize={"10px"}
+          width={"100%"}
+          type={user ? "logged_in" : "logged_out"}
+          selected="addtrips"
+        />
         <ContactUs />
       </Flex>
 
@@ -88,9 +98,7 @@ export default function Index() {
 
           <SimpleGrid columns={4} spacing={8}>
             <Box>
-              <Text fontSize="md">
-                Title
-              </Text>
+              <Text fontSize="md">Title</Text>
               <Input
                 placeholder="Enter title"
                 size="md"
@@ -100,9 +108,7 @@ export default function Index() {
             </Box>
 
             <Box>
-              <Text fontSize="md">
-                Estimated costs
-              </Text>
+              <Text fontSize="md">Estimated costs</Text>
               <Input
                 placeholder="Enter estimated costs"
                 size="md"
@@ -112,9 +118,7 @@ export default function Index() {
             </Box>
 
             <Box>
-              <Text fontSize="md">
-                Duration
-              </Text>
+              <Text fontSize="md">Duration</Text>
               <Input
                 placeholder="Enter duration"
                 size="md"
@@ -124,7 +128,7 @@ export default function Index() {
             </Box>
           </SimpleGrid>
 
-          <Flex flexWrap="wrap" gap="10px" >
+          <Flex flexWrap="wrap" gap="10px">
             {trips.map((trip, index) => (
               <Button
                 key={index}
@@ -137,12 +141,11 @@ export default function Index() {
                 textAlign="center"
               >
                 {trip}
-                
               </Button>
             ))}
           </Flex>
 
-          <Flex flexWrap="wrap" gap="10px" >
+          <Flex flexWrap="wrap" gap="10px">
             {images.map((image, index) => (
               <Box
                 key={index}
@@ -161,15 +164,13 @@ export default function Index() {
                   fontWeight="bold"
                   // hover
                   cursor="pointer"
-                  
                   _hover={{
-                    color: "gray.500"
+                    color: "gray.500",
                   }}
-
                 >
                   X
                 </Text>
-                </Box>
+              </Box>
             ))}
 
             <Button
@@ -186,21 +187,17 @@ export default function Index() {
           </Flex>
 
           {/* Big add Description field saying "Write here" */}
-          
+
           <Box>
-          <Text fontSize="md">
-            Description
-          </Text>
-          <Textarea
-            placeholder="Write here"
-            size="md"
-            mt="3px"
-            borderRadius="lg"
-            h="300px"
-          />
-
+            <Text fontSize="md">Description</Text>
+            <Textarea
+              placeholder="Write here"
+              size="md"
+              mt="3px"
+              borderRadius="lg"
+              h="300px"
+            />
           </Box>
-
         </Card>
       </Flex>
     </Flex>

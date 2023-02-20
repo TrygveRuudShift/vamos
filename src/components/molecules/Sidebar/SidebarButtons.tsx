@@ -2,9 +2,15 @@ import { SidepanelButton } from "../../atoms/SidepanelButton/SidepanelButton";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { AiFillHome, AiFillStar } from "react-icons/ai";
 import { MdBackpack } from "react-icons/md";
-import { BsFillPersonFill } from "react-icons/bs";
-import { GoSignIn } from "react-icons/go";
+import {
+  BsFillCreditCardFill,
+  BsFillPersonFill,
+  BsPlusLg,
+} from "react-icons/bs";
+import { GoSignIn, GoSignOut } from "react-icons/go";
 import { IoRocketSharp } from "react-icons/io5";
+import { FaSignOutAlt } from "react-icons/fa";
+import { auth } from "../../../firebase/clientApp";
 
 interface ButtonsProps {
   size?: "small" | "medium" | "large";
@@ -13,35 +19,139 @@ interface ButtonsProps {
   gapSize?: string;
   height?: string;
   width?: string;
+  type?: "logged_in" | "logged_out";
+  selected?: "home" | "mytrips" | "ratedtrips" | "addtrips" | "billing" | "profile";
 }
 
-export const SidebarButtons: React.FC<ButtonsProps> = ({onClick, children, ...props}) => {
-  
-  onClick = () => {
-
+export const SidebarButtons: React.FC<ButtonsProps> = ({
+  type,
+  onClick,
+  selected,
+  children,
+  ...props
+}) => {
+  if (!type) {
+    const type = "logged_out";
   }
+
+  let dir = {
+    "home": false,
+    "mytrips": false,
+    "ratedtrips": false,
+    "addtrips": false,
+    "billing": false,
+    "profile": false,
+  }
+
+  if (!selected){
+    dir["home"] = true;
+  } else {
+    dir[selected] = true;
+  }
+
   return (
-    <Box 
-      w={props.width} textAlign="center">
+    <Box w={props.width} textAlign="center">
       <Flex
         direction="column"
         gap={props.gapSize}
         alignItems={"center"}
         mb="20px"
       >
-        <SidepanelButton icon={AiFillHome} selected={true} size={props.size} href="">Home</SidepanelButton>
-        <SidepanelButton icon={MdBackpack} selected={false} size={props.size} href="">My Trips</SidepanelButton>
-        <SidepanelButton icon={AiFillStar} selected={false} size={props.size} href="">Rated Trips</SidepanelButton>
+        <SidepanelButton
+          icon={AiFillHome}
+          selected={dir["home"]}
+          size={props.size}
+          href="homepage"
+        >
+          Home
+        </SidepanelButton>
+        <SidepanelButton
+          icon={MdBackpack}
+          selected={dir["mytrips"]}
+          size={props.size}
+          href=""
+        >
+          My Trips
+        </SidepanelButton>
+        <SidepanelButton
+          icon={AiFillStar}
+          selected={dir["ratedtrips"]}
+          size={props.size}
+          href=""
+        >
+          Rated Trips
+        </SidepanelButton>
+        <SidepanelButton
+          icon={BsPlusLg}
+          selected={dir["addtrips"]}
+          size={props.size}
+          href="addTrip"
+        >
+          Add trips
+        </SidepanelButton>
+        <SidepanelButton
+          icon={BsFillCreditCardFill}
+          selected={dir["billing"]}
+          size={props.size}
+          href=""
+        >
+          Billing
+        </SidepanelButton>
       </Flex>
-      <Text fontSize="xl" mb="20px">Account Pages</Text>
+      <Text fontSize="xl" mb="20px" mt="60px">
+        Account Pages
+      </Text>
       <Flex
         direction="column"
         gap={props.gapSize}
         alignItems={"center"}
+        pb="25px"
       >
-          <SidepanelButton icon={BsFillPersonFill} selected={false} size={props.size} href="">Profile</SidepanelButton>
-          <SidepanelButton icon={GoSignIn} selected={false} size={props.size} href="">Sign In</SidepanelButton>
-          <SidepanelButton icon={IoRocketSharp} selected={false} size={props.size} href="">Sign Up</SidepanelButton>
+        {type === "logged_in" ? (
+          <>
+            {" "}
+            <SidepanelButton
+              icon={BsFillPersonFill}
+              selected={dir["profile"]}
+              size={props.size}
+              href="profile"
+            >
+              Profile
+            </SidepanelButton>
+            <SidepanelButton
+              icon={GoSignOut}
+              selected={false}
+              size={props.size}
+              href="login"
+              onClick={() => {
+                auth.signOut();
+              }
+              }
+            >
+              Log out
+            </SidepanelButton>
+          </>
+        ) : (
+          <>
+            {" "}
+            <SidepanelButton
+              icon={GoSignIn}
+              selected={false}
+              size={props.size}
+              href="login"
+            >
+              Sign In
+            </SidepanelButton>
+            <SidepanelButton
+              icon={IoRocketSharp}
+              selected={false}
+              size={props.size}
+              href="register"
+            >
+              Sign Up
+            </SidepanelButton>
+          </>
+        )}
       </Flex>
     </Box>
   );

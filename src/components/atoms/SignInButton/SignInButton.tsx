@@ -9,7 +9,7 @@ export const SignInButton: React.FC<ButtonProps> = ({ children, ...props }) => {
       <Button
         fontSize="10px"
         type="submit"
-        bg="brand.100"
+        bg="teal.300"
         w="100%"
         h="45"
         mb="20px"
