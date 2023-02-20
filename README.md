@@ -3,6 +3,15 @@ This is a project for the course [TDT4140 - Software Engineering](https://www.nt
 
 The application is built using [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/), [Storybook](https://storybook.js.org/), [Vercel](https://vercel.com/), [Firebase](https://firebase.google.com/) and [Chakra UI](https://chakra-ui.com/).
 
+**Developers:**
+
+- Axel <axelme@stud.ntnu.no>
+- Jakob <jakobere@stud.ntnu.no>
+- Ragni <ragnibo@stud.ntnu.no>
+- Trygve <trygvru@stud.ntnu.no>
+- Simen <simeeid@stud.ntnu.no>
+- Sondre <sondralf@stud.ntnu.no>
+
 ## For developers
 For insparation [GitHub Repo](https://github.com/creativetimofficial/purity-ui-dashboard)
 
@@ -38,3 +47,7 @@ Open [http://localhost:6006](http://localhost:6006) with your browser to see the
 
 ## Deploy on Vercel
 Each push to the main branch will trigger a new deployment on Vercel. You can see the website [HERE](https://pu.alfnes.dev/)
+
+## Practices for commits and merges
+This project uses a common practice and layout for commit messages and merge requests. 
+See the [practiceDocs.md](/practiceDocs.md) file for a overview of these practices.
