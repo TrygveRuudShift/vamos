@@ -15,13 +15,18 @@ import {
 // Assets
 import BgSignUp from "assets/img/BgSignUp.png";
 import { SignInButton, InputField, NavBar } from "components/atoms/";
-import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { login } from "../firebase/clientApp";
+import { FcGoogle } from "react-icons/fc";
 
 export default function Register() {
   const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.700", "white");
   const bgColor = useColorModeValue("white", "gray.700");
   const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
+
+  const provider = new GoogleAuthProvider();
+
   return (
     <Flex
       direction="column"
@@ -29,9 +34,7 @@ export default function Register() {
       justifySelf="center"
       overflow="hidden"
     >
-      <NavBar 
-        backgroundtype="clear"
-      />
+      <NavBar backgroundtype="clear" />
       <Box
         position="absolute"
         minH={{ base: "70vh", md: "50vh" }}
@@ -91,48 +94,55 @@ export default function Register() {
           >
             Register With
           </Text>
-          <HStack spacing='15px' justify='center' mb='22px'>
+          <HStack spacing="15px" justify="center" mb="10px">
             <Flex
-              justify='center'
-              align='center'
-              w='75px'
-              h='75px'
-              borderRadius='15px'
-              border='1px solid lightgray'
-              cursor='pointer'
-              transition='all .25s ease'
-              _hover={{ filter: "brightness(120%)", bg: bgIcons }}>
-              <Link href='#'>
-                <Icon
-                  as={FaGoogle}
-                  w='30px'
-                  h='30px'
-                  _hover={{ filter: "brightness(120%)" }}
-                />
-              </Link>
+              onClick={login}
+              justify="center"
+              align="center"
+              w="40vw"
+              h="75px"
+              borderRadius="15px"
+              border="1px solid lightgray"
+              cursor="pointer"
+              transition="all .25s ease"
+              _hover={{ filter: "brightness(120%)", bg: bgIcons }}
+            >
+              <Icon
+                as={FcGoogle}
+                w="30px"
+                h="30px"
+                _hover={{ filter: "brightness(120%)" }}
+                marginRight="10px"
+              />
+              Sign in with Google
             </Flex>
           </HStack>
           <Text
-            fontSize='lg'
-            color='gray.400'
-            fontWeight='bold'
-            textAlign='center'
-            mb='22px'>
+            fontSize="lg"
+            color="gray.400"
+            fontWeight="bold"
+            textAlign="center"
+            mb="22px"
+          >
             or
           </Text>
           <FormControl>
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Name
             </FormLabel>
-            <InputField placeholder="Your full name" radius="medium"/>
+            <InputField placeholder="Your full name" radius="medium" />
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Email
             </FormLabel>
-            <InputField placeholder="Your email address" radius="medium"/>
+            <InputField placeholder="Your email address" radius="medium" />
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Password
             </FormLabel>
-            <InputField placeholder="Your password" radius="medium" type="password"/>
+            <InputField
+              placeholder="Your password"
+              radius="medium"
+              type="password"
+            />
             <FormControl display="flex" alignItems="center" mb="24px">
               <Switch id="remember-login" colorScheme="teal" me="10px" />
               <FormLabel htmlFor="remember-login" mb="0" fontWeight="normal">

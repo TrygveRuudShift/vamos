@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -14,7 +14,7 @@ const firebaseConfig = {
   storageBucket: "vamos-pu.appspot.com",
   messagingSenderId: "255921353515",
   appId: "1:255921353515:web:53911841a6263e81750b6e",
-  measurementId: "G-VKPZ8TPZ6M"
+  measurementId: "G-VKPZ8TPZ6M",
 };
 
 // Initialize Firebase
@@ -22,4 +22,25 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 const auth = getAuth(app);
 
-export { auth , db};
+const provider = new GoogleAuthProvider();
+
+const login = () => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential?.accessToken;
+      const user = result.user;
+      console.log({ credential, token, user });
+      // TODO: remove this line when login page is done
+      window.location.href = "/homepage";
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.email;
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      console.log({ errorCode, errorMessage, email, credential });
+    });
+};
+
+export { auth, db, login };
