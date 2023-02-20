@@ -50,12 +50,40 @@ export default function Index() {
 
 
       <Flex w="80%" flexWrap="wrap">
-        <DefaultHeader img_src={`url(${BgSignUp.src})`} title={user ? `Hello ${user.displayName}` : "You are logged out"} />
+        <DefaultHeader type="profile" img_src={`url(${BgSignUp.src})`} title={user ? `Hello ${user.displayName}` : "You are logged out"} />
 
-        {/* PROJECT PANELS */}
-        <Flex mt="70px" flexDirection="column" gap="20px">
-          <ProjectPanel />
 
+        <Flex mt="70px" w="full" justifyContent="space-between">
+        <Card width="32%" minH="250px">
+            <CardHeader>
+              <Flex justifyContent="space-between">
+                <Text>Profile Information</Text>
+                <Button size="sm" colorScheme="teal" variant='outline'>
+                  Edit
+                </Button>
+              </Flex>
+            </CardHeader>
+          </Card>
+
+          <Card width="32%">
+            <CardHeader>
+              <Flex justifyContent="space-between">
+                <Text>Favorite trips</Text>
+              </Flex>
+            </CardHeader>
+          </Card>
+
+          <Card width="32%">
+            <CardHeader>
+              <Flex justifyContent="space-between">
+                <Text>Reviews</Text>
+              </Flex>
+            </CardHeader>
+          </Card>
+        </Flex>
+
+
+        <Flex mt="20px" flexDirection="column" gap="20px" w="full">
           <ProjectPanel />
         </Flex>
       </Flex>

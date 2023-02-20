@@ -29,6 +29,10 @@ export const ContactUs: React.FC<ContactUsProps> = ({ ...props }) => {
           textColor={"black"}
           borderRadius="xl"
           cursor="pointer"
+          // onclick redirect to ./contact
+          onClick={() => {
+            window.location.href = "/contact";
+          }}
         >
           Contact us!
         </Button>
