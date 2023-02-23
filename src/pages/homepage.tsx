@@ -14,12 +14,15 @@ import {
   useColorModeValue,
   Avatar,
 } from "@chakra-ui/react";
-import BgSignUp from "assets/img/BgSignUp.png";
-import { ContactUs } from "components/atoms";
-import { ProjectPanel, DefaultHeader } from "components/molecules";
 import { useState } from "react";
-import { SidebarButtons } from "components/molecules";
-import logo from "assets/img/logo2.png";
+import BgSignUp from "assets/img/BgSignUp.png";
+
+import { ContactUs, Logo } from "components/atoms";
+import {
+  ProjectPanel,
+  DefaultHeader,
+  SidebarButtons,
+} from "components/molecules";
 
 // firebase
 import { auth } from "../firebase/clientApp";
@@ -42,9 +45,17 @@ export default function Index() {
         alignItems="center"
         gap="20px"
       >
-        <Box mx="25px" pb="15px" mb="5px" w="80%" borderBottom="1px" borderColor="blackAlpha.200" >
-        <Image src={logo.src} alt="sign in image" h="40px" display="block" m="auto" />
-        </Box>
+        <Flex
+          mx="25px"
+          pb="15px"
+          mb="5px"
+          w="80%"
+          borderBottom="1px"
+          borderColor="blackAlpha.200"
+          justifyContent="center"
+        >
+          <Logo h="40px" />
+        </Flex>
         <SidebarButtons
           size={"medium"}
           gapSize={"10px"}

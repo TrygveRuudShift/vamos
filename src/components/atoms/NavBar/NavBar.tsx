@@ -4,7 +4,7 @@ import { Box, Flex, Image } from "@chakra-ui/react";
 import { auth } from "../../../firebase/clientApp";
 import { FaKey, FaUserAlt, FaUserCircle } from "react-icons/fa";
 import { SiHackthebox } from "react-icons/si";
-import logo from "../../../assets/img/logo2.png";
+import { Logo } from "../";
 import { GoSignOut } from "react-icons/go";
 import { AiFillHome } from "react-icons/ai";
 interface BoxProps {
@@ -79,7 +79,7 @@ export const NavBar: React.FC<BoxProps> = ({
       {...props}
     >
       <Box as="button" marginLeft="20px" borderRadius="md" color={fontcolor}>
-        <Image src={logo.src} alt="sign in image" h="20px" />
+        <Logo h="20px" />
       </Box>
       <Flex
         margin="auto"

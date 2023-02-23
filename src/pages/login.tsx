@@ -15,8 +15,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import signInImage from "assets/img/signInImage2.png";
-import logo from "assets/img/logo2.png";
-import { SignInButton, InputField, NavBar } from "components/atoms/";
+import { SignInButton, InputField, NavBar, Logo } from "components/atoms/";
 import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth, login } from "../firebase/clientApp";
@@ -175,7 +174,7 @@ export default function Login() {
             fontWeight="bold"
           >
             {/* center text */}
-          <Image src={logo.src} alt="sign in image" w="60%" display="block" margin="auto" mt="45%" />
+            <Logo w="60%" margin="auto" mt="45%" />
           </Box>
         </Box>
       </Flex>

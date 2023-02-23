@@ -60,7 +60,7 @@ export const DefaultHeader: React.FC<HeaderProps> = ({
           <Text fontWeight="bold"> Backpack Trips</Text>
         </Box>
         <Flex alignItems="center">
-          <AvatarIcon src={profilePic} name={title} />
+          {title === "You are logged out" ? null : <AvatarIcon src={profilePic} name={title} />}
           <Text fontWeight="bold" mr="10px">
             {title}
           </Text>
@@ -90,7 +90,7 @@ export const DefaultHeader: React.FC<HeaderProps> = ({
         </Box>
         <Flex color="white" alignItems="center" mt="20px">
           {type === "profile" ? null : (
-            <AvatarIcon src={profilePic} name={title} />
+            title === "You are logged out" ? null : <AvatarIcon src={profilePic} name={title} />
           )}
           <Text fontWeight="bold" mr="10px">
             {title}
