@@ -46,7 +46,6 @@ export const SidepanelButton: React.FC<SidepanelProps> = ({
 
   const handleClick = () => {
     props.selected = props.selected ? false : true;
-    console.log("clicked");
   };
   return (
     <div
