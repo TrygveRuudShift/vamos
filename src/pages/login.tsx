@@ -161,7 +161,7 @@ export default function Login() {
           position="absolute"
           right="0px"
         >
-          <Box
+          <Flex
             backgroundImage={`url(${signInImage.src})`}
             w="100%"
             h="100%"
@@ -169,13 +169,12 @@ export default function Login() {
             bgPosition="50%"
             position="absolute"
             borderBottomLeftRadius="20px"
-            textAlign="center"
             color="white"
             fontWeight="bold"
           >
             {/* center text */}
-            <Logo w="60%" margin="auto" mt="45%" />
-          </Box>
+            <Logo h="80px" margin="auto" mt="55%" />
+          </Flex>
         </Box>
       </Flex>
     </Flex>
