@@ -7,4 +7,5 @@ export { NavBar } from './NavBar/NavBar'
 export { SidepanelButton } from './SidepanelButton/SidepanelButton'
 export { Rating } from "./Rating/Rating"
 export { ContactUs } from './ContactUs/ContactUs'
+export { Footer } from './Footer/Footer'
 export { Logo } from './Logo/Logo'
