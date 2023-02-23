@@ -9,24 +9,57 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { ProjectCard } from "../";
+import NewYork from "../../../assets/img/NewYork.jpeg";
 
 interface ProjectPanelProps {
   onClick?: () => void;
   [key: string]: any;
 }
 
+const ProjectCards = () => {
+  return (
+    <>
+      <ProjectCard
+        title="New York"
+        price="$1,900.00"
+        description="A great trip with many activities. I love how the trip was organized. I would recommend this trip to everyone."
+        reviewCount={18}
+        rating={5}
+        img_url={NewYork.src}
+      />
+      <ProjectCard
+        title="New York"
+        price="$1,900.00"
+        description="A great trip with many activities. I love how the trip was organized. I would recommend this trip to everyone."
+        reviewCount={18}
+        rating={5}
+        img_url={NewYork.src}
+      />
+      <ProjectCard
+        title="New York"
+        price="$1,900.00"
+        description="A great trip with many activities. I love how the trip was organized. I would recommend this trip to everyone."
+        reviewCount={18}
+        rating={5}
+        img_url={NewYork.src}
+      />
+    </>
+  );
+};
+
 export const ProjectPanel: React.FC<ProjectPanelProps> = ({
   onClick,
   children,
   ...props
 }) => {
-  const textColor = useColorModeValue("gray.700", "white");
+  const textColor = useColorModeValue("gray.700", "white");  
   return (
     <Card p="16px" borderRadius="2xl" w="full">
       <CardHeader p="12px">
         <Flex direction="column">
           <Text fontSize="lg" color={textColor} fontWeight="bold">
-            EUROPE
+            USA
           </Text>
           <Text fontSize="sm" color="gray.500" fontWeight="400">
             A collection of projects
@@ -48,10 +81,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
           gap="24px"
         >
           {/* Project Card */}
-          <Box bg="teal.200" w="260px" h="300px" m="0" borderRadius="2xl"></Box>
-          <Box bg="teal.200" w="260px" h="300px" m="0" borderRadius="2xl"></Box>
-          <Box bg="teal.200" w="260px" h="300px" m="0" borderRadius="2xl"></Box>
-
+          {children ? children : <ProjectCards />}
           <Button
             p="0px"
             bg="transparent"

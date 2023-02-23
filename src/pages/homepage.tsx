@@ -1,19 +1,5 @@
 import { SettingsIcon } from "@chakra-ui/icons";
-import {
-  Flex,
-  SimpleGrid,
-  Grid,
-  Box,
-  Text,
-  Button,
-  Image,
-  Card,
-  CardBody,
-  CardHeader,
-  Icon,
-  useColorModeValue,
-  Avatar,
-} from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { useState } from "react";
 import BgSignUp from "assets/img/BgSignUp.png";
 
@@ -22,7 +8,9 @@ import {
   ProjectPanel,
   DefaultHeader,
   SidebarButtons,
+  ProjectCard,
 } from "components/molecules";
+import NewYork from "assets/img/NewYork.jpeg";
 
 // firebase
 import { auth } from "../firebase/clientApp";
@@ -74,7 +62,9 @@ export default function Index() {
 
         {/* PROJECT PANELS */}
         <Flex mt="70px" flexDirection="column" gap="20px" w="full">
-          <ProjectPanel />
+          <ProjectPanel>
+
+          </ProjectPanel>
 
           <ProjectPanel />
         </Flex>
