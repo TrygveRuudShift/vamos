@@ -28,12 +28,20 @@ import { useState } from "react";
 // firebase
 import { auth } from "../firebase/clientApp";
 
+// templates
+import { TripTemplate } from "templates/tripTemplate";
+import React from "react";
+
 export default function Index() {
   // Logic to set user state
   const [user, setUser] = useState(auth.currentUser);
-  auth.onAuthStateChanged((user) => {
-    setUser(user);
-  });
+
+  // add useeffect of onAuthStateChanged
+  React.useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+  }, []);
 
   const trips = [
     "Spain",
@@ -48,6 +56,12 @@ export default function Index() {
     "", // Spain
     "", // France
   ];
+
+  const [localTripTemplate, setLocalTripTemplate] = useState<TripTemplate>();
+  // add trip to database
+  const addTrip = () => {
+    console.log(localTripTemplate);
+  };
 
   return (
     <Flex pt="5px">
@@ -112,6 +126,13 @@ export default function Index() {
                 size="md"
                 mt="3px"
                 borderRadius="lg"
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setLocalTripTemplate({
+                    title: e.target.value,
+                    ...localTripTemplate,
+                  });
+                }}
               />
             </Box>
 
@@ -122,6 +143,12 @@ export default function Index() {
                 size="md"
                 mt="3px"
                 borderRadius="lg"
+                onChange={(e) => {
+                  setLocalTripTemplate({
+                    cost: Number(e.target.value),
+                    ...localTripTemplate,
+                  });
+                }}
               />
             </Box>
 
@@ -132,6 +159,12 @@ export default function Index() {
                 size="md"
                 mt="3px"
                 borderRadius="lg"
+                onChange={(e) => {
+                  setLocalTripTemplate({
+                    duration: Number(e.target.value),
+                    ...localTripTemplate,
+                  });
+                }}
               />
             </Box>
           </SimpleGrid>
@@ -206,6 +239,29 @@ export default function Index() {
               h="300px"
             />
           </Box>
+
+          {/* Add cancel and upload button */}
+          <Flex justifyContent="flex-end" gap="10px">
+            <Button
+              variant="outline"
+              colorScheme="teal"
+              borderRadius="lg"
+              onClick={() => {
+                window.location.href = "/homepage";
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="solid"
+              colorScheme="teal"
+              borderRadius="lg"
+              w="150px"
+              onClick={addTrip}
+            >
+              Upload
+            </Button>
+          </Flex>
         </Card>
       </Flex>
     </Flex>

@@ -20,8 +20,8 @@ export const Logo: React.FC<LogoProps> = ({
 
   return (
     <Box {...props}>
-      <Flex h="100%" w="100%">
-        <Box position="relative">
+      <Box h="100%" w="100%">
+        <Box display="inline-block" h="100%">
           <svg
             version="1.0"
             xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@ m131 -489 c15 -18 24 -40 139 -328 33 -82 74 -182 90 -222 16 -39 29 -77 29
             </g>
           </svg>
         </Box>
-        <Box>
+        <Box display="inline-block" h="100%">
           <svg
             style={{
               height: "100%",
@@ -114,7 +114,7 @@ m131 -489 c15 -18 24 -40 139 -328 33 -82 74 -182 90 -222 16 -39 29 -77 29
             </g>
           </svg>
         </Box>
-        <Box>
+        <Box display="inline-block" h="100%">
           <svg
             version="1.0"
             xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +146,7 @@ m131 -489 c15 -18 24 -40 139 -328 33 -82 74 -182 90 -222 16 -39 29 -77 29
             </g>
           </svg>
         </Box>
-      </Flex>
+      </Box>
     </Box>
   );
 };
