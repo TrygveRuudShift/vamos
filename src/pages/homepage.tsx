@@ -57,7 +57,7 @@ export default function Index() {
         <DefaultHeader
           profilePic={user ? user.photoURL : undefined}
           img_src={`url(${BgSignUp.src})`}
-          title={user ? `Hello ${user.displayName}` : "You are logged out"}
+          title={user ? `Hello ${user.displayName}` : "You are not logged in"}
         />
 
         {/* PROJECT PANELS */}

@@ -95,7 +95,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
                 ...
               </Text>
               <Text fontSize="lg" fontWeight="bold">
-                View more trips
+                More trips
               </Text>
             </Flex>
           </Button>

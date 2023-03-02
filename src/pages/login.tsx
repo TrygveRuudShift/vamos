@@ -38,7 +38,6 @@ export default function Login() {
     <Flex position="relative" mb="0px">
       <NavBar backgroundtype="blur" />
       <Flex
-        h={{ sm: "initial", md: "75vh", lg: "85vh" }}
         w="100%"
         maxW="1044px"
         mx="auto"
@@ -47,11 +46,9 @@ export default function Login() {
         pt={{ sm: "100px", md: "0px" }}
       >
         <Flex
-          mt="90px"
-          alignItems="center"
-          justifyContent="start"
           style={{ userSelect: "none" }}
           w={{ base: "100%", md: "50%", lg: "42%" }}
+          h="650px"
         >
           <Flex
             direction="column"

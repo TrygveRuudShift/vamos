@@ -1,4 +1,4 @@
-import { Button, Box } from "@chakra-ui/react";
+import { Button, Box, Flex } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 interface SidepanelProps {
   selected: boolean;
@@ -48,20 +48,19 @@ export const SidepanelButton: React.FC<SidepanelProps> = ({
     props.selected = props.selected ? false : true;
   };
   return (
-    <div
-      style={{ width: "80%" }}
-      onClick={onClick}
-    >
+    <div style={{ width: "80%" }} onClick={onClick}>
       <a href={props.href} style={{ height: "100%", display: "flex" }}>
-        <Button
+        <Flex
           fontSize="12px"
           textAlign="left"
-          type="submit"
+          position="relative"
           bg={colorActive}
+          fontWeight="bold"
           w="100%"
           h="45"
           color={textColor}
           boxShadow={borderStyle}
+          alignItems="center"
           borderRadius="15px"
           _hover={{
             bg: "#F8F9FA",
@@ -83,15 +82,15 @@ export const SidepanelButton: React.FC<SidepanelProps> = ({
           >
             {icon()}
           </Box>
-          <div
+          <Box
             style={{
               position: "absolute",
               left: "30%",
             }}
           >
             {children}
-          </div>
-        </Button>
+          </Box>
+        </Flex>
       </a>
     </div>
   );
