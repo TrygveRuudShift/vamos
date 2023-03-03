@@ -11,9 +11,11 @@ import {
   ProjectCard,
 } from "components/molecules";
 import NewYork from "assets/img/NewYork.jpeg";
+import { queryFilter } from "utils/queryFilter";
 
 // firebase
-import { auth } from "../firebase/clientApp";
+import { auth, db } from "../firebase/clientApp";
+import { collection, limit, orderBy, query, where } from "firebase/firestore";
 
 export default function Index() {
   // Logic to set user state
@@ -62,11 +64,11 @@ export default function Index() {
 
         {/* PROJECT PANELS */}
         <Flex mt="70px" flexDirection="column" gap="20px" w="full">
-          <ProjectPanel>
-
-          </ProjectPanel>
-
-          <ProjectPanel />
+          <ProjectPanel title="USA" tripQuery={query(collection(db, "trips"), where("destinationsLowercase", "array-contains-any", queryFilter.USA), limit(3))} />
+          <ProjectPanel title="Europe" tripQuery={query(collection(db, "trips"), where("destinationsLowercase", "array-contains-any", queryFilter.Europe), limit(3))} />
+          <ProjectPanel title="Cheap trips" tripQuery={query(collection(db, "trips"), orderBy("cost"), limit(3))} /> 
+          <ProjectPanel title="Longest trips" tripQuery={query(collection(db, "trips"), orderBy("duration", "desc"), limit(3))} />
+          {/* <ProjectPanel title="Most popular" tripQuery={query(collection(db, "trips"), orderBy("rating", "desc"), limit(3))} /> */}
         </Flex>
       </Flex>
     </Flex>
