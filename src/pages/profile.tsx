@@ -15,22 +15,28 @@ import {
   Avatar,
 } from "@chakra-ui/react";
 import BgSignUp from "assets/img/BgSignUp.png";
-import { ContactUs, Logo } from "components/atoms";
+import { ContactUs, Logo } from "components/atoms/";
 import {
   ProjectPanel,
   DefaultHeader,
   SidebarButtons,
 } from "components/molecules";
-import { useState } from "react";
+import { collection, limit, query, where } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { queryFilter } from "utils/queryFilter";
 // firebase
-import { auth } from "../firebase/clientApp";
+import { auth, db } from "../firebase/clientApp";
 
 export default function Index() {
   // Logic to set user state
   const [user, setUser] = useState(auth.currentUser);
-  auth.onAuthStateChanged((user) => {
-    setUser(user);
-  });
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setUser(user);
+      console.log(user?.email);
+    });
+  }, []);
 
   return (
     <Flex pt="5px">
@@ -75,11 +81,16 @@ export default function Index() {
         <Flex mt="70px" w="full" justifyContent="space-between">
           <Card width="32%" minH="250px" borderRadius="2xl">
             <CardHeader>
+              <Text fontWeight="bold" fontSize='lg' >Profile Information</Text>
+              <Text>Your name: <i>{user?.displayName || "Name is undefined"}</i></Text>
+              <Text>Your email: <i>{user?.email || "Email is undefined"}</i></Text>
+            </CardHeader>
+          </Card>
+
+          <Card width="32%" borderRadius="2xl">
+            <CardHeader>
               <Flex justifyContent="space-between">
-                <Text>Profile Information</Text>
-                <Button size="sm" colorScheme="teal" variant="outline">
-                  Edit
-                </Button>
+                <Text fontWeight="bold" fontSize='lg'>Favorite trips</Text>
               </Flex>
             </CardHeader>
           </Card>
@@ -87,22 +98,16 @@ export default function Index() {
           <Card width="32%" borderRadius="2xl">
             <CardHeader>
               <Flex justifyContent="space-between">
-                <Text>Favorite trips</Text>
-              </Flex>
-            </CardHeader>
-          </Card>
-
-          <Card width="32%" borderRadius="2xl">
-            <CardHeader>
-              <Flex justifyContent="space-between">
-                <Text>Reviews</Text>
+                <Text fontWeight="bold" fontSize='lg'>Reviews</Text>
               </Flex>
             </CardHeader>
           </Card>
         </Flex>
 
         <Flex mt="20px" flexDirection="column" gap="20px" w="full">
-          <ProjectPanel />
+          {user && (
+            <ProjectPanel title="My Trips" tripQuery={query(collection(db, "trips"), where("userEmailAddress", "==", user?.email), limit(3))} />
+          )}
         </Flex>
       </Flex>
     </Flex>
