@@ -47,7 +47,7 @@ export default function Home() {
     const userEmailAddress : string = user?.email as string;
     const description : string = "description";
     const cost : number = 100;
-    const durationDays : number = 10;
+    const duration : number = 10;
     const destinations : string[] = ["Los Angeles", "New York", "Chicago"];
     const pictures : string[] = ["https://media.snl.no/media/71710/standard_troll.jpg"];
 
@@ -58,7 +58,7 @@ export default function Home() {
       userEmailAddress: userEmailAddress,
       description: description,
       cost: cost,
-      durationDays: durationDays,
+      duration: duration,
       destinations: destinations,
       pictures: pictures
     }).then(() => {
