@@ -25,8 +25,8 @@ interface ProjectCardsProps {
   cardLimit?: number;
 }
 interface ProjectPanelProps {
-  title?: string;
-  tripQuery?: Query<DocumentData> | CollectionReference<DocumentData>;
+  title: string;
+  tripQuery: Query<DocumentData> | CollectionReference<DocumentData>;
   cardLimit?: number;
   onClick?: () => void;
   [key: string]: any;
