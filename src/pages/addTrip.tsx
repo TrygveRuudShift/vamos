@@ -33,8 +33,6 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 // templates
 import { TripTemplate } from "templates/tripTemplate";
 
-import React from "react";
-
 export default function Index() {
   // Logic to set user state
   const [user, setUser] = useState(auth.currentUser);
@@ -70,7 +68,11 @@ export default function Index() {
       return;
     }
 
-    // TODO: Instead of having "?" in the interface, the frontend should use forms to check if the fields are filled in
+    if (!localTripTemplate.pictures) {
+      alert("You need to upload at least one picture.");
+      return;
+    }
+
     setDoc(doc(db, "trips", randomId), {
       title: localTripTemplate?.title,
       userEmailAddress: user?.email as string,
@@ -78,21 +80,13 @@ export default function Index() {
       cost: localTripTemplate?.cost,
       duration: localTripTemplate?.duration,
       destinations: localTripTemplate?.destinations,
-      destinationsLowercase: localTripTemplate?.destinations
-        ? localTripTemplate?.destinations.map((destination) =>
-            destination.toLowerCase()
-          )
-        : [],
+      destinationsLowercase: localTripTemplate?.destinations ? localTripTemplate?.destinations.map((destination) => destination.toLowerCase()) : [],
       pictures: localTripTemplate?.pictures,
-    })
-      .then(() => {
-        console.log("Document successfully written!");
-      })
-      .catch((error: Error) => {
-        console.error("Error writing document: ", error);
-      });
-
-    // TODO: Clearing input should not be done, it should redirect to the trip
+    }).then(() => {
+      console.log("Document successfully written!");
+    }).catch((error: Error) => {
+      console.error("Error writing document: ", error);
+    });
 
     setLocalTripTemplate({
       title: "",
@@ -105,13 +99,9 @@ export default function Index() {
 
     // clear the input fields
     const titleInput = document.getElementById("title") as HTMLInputElement;
-    const descriptionInput = document.getElementById(
-      "description"
-    ) as HTMLInputElement;
+    const descriptionInput = document.getElementById("description") as HTMLInputElement;
     const costInput = document.getElementById("cost") as HTMLInputElement;
-    const durationInput = document.getElementById(
-      "duration"
-    ) as HTMLInputElement;
+    const durationInput = document.getElementById("duration") as HTMLInputElement;
 
     titleInput.value = "";
     descriptionInput.value = "";
@@ -133,26 +123,20 @@ export default function Index() {
       return;
     }
 
-    // TODO: Change from global upload and download, to local upload and download
     const storageRef = ref(storage, `images/${imageFile.name}`);
-    uploadBytes(storageRef, imageFile)
-      .then((snapshot) => {
-        console.log("Uploaded a blob or file!");
-      })
-      .then(() => {
-        getDownloadURL(storageRef).then((url) => {
-          console.log(url);
-          setLocalTripTemplate({
-            ...localTripTemplate,
-            pictures: localTripTemplate?.pictures
-              ? [...(localTripTemplate?.pictures as string[]), url]
-              : [url],
-          });
+    uploadBytes(storageRef, imageFile).then((snapshot) => {
+      console.log("Uploaded a blob or file!");
+    }).then(() => {
+      getDownloadURL(storageRef).then((url) => {
+        console.log(url);
+        setLocalTripTemplate({
+          ...localTripTemplate,
+          pictures: localTripTemplate?.pictures ? [...localTripTemplate?.pictures as string[], url] : [url],
         });
-      })
-      .catch((error: Error) => {
-        console.error("Error writing document: ", error);
       });
+    }).catch((error: Error) => {
+      console.error("Error writing document: ", error);
+    });
   };
 
   return (
@@ -229,7 +213,7 @@ export default function Index() {
             </Box>
 
             <Box>
-              <Text fontSize="md">Estimated costs</Text>
+              <Text fontSize="md" >Estimated costs</Text>
               <Input
                 placeholder="Enter estimated costs"
                 size="md"
@@ -286,19 +270,12 @@ export default function Index() {
                 textAlign="center"
                 mt="-7px"
                 onClick={() => {
-                  const destinationInput = document.getElementById(
-                    "destinationInput"
-                  ) as HTMLInputElement;
+                  const destinationInput = document.getElementById("destinationInput") as HTMLInputElement;
                   const destination = destinationInput.value;
                   if (destination) {
                     setLocalTripTemplate({
                       ...localTripTemplate,
-                      destinations: localTripTemplate?.destinations
-                        ? [
-                            ...(localTripTemplate?.destinations as string[]),
-                            destination,
-                          ]
-                        : [destination],
+                      destinations: localTripTemplate?.destinations ? [...localTripTemplate?.destinations as string[], destination] : [destination],
                     });
                     destinationInput.value = "";
                   }
