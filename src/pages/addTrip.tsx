@@ -23,13 +23,16 @@ import {
   DefaultHeader,
   SidebarButtons,
 } from "components/molecules";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // firebase
-import { auth } from "../firebase/clientApp";
+import { auth, db, storage } from "../firebase/clientApp";
+import { setDoc, doc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // templates
 import { TripTemplate } from "templates/tripTemplate";
+
 import React from "react";
 
 export default function Index() {
@@ -37,30 +40,119 @@ export default function Index() {
   const [user, setUser] = useState(auth.currentUser);
 
   // add useeffect of onAuthStateChanged
-  React.useEffect(() => {
+  useEffect(() => {
     auth.onAuthStateChanged((user) => {
       setUser(user);
     });
   }, []);
 
-  const trips = [
-    "Spain",
-    "France",
-    "Italy",
-    "Germany",
-    "...",
-    "Add destination",
-  ];
-
-  const images = [
-    "", // Spain
-    "", // France
-  ];
-
   const [localTripTemplate, setLocalTripTemplate] = useState<TripTemplate>();
+
   // add trip to database
   const addTrip = () => {
     console.log(localTripTemplate);
+    const randomId: string =
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15);
+
+    if (!user) {
+      alert("You are not logged in. You need to be logged in to add a trip.");
+      return;
+    }
+    if (
+      !localTripTemplate ||
+      !localTripTemplate?.title ||
+      !localTripTemplate?.description ||
+      !localTripTemplate?.cost ||
+      !localTripTemplate?.duration
+    ) {
+      alert("You need to fill in all the fields.");
+      return;
+    }
+
+    // TODO: Instead of having "?" in the interface, the frontend should use forms to check if the fields are filled in
+    setDoc(doc(db, "trips", randomId), {
+      title: localTripTemplate?.title,
+      userEmailAddress: user?.email as string,
+      description: localTripTemplate?.description,
+      cost: localTripTemplate?.cost,
+      duration: localTripTemplate?.duration,
+      destinations: localTripTemplate?.destinations,
+      destinationsLowercase: localTripTemplate?.destinations
+        ? localTripTemplate?.destinations.map((destination) =>
+            destination.toLowerCase()
+          )
+        : [],
+      pictures: localTripTemplate?.pictures,
+    })
+      .then(() => {
+        console.log("Document successfully written!");
+      })
+      .catch((error: Error) => {
+        console.error("Error writing document: ", error);
+      });
+
+    // TODO: Clearing input should not be done, it should redirect to the trip
+
+    setLocalTripTemplate({
+      title: "",
+      description: "",
+      cost: 0,
+      duration: 0,
+      destinations: [],
+      pictures: [],
+    });
+
+    // clear the input fields
+    const titleInput = document.getElementById("title") as HTMLInputElement;
+    const descriptionInput = document.getElementById(
+      "description"
+    ) as HTMLInputElement;
+    const costInput = document.getElementById("cost") as HTMLInputElement;
+    const durationInput = document.getElementById(
+      "duration"
+    ) as HTMLInputElement;
+
+    titleInput.value = "";
+    descriptionInput.value = "";
+    costInput.value = "";
+    durationInput.value = "";
+
+    alert("Trip added successfully!");
+  };
+
+  const handleImageUpload = (e: any) => {
+    const imageFile = e.target.files[0] as File;
+
+    if (!imageFile) {
+      alert("No image selected");
+      return;
+    }
+    if (imageFile.size > 1050000) {
+      alert("Image size is too big");
+      return;
+    }
+
+    // TODO: Change from global upload and download, to local upload and download
+    const storageRef = ref(storage, `images/${imageFile.name}`);
+    uploadBytes(storageRef, imageFile)
+      .then((snapshot) => {
+        console.log("Uploaded a blob or file!");
+      })
+      .then(() => {
+        getDownloadURL(storageRef).then((url) => {
+          console.log(url);
+          setLocalTripTemplate({
+            ...localTripTemplate,
+            pictures: localTripTemplate?.pictures
+              ? [...(localTripTemplate?.pictures as string[]), url]
+              : [url],
+          });
+        });
+      })
+      .catch((error: Error) => {
+        console.error("Error writing document: ", error);
+      });
   };
 
   return (
@@ -126,11 +218,11 @@ export default function Index() {
                 size="md"
                 mt="3px"
                 borderRadius="lg"
+                id="title"
                 onChange={(e) => {
-                  console.log(e.target.value);
                   setLocalTripTemplate({
-                    title: e.target.value,
                     ...localTripTemplate,
+                    title: e.target.value,
                   });
                 }}
               />
@@ -143,10 +235,11 @@ export default function Index() {
                 size="md"
                 mt="3px"
                 borderRadius="lg"
+                id="cost"
                 onChange={(e) => {
                   setLocalTripTemplate({
-                    cost: Number(e.target.value),
                     ...localTripTemplate,
+                    cost: Number(e.target.value),
                   });
                 }}
               />
@@ -159,72 +252,159 @@ export default function Index() {
                 size="md"
                 mt="3px"
                 borderRadius="lg"
+                id="duration"
                 onChange={(e) => {
                   setLocalTripTemplate({
-                    duration: Number(e.target.value),
                     ...localTripTemplate,
+                    duration: Number(e.target.value),
                   });
                 }}
               />
             </Box>
           </SimpleGrid>
 
-          <Flex flexWrap="wrap" gap="10px">
-            {trips.map((trip, index) => (
+          <Box>
+            <Text fontSize="md">Destinations</Text>
+            <Flex justifyContent="space-between" alignItems="center">
+              <Input
+                placeholder="Enter destination"
+                size="md"
+                mt="3px"
+                mb="10px"
+                borderRadius="lg"
+                h="50px"
+                mr="10px"
+                id="destinationInput"
+              />
               <Button
-                key={index}
                 variant="outline"
                 colorScheme="teal"
                 borderRadius="lg"
                 size="md"
-                w="150px"
+                w="200px"
                 h="50px"
                 textAlign="center"
+                mt="-7px"
+                onClick={() => {
+                  const destinationInput = document.getElementById(
+                    "destinationInput"
+                  ) as HTMLInputElement;
+                  const destination = destinationInput.value;
+                  if (destination) {
+                    setLocalTripTemplate({
+                      ...localTripTemplate,
+                      destinations: localTripTemplate?.destinations
+                        ? [
+                            ...(localTripTemplate?.destinations as string[]),
+                            destination,
+                          ]
+                        : [destination],
+                    });
+                    destinationInput.value = "";
+                  }
+                }}
               >
-                {trip}
+                Add destination
               </Button>
-            ))}
-          </Flex>
-
+            </Flex>
+            <Flex flexWrap="wrap" gap="10px">
+              {localTripTemplate?.destinations?.map((destination, index) => (
+                <Button
+                  key={index}
+                  variant="outline"
+                  colorScheme="teal"
+                  borderRadius="lg"
+                  size="md"
+                  w="150px"
+                  h="50px"
+                  textAlign="center"
+                >
+                  {destination}
+                </Button>
+              ))}
+            </Flex>
+          </Box>
           <Flex flexWrap="wrap" gap="10px">
-            {images.map((image, index) => (
-              <Box
-                key={index}
-                w="350px"
-                h="200px"
-                borderRadius="lg"
-                bg="gray.100"
-                position="relative"
-              >
-                {/* X, text */}
+            {localTripTemplate?.pictures
+              ? localTripTemplate?.pictures.map((image, index) => (
+                  <Box
+                    position="relative"
+                    key={index}
+                    w="350px"
+                    h="200px"
+                    borderRadius="lg"
+                    // bg="gray.100"
+                    bg={`url(${image})`}
+                    bgSize="cover"
+                    bgPosition="center"
+                  >
+                    {/* X, text */}
+                    <Text
+                      position="absolute"
+                      top="10px"
+                      right="20px"
+                      color="white"
+                      fontWeight="bold"
+                      // hover
+                      cursor="pointer"
+                      _hover={{
+                        color: "gray.500",
+                      }}
+                    >
+                      X
+                    </Text>
+                  </Box>
+                ))
+              : null}
+            {/* Create stylized file input */}
+            <Box
+              w="350px"
+              h="200px"
+              borderRadius="lg"
+              bg="teal.300"
+              position="relative"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Input
+                type="file"
+                accept="image/*"
+                id="file"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  handleImageUpload(e);
+                }}
+              />
+              <label htmlFor="file">
+                <Box
+                  position="absolute"
+                  top="0"
+                  left="0"
+                  w="100%"
+                  h="100%"
+                  opacity="0"
+                  cursor="pointer"
+                />
                 <Text
                   position="absolute"
-                  top="10px"
-                  right="20px"
                   color="white"
                   fontWeight="bold"
+                  // move to center
+                  top="50%"
+                  left="50%"
+                  transform="translate(-50%, -50%)"
                   // hover
                   cursor="pointer"
                   _hover={{
-                    color: "gray.500",
+                    color: "gray.200",
                   }}
+                  zIndex={1}
                 >
-                  X
+                  + ADD IMAGE
                 </Text>
-              </Box>
-            ))}
-
-            <Button
-              variant="outline"
-              colorScheme="teal"
-              borderRadius="lg"
-              size="md"
-              w="350px"
-              h="200px"
-              textAlign="center"
-            >
-              + ADD IMAGE
-            </Button>
+              </label>
+            </Box>
           </Flex>
 
           {/* Big add Description field saying "Write here" */}
@@ -237,6 +417,13 @@ export default function Index() {
               mt="3px"
               borderRadius="lg"
               h="300px"
+              id="description"
+              onChange={(e) => {
+                setLocalTripTemplate({
+                  ...localTripTemplate,
+                  description: e.target.value,
+                });
+              }}
             />
           </Box>
 
