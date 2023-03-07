@@ -20,7 +20,7 @@ export const ProjectCard: React.FC<Cardprops> = ({
 }) => {
   const bakgrunn = "";
   return (
-    <Flex w="260px" h="230px" borderRadius="2xl" overflow="hidden">
+    <Flex w="260px" h="220px" borderRadius="2xl" overflow="hidden" shadow="md">
       <Grid
         h="100%"
         w="100%"

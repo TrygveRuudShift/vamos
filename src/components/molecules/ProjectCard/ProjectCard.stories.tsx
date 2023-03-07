@@ -12,7 +12,7 @@ export const Default = {
     price: "$1,900.00",
     description:
       "great trip with many activities. I love how the trip was organized. I would recommend this trip to everyone.",
-    reviewCount: 101,
+    duration: 5,
     rating: 5,
     img_url: NewYork,
   },
