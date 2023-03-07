@@ -15,7 +15,7 @@ import {
   Avatar,
 } from "@chakra-ui/react";
 import BgSignUp from "assets/img/BgSignUp.png";
-import { ContactUs, Logo } from "components/atoms/";
+import { ContactUs, Logo, ProfileInformation } from "components/atoms";
 import {
   ProjectPanel,
   DefaultHeader,
@@ -79,13 +79,14 @@ export default function Index() {
         />
 
         <Flex mt="70px" w="full" justifyContent="space-between">
-          <Card width="32%" minH="250px" borderRadius="2xl">
+          {/* <Card width="32%" minH="250px" borderRadius="2xl">
             <CardHeader>
               <Text fontWeight="bold" fontSize='lg' >Profile Information</Text>
               <Text>Your name: <i>{user?.displayName || "Name is undefined"}</i></Text>
               <Text>Your email: <i>{user?.email || "Email is undefined"}</i></Text>
             </CardHeader>
-          </Card>
+          </Card> */}
+          <ProfileInformation />
 
           <Card width="32%" borderRadius="2xl">
             <CardHeader>
