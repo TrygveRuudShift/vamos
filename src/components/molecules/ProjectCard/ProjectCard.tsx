@@ -4,7 +4,7 @@ import { Rating } from "../../atoms";
 interface Cardprops {
   title: string;
   price: string;
-  reviewCount?: number;
+duration?: number;
   description?: string;
   img_url: any;
   rating: number;
@@ -13,14 +13,14 @@ interface Cardprops {
 export const ProjectCard: React.FC<Cardprops> = ({
   title,
   price,
-  reviewCount,
+  duration,
   img_url,
   description,
   rating,
 }) => {
   const bakgrunn = "";
   return (
-    <Flex w="260px" h="290px" borderRadius="2xl" overflow="hidden">
+    <Flex w="260px" h="230px" borderRadius="2xl" overflow="hidden">
       <Grid
         h="100%"
         w="100%"
@@ -28,13 +28,15 @@ export const ProjectCard: React.FC<Cardprops> = ({
         templateRows="1fr 1fr 1fr 1fr"
         gap="5px"
         borderRadius="2xl"
+        borderColor={bakgrunn}
+        borderWidth="1px"
       >
         <GridItem
           colSpan={5}
           rowSpan={1}
           bg="teal.500"
           w="260px"
-          h="175px"
+          h="120px"
           borderRadius="2xl"
         >
           <Image
@@ -42,31 +44,33 @@ export const ProjectCard: React.FC<Cardprops> = ({
             alt="Your Image"
             boxSize="100%"
             borderRadius="2xl"
+            borderBottomRadius="0px"
             objectFit="cover"
           />
         </GridItem>
         <GridItem
-          colSpan={5}
+          colSpan={3}
           rowSpan={1}
           bg={bakgrunn}
-          fontWeight="semibold"
+          fontWeight="bold"
           lineHeight="tight"
           noOfLines={1}
           position="relative"
           pt="5px"
         >
           <Text ml="13px">{title}</Text>
-          <Text
-            mr="13px"
-            textAlign="end"
-            fontWeight="bold"
-            fontSize="sm"
-            position="absolute"
-            right="0px"
-            top="6px"
-          >
-            {price}
-          </Text>
+        </GridItem>
+        <GridItem
+          colSpan={2}
+          rowSpan={1}
+          bg={bakgrunn}
+          w="100%"
+          h="100%"
+          lineHeight="tight"
+          pt="0px"
+          ml="40px"
+        >
+        <Rating stars={rating} size="small" mt="5px" fontWeight="semibold" lineHeight="tight" textalign="end"/>
         </GridItem>
         <GridItem
           colSpan={5}
@@ -82,33 +86,23 @@ export const ProjectCard: React.FC<Cardprops> = ({
         </GridItem>
         <GridItem colSpan={2} rowSpan={1} w="100%" h="100%" textAlign="center">
           <Button
-            w="95%"
-            h="100%"
+            w="85%"
+            h="80%"
             variant="outline"
             colorScheme="teal"
-            p="5px"
-            borderRadius="md"
-            fontSize="10px"
+            p="3px"
+            borderRadius="15"
+            fontSize="9px"
             alignItems={"center"}
-            ml="13px"
+            ml="8px"
             onClick={() => console.log("clicked")}
           >
             VIEW TRIP
           </Button>
         </GridItem>
+        
         <GridItem
           colSpan={1}
-          rowSpan={1}
-          bg={bakgrunn}
-          w="100%"
-          h="100%"
-          fontWeight="semibold"
-          ml="13px"
-        >
-          <Rating stars={rating} size="small" mt="5px" />
-        </GridItem>
-        <GridItem
-          colSpan={2}
           rowSpan={2}
           bg={bakgrunn}
           w="100%"
@@ -116,8 +110,32 @@ export const ProjectCard: React.FC<Cardprops> = ({
           p="2px"
           fontSize={12}
         >
-          <Text textAlign="end" mt="3px" mr="13px">
-            {reviewCount?.toString() + " reviews"}
+          <Text 
+            textAlign="center" 
+            mt="3px" 
+            ml="4px"
+            fontWeight="bold"
+            lineHeight="tight"
+          >
+            {duration?.toString() + " days"}
+          </Text>
+        </GridItem>
+        <GridItem
+          colSpan={2}
+          rowSpan={1}
+          bg={bakgrunn}
+          w="100%"
+          h="100%"
+          p="2px"
+          >
+          <Text
+          fontWeight="bold"
+          lineHeight="tight"
+          textAlign="center"
+          mt="3px"
+          fontSize={12}          
+          >
+            {price}
           </Text>
         </GridItem>
       </Grid>
