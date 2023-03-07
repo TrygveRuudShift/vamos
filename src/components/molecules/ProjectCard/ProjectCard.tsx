@@ -4,7 +4,7 @@ import { Rating } from "../../atoms";
 interface Cardprops {
   title: string;
   price: string;
-duration?: number;
+  duration?: number;
   description?: string;
   img_url: any;
   rating: number;
@@ -18,7 +18,7 @@ export const ProjectCard: React.FC<Cardprops> = ({
   description,
   rating,
 }) => {
-  const bakgrunn = "";
+  const bakgrunn = "teal.200";
   return (
     <Flex w="260px" h="220px" borderRadius="2xl" overflow="hidden" shadow="md">
       <Grid
@@ -100,43 +100,31 @@ export const ProjectCard: React.FC<Cardprops> = ({
             VIEW TRIP
           </Button>
         </GridItem>
-        
         <GridItem
-          colSpan={1}
+          colSpan={3}
           rowSpan={2}
           bg={bakgrunn}
           w="100%"
           h="100%"
           p="2px"
           fontSize={12}
-        >
+          style={{ wordWrap: "break-word" }}
+          >
+          <Flex justifyContent="space-between">
           <Text 
-            textAlign="center" 
             mt="3px" 
-            ml="4px"
-            fontWeight="bold"
-            lineHeight="tight"
-          >
-            {duration?.toString() + " days"}
+            ml="4px" fontWeight="bold" lineHeight="tight">
+            {duration} {duration === 1 ? 'day' : 'days'}
           </Text>
-        </GridItem>
-        <GridItem
-          colSpan={2}
-          rowSpan={1}
-          bg={bakgrunn}
-          w="100%"
-          h="100%"
-          p="2px"
-          >
-          <Text
-          fontWeight="bold"
-          lineHeight="tight"
-          textAlign="center"
-          mt="3px"
-          fontSize={12}          
-          >
+          <Text 
+            fontWeight="bold" 
+            lineHeight="tight" 
+            mr="20px"
+            mt="3px"
+            >
             {price}
           </Text>
+          </Flex>
         </GridItem>
       </Grid>
     </Flex>

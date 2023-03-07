@@ -16,7 +16,7 @@ export const Default = {
           title="New York"
           price="$1,900.00"
           description="great trip with many activities. I love how the trip was organized. I would recommend this trip to everyone."
-          reviewCount={101}
+          duration={10}
           rating={5}
           img_url={NewYork}
         />
@@ -24,7 +24,7 @@ export const Default = {
           title="New York"
           price="$1,900.00"
           description="great trip with many activities. I love how the trip was organized. I would recommend this trip to everyone."
-          reviewCount={101}
+          duration={10}
           rating={5}
           img_url={NewYork}
         />
@@ -32,7 +32,7 @@ export const Default = {
           title="New York"
           price="$1,900.00"
           description="great trip with many activities. I love how the trip was organized. I would recommend this trip to everyone."
-          reviewCount={101}
+          duration={10}
           rating={5}
           img_url={NewYork}
         />

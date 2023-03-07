@@ -56,7 +56,7 @@ const ProjectCards: React.FC<ProjectCardsProps> = ({
             : trip.description.length > descriptionWordLimit ? (trip.description.substring(0, descriptionWordLimit) + "...")
             : trip.description
           }
-          reviewCount={0}
+          duration={0}
           rating={0}
           img_url={trip.pictures ? trip.pictures[0] : NewYork.src}
         /> : <></>
