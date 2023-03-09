@@ -17,11 +17,15 @@ import {
 import BgSignUp from "assets/img/BgSignUp.png";
 import { SignInButton, InputField, NavBar } from "components/atoms/";
 import { auth } from "../firebase/clientApp";
+import { FaFacebook, FaInstagram, FaTwitter, FaPhoneAlt } from "react-icons/fa";
+import { AiOutlineMail } from "react-icons/ai";
 import { useEffect, useState } from "react";
 
 export default function ContactUs() {
   const textColor = useColorModeValue("gray.600", "white");
   const bgColor = useColorModeValue("white", "gray.700");
+  const bg = useColorModeValue("teal.300", "teal.700");
+  const mainbg = useColorModeValue("gray.100", "gray.700");
 
   const [user, setUser] = useState(auth.currentUser);
 
@@ -85,6 +89,85 @@ export default function ContactUs() {
           </Text>
 
           {/* TODO: Setup icons and text */}
+          <Box
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            mb="10px"
+          >
+            <Box
+              pt="2px"
+              pb="2px"
+              pl="5px"
+              pr="5px"
+              //border="1px solid"
+              borderColor={bg}
+              borderRadius="12px"
+              color={bg}
+              fontSize="40px"
+              mr="10px"
+            >
+              <AiOutlineMail />
+            </Box>
+            <Text>
+              Email: contactus@vamos.com
+            </Text>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            mb="20px"
+
+          >
+            <Box
+              pt="6px"
+              pb="6px"
+              pl="10px"
+              pr="10px"
+              //border="1px solid"
+              borderColor={bg}
+              borderRadius="12px"
+              color={bg}
+              fontSize="30px"
+              mr="10px"
+            >
+              <FaPhoneAlt />
+            </Box>
+            <Text>
+              Phone: 123-45-678
+            </Text>
+          </Box>
+          <Text
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            margin="auto"
+            mb="20px"
+            mt="18px"
+          >
+            Or fill in the form
+          </Text>
+          <Text>Full name</Text>
+          <InputField placeholder="Your full name" radius="medium" />
+          <Text>Email</Text>
+          <InputField placeholder="Your email" radius="medium" />
+          <Text>Message</Text>
+          <InputField placeholder="Your message" radius="medium" />
+          <SignInButton>Contact us</SignInButton>
+          <Box 
+            color={bg}
+            width = "75%"
+            alignItems= "center"
+            display= "flex"
+            justifyContent= "space-between"
+            m = "auto"
+            fontSize="50px"
+          >
+            <FaFacebook />
+            <FaInstagram />
+            <FaTwitter />
+          </Box>
         </Flex>
       </Flex>
     </Flex>
