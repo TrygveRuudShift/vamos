@@ -10,23 +10,28 @@ import {
   Link,
   Switch,
   Text,
+  useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
 // Assets
 import BgSignUp from "assets/img/BgSignUp.png";
 import { SignInButton, InputField, NavBar } from "components/atoms/";
 import { auth } from "../firebase/clientApp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ContactUs() {
   const textColor = useColorModeValue("gray.600", "white");
   const bgColor = useColorModeValue("white", "gray.700");
 
   const [user, setUser] = useState(auth.currentUser);
-  auth.onAuthStateChanged((user) => {
-    setUser(user);
-  });
-  
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setUser(user);
+      console.log(user?.email);
+    });
+  }, []);
+
   return (
     <Flex
       direction="column"
@@ -34,7 +39,10 @@ export default function ContactUs() {
       justifySelf="center"
       overflow="hidden"
     >
-      <NavBar backgroundtype="clear" login={user ? "logged_in" : "logged_out"} />
+      <NavBar
+        backgroundtype="clear"
+        login={user ? "logged_in" : "logged_out"}
+      />
       <Box
         position="absolute"
         minH={{ base: "70vh", md: "50vh" }}
@@ -58,8 +66,7 @@ export default function ContactUs() {
         align="center"
         mt="200px"
         mb="0px"
-      >
-      </Flex>
+      ></Flex>
       <Flex alignItems="center" justifyContent="center" mb="60px" mt="20px">
         <Flex
           direction="column"

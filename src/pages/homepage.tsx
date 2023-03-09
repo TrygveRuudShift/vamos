@@ -1,6 +1,6 @@
 import { SettingsIcon } from "@chakra-ui/icons";
 import { Flex } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BgSignUp from "assets/img/BgSignUp.png";
 
 import { ContactUs, Logo } from "components/atoms";
@@ -20,9 +20,13 @@ import { collection, limit, orderBy, query, where } from "firebase/firestore";
 export default function Index() {
   // Logic to set user state
   const [user, setUser] = useState(auth.currentUser);
-  auth.onAuthStateChanged((user: any) => {
-    setUser(user);
-  });
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setUser(user);
+      console.log(user?.email);
+    });
+  }, []);
 
   return (
     <Flex pt="5px">
@@ -64,10 +68,46 @@ export default function Index() {
 
         {/* PROJECT PANELS */}
         <Flex mt="70px" flexDirection="column" gap="20px" w="full">
-          <ProjectPanel title="USA" tripQuery={query(collection(db, "trips"), where("destinationsLowercase", "array-contains-any", queryFilter.USA), limit(3))} />
-          <ProjectPanel title="Europe" tripQuery={query(collection(db, "trips"), where("destinationsLowercase", "array-contains-any", queryFilter.Europe), limit(3))} />
-          <ProjectPanel title="Cheap trips" tripQuery={query(collection(db, "trips"), orderBy("cost"), limit(3))} /> 
-          <ProjectPanel title="Longest trips" tripQuery={query(collection(db, "trips"), orderBy("duration", "desc"), limit(3))} />
+          <ProjectPanel
+            title="USA"
+            tripQuery={query(
+              collection(db, "trips"),
+              where(
+                "destinationsLowercase",
+                "array-contains-any",
+                queryFilter.USA
+              ),
+              limit(3)
+            )}
+          />
+          <ProjectPanel
+            title="Europe"
+            tripQuery={query(
+              collection(db, "trips"),
+              where(
+                "destinationsLowercase",
+                "array-contains-any",
+                queryFilter.Europe
+              ),
+              limit(3)
+            )}
+          />
+          <ProjectPanel
+            title="Cheap trips"
+            tripQuery={query(
+              collection(db, "trips"),
+              orderBy("cost"),
+              limit(3)
+            )}
+          />
+          <ProjectPanel
+            title="Longest trips"
+            tripQuery={query(
+              collection(db, "trips"),
+              orderBy("duration", "desc"),
+              limit(3)
+            )}
+          />
           {/* <ProjectPanel title="Most popular" tripQuery={query(collection(db, "trips"), orderBy("rating", "desc"), limit(3))} /> */}
         </Flex>
       </Flex>
