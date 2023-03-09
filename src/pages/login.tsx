@@ -13,12 +13,14 @@ import {
   useColorModeValue,
   HStack,
   Icon,
+  useColorMode,
 } from "@chakra-ui/react";
 import signInImage from "assets/img/signInImage2.png";
 import { SignInButton, InputField, NavBar, Logo } from "components/atoms/";
 import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth, login } from "../firebase/clientApp";
+import { useEffect, useState } from "react";
 
 export default function Login() {
   // Chakra color mode
@@ -26,17 +28,18 @@ export default function Login() {
   const textColor = useColorModeValue("gray.400", "white");
   const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
 
-  // redirect to home page when user is logged in
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      // TODO: add this line when login page is done
-      // window.location.href = "/homepage";
-    }
-  });
+  const [user, setUser] = useState(auth.currentUser);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setUser(user);
+      console.log(user?.email);
+    });
+  }, []);
 
   return (
     <Flex position="relative" mb="0px">
-      <NavBar backgroundtype="blur" />
+      <NavBar backgroundtype="blur" login={user ? "logged_in" : "logged_out"} />
       <Flex
         w="100%"
         maxW="1044px"

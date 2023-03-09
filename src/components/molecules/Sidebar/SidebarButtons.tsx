@@ -1,5 +1,5 @@
 import { SidepanelButton } from "../../atoms/SidepanelButton/SidepanelButton";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, useColorMode, Button } from "@chakra-ui/react";
 import { AiFillHome, AiFillStar } from "react-icons/ai";
 import { MdBackpack } from "react-icons/md";
 import {
@@ -11,6 +11,7 @@ import { GoSignIn, GoSignOut } from "react-icons/go";
 import { IoRocketSharp } from "react-icons/io5";
 import { FaSignOutAlt } from "react-icons/fa";
 import { auth } from "../../../firebase/clientApp";
+import { ThemeButton } from "../../atoms/ThemeButton/ThemeButton";
 
 interface ButtonsProps {
   size?: "small" | "medium" | "large";
@@ -20,7 +21,13 @@ interface ButtonsProps {
   height?: string;
   width?: string;
   type?: "logged_in" | "logged_out";
-  selected?: "home" | "mytrips" | "ratedtrips" | "addtrips" | "billing" | "profile";
+  selected?:
+    | "home"
+    | "mytrips"
+    | "ratedtrips"
+    | "addtrips"
+    | "billing"
+    | "profile";
 }
 
 export const SidebarButtons: React.FC<ButtonsProps> = ({
@@ -35,20 +42,19 @@ export const SidebarButtons: React.FC<ButtonsProps> = ({
   }
 
   let dir = {
-    "home": false,
-    "mytrips": false,
-    "ratedtrips": false,
-    "addtrips": false,
-    "billing": false,
-    "profile": false,
-  }
+    home: false,
+    mytrips: false,
+    ratedtrips: false,
+    addtrips: false,
+    billing: false,
+    profile: false,
+  };
 
-  if (!selected){
+  if (!selected) {
     dir["home"] = true;
   } else {
     dir[selected] = true;
   }
-
   return (
     <Box w={props.width} textAlign="center">
       <Flex
@@ -125,8 +131,7 @@ export const SidebarButtons: React.FC<ButtonsProps> = ({
               href="login"
               onClick={() => {
                 auth.signOut();
-              }
-              }
+              }}
             >
               Log out
             </SidepanelButton>
@@ -152,6 +157,14 @@ export const SidebarButtons: React.FC<ButtonsProps> = ({
             </SidepanelButton>
           </>
         )}
+        <ThemeButton
+          w="80%"
+          borderRadius="10px"
+          mt="20px"
+          color="white"
+          light="teal.300"
+          dark="teal.700"
+        />
       </Flex>
     </Box>
   );

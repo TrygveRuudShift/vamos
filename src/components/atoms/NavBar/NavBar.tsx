@@ -1,12 +1,13 @@
 //create component navbar
 
-import { Box, Flex, Image } from "@chakra-ui/react";
+import { Box, Button, Flex, Image } from "@chakra-ui/react";
 import { auth } from "../../../firebase/clientApp";
 import { FaKey, FaUserAlt, FaUserCircle } from "react-icons/fa";
 import { SiHackthebox } from "react-icons/si";
 import { Logo } from "../";
 import { GoSignOut } from "react-icons/go";
 import { AiFillHome } from "react-icons/ai";
+import { ThemeButton } from "../ThemeButton/ThemeButton";
 interface BoxProps {
   backgroundtype?: "clear" | "blur";
   login?: "logged_in" | "logged_out";
@@ -195,24 +196,20 @@ export const NavBar: React.FC<BoxProps> = ({
           </>
         )}
       </Flex>
-      <Box
-        as="button"
-        style={{
-          marginRight: "10px",
-          width: "130px",
-          height: "30px",
-          bottom: "2.5px",
-        }}
+      <ThemeButton
+        mr="10px"
+        width="130px"
+        mt="5px"
+        height="30px"
+        bottom="2.5px"
         borderRadius="20px"
         color={fontcolor2}
         backgroundImage={backgroundimage}
         fontSize="10px"
-        onClick={() => {
-          window.location.href = "/homepage";
-        }}
+        fontWeight="medium"
       >
         Look at previous trips
-      </Box>
+      </ThemeButton>
     </Flex>
   );
 };

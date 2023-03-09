@@ -16,8 +16,9 @@ import {
 import BgSignUp from "assets/img/BgSignUp.png";
 import { SignInButton, InputField, NavBar } from "components/atoms/";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { login } from "../firebase/clientApp";
+import { login, auth } from "../firebase/clientApp";
 import { FcGoogle } from "react-icons/fc";
+import { useEffect, useState } from "react";
 
 export default function Register() {
   const titleColor = useColorModeValue("teal.300", "teal.200");
@@ -27,6 +28,14 @@ export default function Register() {
 
   const provider = new GoogleAuthProvider();
 
+  const [user, setUser] = useState(auth.currentUser);
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setUser(user);
+      console.log(user?.email);
+    });
+  }, []);
+
   return (
     <Flex
       direction="column"
@@ -34,7 +43,10 @@ export default function Register() {
       justifySelf="center"
       overflow="hidden"
     >
-      <NavBar backgroundtype="clear" />
+      <NavBar
+        backgroundtype="clear"
+        login={user ? "logged_in" : "logged_out"}
+      />
       <Box
         position="absolute"
         minH={{ base: "70vh", md: "50vh" }}
