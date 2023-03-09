@@ -18,7 +18,7 @@ import {
 import signInImage from "assets/img/signInImage2.png";
 import { SignInButton, InputField, NavBar, Logo } from "components/atoms/";
 import { FcGoogle } from "react-icons/fc";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, login } from "../firebase/clientApp";
 import { useEffect, useState } from "react";
 
@@ -36,6 +36,35 @@ export default function Login() {
       console.log(user?.email);
     });
   }, []);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignInWithEmail = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Redirect to homepage
+        window.location.href = "/homepage";
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log({ errorCode, errorMessage });
+
+        if (errorCode === "auth/internal-error")
+          alert("Internal error, please try again later");
+        if (errorCode === "auth/user-not-found")
+          alert("User not found");
+        if (errorCode === "auth/wrong-password")
+          alert("Wrong password");
+        if (errorCode === "auth/invalid-email")
+          alert("Invalid email");
+        if (errorCode === "auth/user-disabled")
+          alert("User disabled");
+        if (errorCode === "auth/too-many-requests")
+          alert("Too many requests, please try again later");
+      });
+  };
 
   return (
     <Flex position="relative" mb="0px">
@@ -110,7 +139,7 @@ export default function Login() {
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Email
               </FormLabel>
-              <InputField placeholder="Your email address" radius="medium" />
+              <InputField placeholder="Your email address" radius="medium" onChange={(e) => setEmail(e.target.value)} />
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Password
               </FormLabel>
@@ -118,6 +147,7 @@ export default function Login() {
                 placeholder="Your password"
                 radius="medium"
                 type="password"
+                onChange={(e) => setPassword(e.target.value)}
               />
               <FormControl display="flex" alignItems="center">
                 <Switch id="remember-login" colorScheme="teal" me="10px" />
@@ -130,7 +160,7 @@ export default function Login() {
                   Remember me
                 </FormLabel>
               </FormControl>
-              <SignInButton>SIGN IN</SignInButton>
+              <SignInButton onClick={handleSignInWithEmail} >SIGN IN</SignInButton>
             </FormControl>
             <Flex
               flexDirection="column"

@@ -15,8 +15,8 @@ import {
 // Assets
 import BgSignUp from "assets/img/BgSignUp.png";
 import { SignInButton, InputField, NavBar } from "components/atoms/";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { login, auth } from "../firebase/clientApp";
+import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, login } from "../firebase/clientApp";
 import { FcGoogle } from "react-icons/fc";
 import { useEffect, useState } from "react";
 
@@ -27,6 +27,47 @@ export default function Register() {
   const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
 
   const provider = new GoogleAuthProvider();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignUp = () => {
+    console.log({ name, email, password })
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log({ user });
+        // set displayName
+        updateProfile(user, {
+          displayName: name,
+        })
+          .then(() => {
+            // Update successful
+            window.location.href = "/homepage";
+          })
+          .catch((error) => {
+            // An error occurred
+          });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log({ errorCode, errorMessage });
+
+        if (errorCode === "auth/weak-password") {
+          alert("The password is too weak.");
+        }
+        if (errorCode === "auth/email-already-in-use") {
+          alert("The email is already in use.");
+        }
+        if (errorCode === "auth/invalid-email") {
+          alert("The email is invalid.");
+        }
+      });
+  };
+
 
   const [user, setUser] = useState(auth.currentUser);
   useEffect(() => {
@@ -142,11 +183,11 @@ export default function Register() {
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Name
             </FormLabel>
-            <InputField placeholder="Your full name" radius="medium" />
+            <InputField placeholder="Your full name" radius="medium" onChange={(e) => setName(e.target.value)} />
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Email
             </FormLabel>
-            <InputField placeholder="Your email address" radius="medium" />
+            <InputField placeholder="Your email address" radius="medium" onChange={(e) => setEmail(e.target.value)} />
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Password
             </FormLabel>
@@ -154,6 +195,7 @@ export default function Register() {
               placeholder="Your password"
               radius="medium"
               type="password"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <FormControl display="flex" alignItems="center" mb="24px">
               <Switch id="remember-login" colorScheme="teal" me="10px" />
@@ -161,7 +203,7 @@ export default function Register() {
                 Remember me
               </FormLabel>
             </FormControl>
-            <SignInButton> SIGN UP </SignInButton>
+            <SignInButton onClick={() => handleSignUp()} > Sign Up </SignInButton>
           </FormControl>
           <Flex
             flexDirection="column"
