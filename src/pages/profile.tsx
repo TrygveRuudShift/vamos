@@ -20,6 +20,7 @@ import {
   ProjectPanel,
   DefaultHeader,
   SidebarButtons,
+  ProfileReviews,
 } from "components/molecules";
 import { collection, limit, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -96,13 +97,19 @@ export default function Index() {
             </CardHeader>
           </Card>
 
-          <Card width="32%" borderRadius="2xl">
+          {/*<Card width="32%" borderRadius="2xl">
             <CardHeader>
               <Flex justifyContent="space-between">
                 <Text fontWeight="bold" fontSize='lg'>Reviews</Text>
               </Flex>
             </CardHeader>
-          </Card>
+        </Card>*/}
+        <ProfileReviews 
+        userNames={["User1","User2","User3","User4"]} 
+        reviews={[1,2,3,4]}
+        description={["Description1","Description2","Description3","Description4"]}
+        profileURL={BgSignUp.src}
+        />
         </Flex>
 
         <Flex mt="20px" flexDirection="column" gap="20px" w="full">
