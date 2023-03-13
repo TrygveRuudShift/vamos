@@ -87,7 +87,9 @@ export default function Index() {
               <Text>Your email: <i>{user?.email || "Email is undefined"}</i></Text>
             </CardHeader>
           </Card> */}
-          <ProfileInformation />
+          <ProfileInformation
+            email={user?.email || "Email is undefined"}
+          />
 
           <Card width="32%" borderRadius="2xl">
             <CardHeader>
@@ -112,11 +114,10 @@ export default function Index() {
         />
         </Flex>
 
-        <Flex mt="20px" flexDirection="column" gap="20px" w="full">
-          {user && (
-            <ProjectPanel title="My Trips" tripQuery={query(collection(db, "trips"), where("userEmailAddress", "==", user?.email), limit(3))} />
-          )}
-        </Flex>
+        {user && (<Flex mt="20px" flexDirection="column" gap="20px" w="full">
+          <ProjectPanel title="My Trips" tripQuery={query(collection(db, "trips"), where("userEmailAddress", "==", user?.email), limit(3))} />
+          <ProjectPanel title="Favorites" tripQuery={query(collection(db, "trips"), where("favorites", "array-contains", user?.email), limit(3))} />
+        </Flex>)}
       </Flex>
     </Flex>
   );

@@ -8,4 +8,5 @@ export interface TripTemplate {
 	destinations? : string[];
 	destinationsLowercase? : string[];
 	pictures? : string[];
+	favorites? : string[];
 }
