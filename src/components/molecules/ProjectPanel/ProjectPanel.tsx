@@ -135,7 +135,8 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
             color="gray.500"
             border="1px solid lightgray"
             borderRadius="15px"
-            minHeight={{ sm: "200px", md: "100%" }}
+            minHeight="100px"
+            h="100%"
           >
             <Flex direction="column" justifyContent="center" align="center">
               <Text fontSize="lg" mb="12px">
