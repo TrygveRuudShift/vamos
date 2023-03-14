@@ -67,7 +67,7 @@ export const SidebarButtons: React.FC<ButtonsProps> = ({
           icon={AiFillHome}
           selected={dir["home"]}
           size={props.size}
-          href="homepage"
+          href="/homepage"
         >
           Home
         </SidepanelButton>
@@ -91,7 +91,7 @@ export const SidebarButtons: React.FC<ButtonsProps> = ({
           icon={BsPlusLg}
           selected={dir["addtrips"]}
           size={props.size}
-          href="addTrip"
+          href="/addTrip"
         >
           Add trips
         </SidepanelButton>
@@ -120,7 +120,7 @@ export const SidebarButtons: React.FC<ButtonsProps> = ({
               icon={BsFillPersonFill}
               selected={dir["profile"]}
               size={props.size}
-              href="profile"
+              href="/profile"
             >
               Profile
             </SidepanelButton>
@@ -128,7 +128,7 @@ export const SidebarButtons: React.FC<ButtonsProps> = ({
               icon={GoSignOut}
               selected={false}
               size={props.size}
-              href="login"
+              href="/login"
               onClick={() => {
                 auth.signOut();
               }}
@@ -143,7 +143,7 @@ export const SidebarButtons: React.FC<ButtonsProps> = ({
               icon={GoSignIn}
               selected={false}
               size={props.size}
-              href="login"
+              href="/login"
             >
               Sign In
             </SidepanelButton>
@@ -151,7 +151,7 @@ export const SidebarButtons: React.FC<ButtonsProps> = ({
               icon={IoRocketSharp}
               selected={false}
               size={props.size}
-              href="register"
+              href="/register"
             >
               Sign Up
             </SidepanelButton>
