@@ -26,6 +26,7 @@ import {
   Logo,
   ProfileInformation,
   FavButton,
+  FavoritesButton,
   TextArena,
 } from "components/atoms";
 import {
@@ -35,13 +36,15 @@ import {
   ReviewCard,
   ImageSlider,
 } from "components/molecules";
-import { collection, limit, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, limit, query, where } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { BsHeart, BsStar } from "react-icons/bs";
 import { FaShareSquare } from "react-icons/fa";
+
 // firebase
 import { auth, db } from "../../firebase/clientApp";
+import { TripTemplate } from "templates/tripTemplate";
 
 export default function Index() {
   // Logic to set user state
@@ -49,10 +52,15 @@ export default function Index() {
 
   const [fav, setFav] = useState(false);
 
-  const router = useRouter();
-  const { tripId } = router.query;
+  const defaultImage = "https://i.natgeofe.com/k/e800ca90-2b5b-4dad-b4d7-b67a48c96c91/spain-madrid.jpg?w=636&h=358"
+  const [slideImages, setSlideImages] = useState<string[]>([defaultImage]);
 
-  console.log(tripId);
+  const router = useRouter();
+  const { tripId, tripJSON } = router.query;
+  const trip : TripTemplate = JSON.parse(tripJSON ? tripJSON as string : "{}");
+  console.log("tripId: ", tripId);
+  console.log("tripJSON: ", tripJSON);
+  console.log("trip: ", trip);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -61,11 +69,8 @@ export default function Index() {
     });
   }, []);
 
-  const slideImages = [
-    "https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-    "https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80",
-    "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-  ];
+
+  const [haveShared, setHaveShared] = useState(false);
 
   return (
     <Flex pt="5px">
@@ -101,30 +106,45 @@ export default function Index() {
 
       <Flex w="80%" flexWrap="wrap">
         <Flex mt="20px" flexDirection="column" gap="20px" w="full" pr="10px">
-          <ImageSlider slideRef={useRef(null)} images={slideImages} />
+          <ImageSlider slideRef={useRef(null)} images={ trip?.pictures || [defaultImage]} />
 
           {/* Header, h1, add to favorite button, share button */}
           <Flex w="full" justifyContent="space-between" alignItems="center">
             <Text fontSize="4xl" fontWeight="bold">
-              Backpacking in Spain with Guides!
+              {trip?.title}
             </Text>
             <Flex>
-              <FavButton selected={fav} onClick={() => setFav(!fav)} />
+              <FavoritesButton
+                favorites={trip?.favorites || []}
+                tripID={tripId as string}
+              >
+              </FavoritesButton>
               <Button
                 colorScheme="teal"
                 variant="link"
                 size="sm"
                 leftIcon={<Icon as={FaShareSquare} boxSize="25px" mb="2px" />}
                 mx="10px"
+                px="10px"
+                _active={{ bg: "teal.100" }}
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    // `https://pu.alfnes.dev/trip/${tripId}`
+                    // `http://localhost:3000/trip/${tripId}`
+                    `${window.location.href}`
+                  );
+                  setHaveShared(true);
+                }}
               >
-                Share
+                {haveShared ? "Copied!" : "Share"}
               </Button>
             </Flex>
           </Flex>
 
           {/* Locations, in button, white buttons with box shadow*/}
           <Flex w="full" gap="10px">
-            <Button
+            {[...trip?.destinations || []].map((destination) => (
+              <Button
               bg="white"
               size="md"
               width="130px"
@@ -132,29 +152,10 @@ export default function Index() {
               boxShadow="md"
               _hover={{ boxShadow: "lg" }}
             >
-              Barcelona
+              {destination}
             </Button>
-            <Button
-              bg="white"
-              size="md"
-              width="150px"
-              fontWeight="semibold"
-              boxShadow="md"
-              _hover={{ boxShadow: "lg" }}
-            >
-              Madrid
-            </Button>
-
-            <Button
-              bg="white"
-              size="md"
-              width="150px"
-              fontWeight="semibold"
-              boxShadow="md"
-              _hover={{ boxShadow: "lg" }}
-            >
-              Granada
-            </Button>
+            ))}
+          
           </Flex>
 
           {/* Trip description, Price estimate, Duration and rating. Big numbers, but small label over the numbers */}
@@ -164,7 +165,7 @@ export default function Index() {
                 Price estimate:
               </Text>
               <Text m="0" fontSize="4xl" fontWeight="bold">
-                1000,- euros
+                €{trip?.cost}
               </Text>
             </Flex>
             <Flex flexDirection="column">
@@ -172,7 +173,7 @@ export default function Index() {
                 Duration:
               </Text>
               <Text m="0" fontSize="4xl" fontWeight="bold">
-                10 days
+                {trip?.duration} days
               </Text>
             </Flex>
             <Flex flexDirection="column">
@@ -186,27 +187,7 @@ export default function Index() {
           </Flex>
 
           <TextArena
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl,
-              et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget
-              ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl
-              sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl
-              nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed
-              tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl,
-              et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget
-              ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl
-              sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl
-              nisl aliquam nisl, et aliquam nisl nisl sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl,
-              et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget
-              ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl
-              sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl
-              nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed
-              tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl,
-              et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget
-              ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl
-              sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl
-              nisl aliquam nisl, et aliquam nisl nisl sit amet..."
+            text={trip?.description || ""}
             length={520}
           />
 

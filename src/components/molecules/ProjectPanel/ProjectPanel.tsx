@@ -39,26 +39,11 @@ const ProjectCards: React.FC<ProjectCardsProps> = ({
  }) => {
   return (
     <>
-      {/* <ProjectCard
-        title="New York"
-        price="$1,900.00"
-        description="A great trip with many activities. I love how the trip was organized. I would recommend this trip to everyone."
-        reviewCount={18}
-        rating={5}
-        img_url={NewYork.src}
-      /> */}
       {trips.map((trip, index) => (
         index < cardLimit ? <ProjectCard
-          title={trip.title ? trip.title : "Undefined title"}
-          price={trip.cost ? trip.cost.toString() + " €" : "Undefined price"}
-          description={
-            !trip.description ? " "
-            : trip.description.length > descriptionWordLimit ? (trip.description.substring(0, descriptionWordLimit) + "...")
-            : trip.description
-          }
           reviewCount={0}
           rating={0}
-          img_url={trip.pictures ? trip.pictures[0] : NewYork.src}
+          trip={trip}
         /> : <></>
       ))}
     </>
@@ -75,8 +60,6 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
 }) => {
   const textColor = useColorModeValue("gray.700", "white");
 
-  // get all trips from firebase
-  // const trips = getDocs(collection(db, "trips"));
   const [tripsArray, setTripsArray] = useState([] as TripTemplate[]);
   
   useEffect(() => {
@@ -87,6 +70,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
       const tempArray: TripTemplate[] = [];
       querySnapshot.forEach((doc) => {
         tempArray.push(doc.data());
+        tempArray[tempArray.length - 1].id = doc.id;
       });
       setTripsArray(tempArray);
       console.log(tempArray);
