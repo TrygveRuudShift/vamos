@@ -51,15 +51,18 @@ export default function Index() {
         gap="20px"
       >
         <Flex
-          mx="25px"
-          pb="15px"
-          mb="5px"
           w="80%"
-          borderBottom="1px"
-          borderColor="blackAlpha.200"
-          justifyContent="center"
-        >
-          <Logo h="40px" />
+          mx="25px"
+          bg="sideBarBorderBottom">
+          <Flex
+            pb="15px"
+            mb="1px"
+            w="100%"
+            justifyContent="center"
+            bg="sideBar"
+          >
+            <Logo h="40px" />
+          </Flex>
         </Flex>
         <SidebarButtons
           size={"medium"}
@@ -87,14 +90,14 @@ export default function Index() {
               <Text>Your email: <i>{user?.email || "Email is undefined"}</i></Text>
             </CardHeader>
           </Card> */}
-          <ProfileInformation
-            email={user?.email || "Email is undefined"}
-          />
+          <ProfileInformation email={user?.email || "Email is undefined"} />
 
-          <Card width="32%" borderRadius="2xl">
+          <Card width="32%" borderRadius="2xl" bg="hovComp">
             <CardHeader>
               <Flex justifyContent="space-between">
-                <Text fontWeight="bold" fontSize='lg'>Favorite trips</Text>
+                <Text fontWeight="bold" fontSize="lg">
+                  Favorite trips
+                </Text>
               </Flex>
             </CardHeader>
           </Card>
@@ -106,18 +109,39 @@ export default function Index() {
               </Flex>
             </CardHeader>
         </Card>*/}
-        <ProfileReviews 
-        userNames={["User1","User2","User3","User4"]} 
-        reviews={[1,2,3,4]}
-        description={["Description1","Description2","Description3","Description4"]}
-        profileURL={BgSignUp.src}
-        />
+          <ProfileReviews
+            userNames={["User1", "User2", "User3", "User4"]}
+            reviews={[1, 2, 3, 4]}
+            description={[
+              "Description1",
+              "Description2",
+              "Description3",
+              "Description4",
+            ]}
+            profileURL={BgSignUp.src}
+          />
         </Flex>
 
-        {user && (<Flex mt="20px" flexDirection="column" gap="20px" w="full">
-          <ProjectPanel title="My Trips" tripQuery={query(collection(db, "trips"), where("userEmailAddress", "==", user?.email), limit(3))} />
-          <ProjectPanel title="Favorites" tripQuery={query(collection(db, "trips"), where("favorites", "array-contains", user?.email), limit(3))} />
-        </Flex>)}
+        {user && (
+          <Flex mt="20px" flexDirection="column" gap="20px" w="full">
+            <ProjectPanel
+              title="My Trips"
+              tripQuery={query(
+                collection(db, "trips"),
+                where("userEmailAddress", "==", user?.email),
+                limit(3)
+              )}
+            />
+            <ProjectPanel
+              title="Favorites"
+              tripQuery={query(
+                collection(db, "trips"),
+                where("favorites", "array-contains", user?.email),
+                limit(3)
+              )}
+            />
+          </Flex>
+        )}
       </Flex>
     </Flex>
   );

@@ -1,21 +1,36 @@
-import { Image, Flex, Box } from "@chakra-ui/react";
+import { Image, Flex, Box, useColorModeValue } from "@chakra-ui/react";
 
 interface LogoProps {
   mainColor?: string;
   secondaryColor?: string;
+  darkMode?: string;
   [key: string]: any;
 }
 
 export const Logo: React.FC<LogoProps> = ({
   mainColor,
   secondaryColor,
+  darkMode,
   ...props
 }) => {
   if (!mainColor) {
-    mainColor = "rgb(21,49,111)";
+    mainColor = "#15316F";
   }
   if (!secondaryColor) {
-    secondaryColor = "rgb(235,86,118)";
+    secondaryColor = "#EB5676";
+  }
+
+  mainColor = useColorModeValue(mainColor, "#628ae1");
+  secondaryColor = useColorModeValue(secondaryColor, "#EB5676");
+
+  if (darkMode) {
+    if (darkMode === "true") {
+      mainColor = "#628ae1";
+      secondaryColor = "#EB5676";
+    } else { 
+      mainColor = "#15316F";
+      secondaryColor = "#EB5676";
+    }
   }
 
   return (

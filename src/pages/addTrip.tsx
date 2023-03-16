@@ -151,15 +151,18 @@ export default function Index() {
         gap="20px"
       >
         <Flex
-          mx="25px"
-          pb="15px"
-          mb="5px"
           w="80%"
-          borderBottom="1px"
-          borderColor="blackAlpha.200"
-          justifyContent="center"
-        >
-          <Logo h="40px" />
+          mx="25px"
+          bg="sideBarBorderBottom">
+          <Flex
+            pb="15px"
+            mb="1px"
+            w="100%"
+            justifyContent="center"
+            bg="sideBar"
+          >
+            <Logo h="40px" />
+          </Flex>
         </Flex>
         <SidebarButtons
           size={"medium"}
@@ -189,6 +192,7 @@ export default function Index() {
           minH="500px"
           borderRadius="md"
           mt="30px"
+          bg="hovComp"
         >
           <Text fontSize="xl" fontWeight="bold">
             New Trip

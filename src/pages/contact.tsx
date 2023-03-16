@@ -23,9 +23,9 @@ import { useEffect, useState } from "react";
 
 export default function ContactUs() {
   const textColor = useColorModeValue("gray.600", "white");
-  const bgColor = useColorModeValue("white", "gray.700");
+  const bgColor = useColorModeValue("white", "gray.bg1");
   const bg = useColorModeValue("teal.300", "teal.700");
-  const mainbg = useColorModeValue("gray.100", "gray.700");
+  const mainbg = useColorModeValue("gray.100", "gray.bg1");
 
   const [user, setUser] = useState(auth.currentUser);
 
@@ -89,12 +89,7 @@ export default function ContactUs() {
           </Text>
 
           {/* TODO: Setup icons and text */}
-          <Box
-            display="flex"
-            flexDirection="row"
-            alignItems="center"
-            mb="10px"
-          >
+          <Box display="flex" flexDirection="row" alignItems="center" mb="10px">
             <Box
               pt="2px"
               pb="2px"
@@ -109,17 +104,9 @@ export default function ContactUs() {
             >
               <AiOutlineMail />
             </Box>
-            <Text>
-              Email: contactus@vamos.com
-            </Text>
+            <Text>Email: contactus@vamos.com</Text>
           </Box>
-          <Box
-            display="flex"
-            flexDirection="row"
-            alignItems="center"
-            mb="20px"
-
-          >
+          <Box display="flex" flexDirection="row" alignItems="center" mb="20px">
             <Box
               pt="6px"
               pb="6px"
@@ -134,9 +121,7 @@ export default function ContactUs() {
             >
               <FaPhoneAlt />
             </Box>
-            <Text>
-              Phone: 123-45-678
-            </Text>
+            <Text>Phone: 123-45-678</Text>
           </Box>
           <Text
             display="flex"
@@ -155,13 +140,13 @@ export default function ContactUs() {
           <Text>Message</Text>
           <InputField placeholder="Your message" radius="medium" />
           <SignInButton>Contact us</SignInButton>
-          <Box 
+          <Box
             color={bg}
-            width = "75%"
-            alignItems= "center"
-            display= "flex"
-            justifyContent= "space-between"
-            m = "auto"
+            width="75%"
+            alignItems="center"
+            display="flex"
+            justifyContent="space-between"
+            m="auto"
             fontSize="50px"
           >
             <FaFacebook />

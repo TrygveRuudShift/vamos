@@ -14,7 +14,13 @@ import { ProjectCard } from "../";
 import NewYork from "../../../assets/img/NewYork.jpeg";
 
 // firebase
-import { getDocs, collection, Query, DocumentData, CollectionReference } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  Query,
+  DocumentData,
+  CollectionReference,
+} from "firebase/firestore";
 import { db } from "../../../firebase/clientApp";
 import { TripTemplate } from "templates/tripTemplate";
 import { useEffect, useState } from "react";
@@ -36,7 +42,7 @@ const ProjectCards: React.FC<ProjectCardsProps> = ({
   trips,
   descriptionWordLimit = 200,
   cardLimit = 3,
- }) => {
+}) => {
   return (
     <>
       {trips.map((trip, index) => (
@@ -61,7 +67,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
   const textColor = useColorModeValue("gray.700", "white");
 
   const [tripsArray, setTripsArray] = useState([] as TripTemplate[]);
-  
+
   useEffect(() => {
     if (!tripQuery) {
       return;
@@ -77,9 +83,8 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
     });
   }, []);
 
-
   return (
-    <Card p="16px" borderRadius="2xl" w="full">
+    <Card p="16px" borderRadius="2xl" w="full" bg="hovComp">
       <CardHeader p="12px">
         <Flex direction="column">
           <Text fontSize="lg" color={textColor} fontWeight="bold">
@@ -105,14 +110,11 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
           gap="24px"
         >
           {/* Project Card */}
-          {
+          {children ? (
             children
-              ? children
-              : <ProjectCards
-              trips={tripsArray}
-              cardLimit={cardLimit}
-            />
-          }
+          ) : (
+            <ProjectCards trips={tripsArray} cardLimit={cardLimit} />
+          )}
           <Button
             p="0px"
             bg="transparent"
