@@ -11,11 +11,13 @@ import { ThemeButton } from "../ThemeButton/ThemeButton";
 interface BoxProps {
   backgroundtype?: "clear" | "blur";
   login?: "logged_in" | "logged_out";
+  darkmode?: string;
   [key: string]: any;
 }
 export const NavBar: React.FC<BoxProps> = ({
   backgroundtype,
   login,
+  darkmode,
   ...props
 }: BoxProps) => {
   if (!login) {
@@ -80,7 +82,7 @@ export const NavBar: React.FC<BoxProps> = ({
       {...props}
     >
       <Box as="button" marginLeft="20px" borderRadius="md" color={fontcolor}>
-        <Logo h="20px" />
+        <Logo h="20px" darkMode="false" />
       </Box>
       <Flex
         margin="auto"

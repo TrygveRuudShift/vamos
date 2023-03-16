@@ -17,11 +17,14 @@ export const ProfileInformation: React.FC<ProfileInformation> = ({ ...props }) =
         borderRadius="2xl"
         pt="20px"
         pl="10px"
-        pr="10px">
+        pr="10px"
+        bg="hovComp"
+        >
         <Box borderBottom="1px"
-          borderColor="blackAlpha.200">
+          borderColor="blackAlpha.200"
+          >
             <Button float="right"
-                bg="white"
+                bg="hovComp"
                 textColor="#4FD1C5"
                 border="1px solid #4FD1C5"
                 borderRadius="10px"

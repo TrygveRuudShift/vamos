@@ -18,7 +18,11 @@ import {
 import signInImage from "assets/img/signInImage2.png";
 import { SignInButton, InputField, NavBar, Logo } from "components/atoms/";
 import { FcGoogle } from "react-icons/fc";
-import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth, login } from "../firebase/clientApp";
 import { useEffect, useState } from "react";
 
@@ -53,14 +57,10 @@ export default function Login() {
 
         if (errorCode === "auth/internal-error")
           alert("Internal error, please try again later");
-        if (errorCode === "auth/user-not-found")
-          alert("User not found");
-        if (errorCode === "auth/wrong-password")
-          alert("Wrong password");
-        if (errorCode === "auth/invalid-email")
-          alert("Invalid email");
-        if (errorCode === "auth/user-disabled")
-          alert("User disabled");
+        if (errorCode === "auth/user-not-found") alert("User not found");
+        if (errorCode === "auth/wrong-password") alert("Wrong password");
+        if (errorCode === "auth/invalid-email") alert("Invalid email");
+        if (errorCode === "auth/user-disabled") alert("User disabled");
         if (errorCode === "auth/too-many-requests")
           alert("Too many requests, please try again later");
       });
@@ -68,7 +68,11 @@ export default function Login() {
 
   return (
     <Flex position="relative" mb="0px">
-      <NavBar backgroundtype="blur" login={user ? "logged_in" : "logged_out"} />
+      <NavBar
+        backgroundtype="blur"
+        darkmode="false"
+        login={user ? "logged_in" : "logged_out"}
+      />
       <Flex
         w="100%"
         maxW="1044px"
@@ -139,7 +143,11 @@ export default function Login() {
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Email
               </FormLabel>
-              <InputField placeholder="Your email address" radius="medium" onChange={(e) => setEmail(e.target.value)} />
+              <InputField
+                placeholder="Your email address"
+                radius="medium"
+                onChange={(e) => setEmail(e.target.value)}
+              />
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Password
               </FormLabel>
@@ -160,7 +168,9 @@ export default function Login() {
                   Remember me
                 </FormLabel>
               </FormControl>
-              <SignInButton onClick={handleSignInWithEmail} >SIGN IN</SignInButton>
+              <SignInButton onClick={handleSignInWithEmail}>
+                SIGN IN
+              </SignInButton>
             </FormControl>
             <Flex
               flexDirection="column"
@@ -203,7 +213,7 @@ export default function Login() {
             fontWeight="bold"
           >
             {/* center text */}
-            <Logo h="80px" margin="auto" mt="55%" />
+            <Logo h="80px" margin="auto" mt="55%" darkMode="false" />
           </Flex>
         </Box>
       </Flex>

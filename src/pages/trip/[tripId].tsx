@@ -36,7 +36,14 @@ import {
   ReviewCard,
   ImageSlider,
 } from "components/molecules";
-import { collection, doc, getDoc, limit, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  limit,
+  query,
+  where,
+} from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { BsHeart, BsStar } from "react-icons/bs";
@@ -52,12 +59,16 @@ export default function Index() {
 
   const [fav, setFav] = useState(false);
 
-  const defaultImage = "https://i.natgeofe.com/k/e800ca90-2b5b-4dad-b4d7-b67a48c96c91/spain-madrid.jpg?w=636&h=358"
+  const defaultImage =
+    "https://i.natgeofe.com/k/e800ca90-2b5b-4dad-b4d7-b67a48c96c91/spain-madrid.jpg?w=636&h=358";
   const [slideImages, setSlideImages] = useState<string[]>([defaultImage]);
 
   const router = useRouter();
   const { tripId, tripJSON } = router.query;
-  const trip : TripTemplate = JSON.parse(tripJSON ? tripJSON as string : "{}");
+  const trip: TripTemplate = JSON.parse(tripJSON ? (tripJSON as string) : "{}");
+
+  const [favorite, setFavorite] = useState(false);
+
   console.log("tripId: ", tripId);
   console.log("tripJSON: ", tripJSON);
   console.log("trip: ", trip);
@@ -68,7 +79,6 @@ export default function Index() {
       console.log(user?.email);
     });
   }, []);
-
 
   const [haveShared, setHaveShared] = useState(false);
 
@@ -106,19 +116,24 @@ export default function Index() {
 
       <Flex w="80%" flexWrap="wrap">
         <Flex mt="20px" flexDirection="column" gap="20px" w="full" pr="10px">
-          <ImageSlider slideRef={useRef(null)} images={ trip?.pictures || [defaultImage]} />
+          <ImageSlider
+            slideRef={useRef(null)}
+            images={
+              trip?.pictures || [defaultImage, defaultImage, defaultImage]
+            }
+          />
 
           {/* Header, h1, add to favorite button, share button */}
           <Flex w="full" justifyContent="space-between" alignItems="center">
             <Text fontSize="4xl" fontWeight="bold">
-              {trip?.title}
+              {trip?.title || "Trip to Backpacking in Spain with Guides!"}
             </Text>
-            <Flex>
-              <FavoritesButton
+            <Flex alignItems={"center"}>
+              <FavButton
                 favorites={trip?.favorites || []}
                 tripID={tripId as string}
-              >
-              </FavoritesButton>
+              />
+
               <Button
                 colorScheme="teal"
                 variant="link"
@@ -143,19 +158,20 @@ export default function Index() {
 
           {/* Locations, in button, white buttons with box shadow*/}
           <Flex w="full" gap="10px">
-            {[...trip?.destinations || []].map((destination) => (
-              <Button
-              bg="white"
-              size="md"
-              width="130px"
-              fontWeight="semibold"
-              boxShadow="md"
-              _hover={{ boxShadow: "lg" }}
-            >
-              {destination}
-            </Button>
-            ))}
-          
+            {[...(trip?.destinations || ["Madrid", "Barcelona", "Paris"])].map(
+              (destination) => (
+                <Button
+                  bg="hovComp"
+                  size="md"
+                  width="130px"
+                  fontWeight="semibold"
+                  boxShadow="md"
+                  _hover={{ boxShadow: "lg" }}
+                >
+                  {destination}
+                </Button>
+              )
+            )}
           </Flex>
 
           {/* Trip description, Price estimate, Duration and rating. Big numbers, but small label over the numbers */}
@@ -165,7 +181,7 @@ export default function Index() {
                 Price estimate:
               </Text>
               <Text m="0" fontSize="4xl" fontWeight="bold">
-                €{trip?.cost}
+                €{trip?.cost ? trip.cost : 1539}
               </Text>
             </Flex>
             <Flex flexDirection="column">
@@ -173,7 +189,7 @@ export default function Index() {
                 Duration:
               </Text>
               <Text m="0" fontSize="4xl" fontWeight="bold">
-                {trip?.duration} days
+                {trip?.duration ? trip.duration : 5} days
               </Text>
             </Flex>
             <Flex flexDirection="column">
@@ -186,10 +202,7 @@ export default function Index() {
             </Flex>
           </Flex>
 
-          <TextArena
-            text={trip?.description || ""}
-            length={520}
-          />
+          <TextArena text={trip?.description || ""} length={520} />
 
           {/* STAR, "write a review" button */}
 

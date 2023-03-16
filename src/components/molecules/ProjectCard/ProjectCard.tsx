@@ -21,7 +21,7 @@ export const ProjectCard: React.FC<Cardprops> = ({
   const router = useRouter();
 
   return (
-    <Flex w="260px" h="290px" borderRadius="2xl" overflow="hidden">
+    <Flex w="260px" h="290px" borderRadius="2xl" overflow="hidden" bg="hovComp">
       <Grid
         h="100%"
         w="100%"

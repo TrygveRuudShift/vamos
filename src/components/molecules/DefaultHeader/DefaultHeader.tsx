@@ -92,7 +92,7 @@ export const DefaultHeader: React.FC<HeaderProps> = ({
           {type === "profile" ? null : (
             title === "You are logged out" ? null : <AvatarIcon src={profilePic} name={title} />
           )}
-          <Text fontWeight="bold" mr="10px">
+          <Text fontWeight="bold" color="white" mr="10px">
             {title}
           </Text>
           <SettingsIcon boxSize="20px" />
@@ -104,7 +104,7 @@ export const DefaultHeader: React.FC<HeaderProps> = ({
           h="80px"
           borderRadius="2xl"
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.15)"
-          bg="rgba(255, 255, 255, 0.7)"
+          bg="defaultHeader"
           align="center"
           justify="space-between"
         >
@@ -128,7 +128,7 @@ export const DefaultHeader: React.FC<HeaderProps> = ({
                   borderRadius="2xl"
                   fontSize="2xs"
                   width="100px"
-                  backgroundColor="white"
+                  bg="hovComp"
                   boxShadow="base"
                   onClick={() => {
                     window.location.href = "/addTrip";
@@ -140,7 +140,7 @@ export const DefaultHeader: React.FC<HeaderProps> = ({
                   borderRadius="2xl"
                   fontSize="2xs"
                   width="100px"
-                  backgroundColor="white"
+                  bg="hovComp"
                   boxShadow="base"
                 >
                   LIST VIEW
@@ -149,7 +149,7 @@ export const DefaultHeader: React.FC<HeaderProps> = ({
                   borderRadius="2xl"
                   fontSize="2xs"
                   bg="transparent"
-                  _hover={{ bg: "whiteAlpha.800" }}
+                  _hover={{ bg: "hovComp" }}
                 >
                   SEARCH
                 </Button>

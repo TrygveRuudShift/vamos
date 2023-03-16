@@ -1,10 +1,9 @@
-import { FavButton } from './FavButton';
+import { FavButton } from "./FavButton";
 
 export default {
-  title: 'atom/FavButton',
+  title: "atom/FavButton",
   component: FavButton,
-  args : { selected: false },
+  args: { favorites: [], tripID: "123" },
 };
 
-export const Default = {}
-
+export const Default = {};

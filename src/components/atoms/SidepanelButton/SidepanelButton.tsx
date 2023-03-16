@@ -1,4 +1,4 @@
-import { Button, Box, Flex } from "@chakra-ui/react";
+import { Button, Box, Flex, DarkMode, useColorModeValue, ColorModeContext, localStorageManager } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 interface SidepanelProps {
   selected: boolean;
@@ -15,18 +15,29 @@ export const SidepanelButton: React.FC<SidepanelProps> = ({
   size,
   ...props
 }) => {
-  let colorActive = "#F8F9FA";
+
+  const checkColorMode = () => {
+    return localStorageManager.get();
+  };
+
+  let colorActive = "sideBar";
   let borderStyle = "none";
-  let inverseColor = "white";
+  let inverseColor = "sideBarInverse";
   let textColor = "#868e98";
+  let iconColor = "#4FD1C5";
+
 
   if (props.selected) {
-    colorActive = "white";
+    colorActive = "sideBarIcon";
     borderStyle = "1px 3px 8px 0px rgba(0,0,0,0.04)";
     inverseColor = "#4FD1C5";
-    textColor = "black";
+    textColor = "textColor";
+    iconColor = useColorModeValue("white", "gray.800");
+    // if (checkColorMode() === "dark") {
+    //   console.log(localStorageManager.get());
+    //   iconColor = "gray.800"
+    
   }
-
   let widthDiv: string = "30px";
   let heightDiv: string = "25px";
   let iconSize: number;
@@ -40,8 +51,7 @@ export const SidepanelButton: React.FC<SidepanelProps> = ({
   }
 
   const icon = () => {
-    const iconColor = props.selected ? "white" : "#4FD1C5";
-    return <props.icon size={iconSize} color={iconColor}></props.icon>;
+    return <props.icon size={iconSize} fill={iconColor}></props.icon>;
   };
 
   const handleClick = () => {
@@ -63,13 +73,13 @@ export const SidepanelButton: React.FC<SidepanelProps> = ({
           alignItems="center"
           borderRadius="15px"
           _hover={{
-            bg: "#F8F9FA",
+            bg: "sideBar",
           }}
           {...props}
         >
           <Box
+            bg={inverseColor}
             style={{
-              background: inverseColor,
               display: "flex",
               width: widthDiv,
               height: heightDiv,

@@ -15,7 +15,12 @@ import {
 // Assets
 import BgSignUp from "assets/img/BgSignUp.png";
 import { SignInButton, InputField, NavBar } from "components/atoms/";
-import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth, login } from "../firebase/clientApp";
 import { FcGoogle } from "react-icons/fc";
 import { useEffect, useState } from "react";
@@ -23,7 +28,7 @@ import { useEffect, useState } from "react";
 export default function Register() {
   const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.700", "white");
-  const bgColor = useColorModeValue("white", "gray.700");
+  const bgColor = useColorModeValue("white", "gray.bg1");
   const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
 
   const provider = new GoogleAuthProvider();
@@ -33,7 +38,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
 
   const handleSignUp = () => {
-    console.log({ name, email, password })
+    console.log({ name, email, password });
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
@@ -67,7 +72,6 @@ export default function Register() {
         }
       });
   };
-
 
   const [user, setUser] = useState(auth.currentUser);
   useEffect(() => {
@@ -183,11 +187,19 @@ export default function Register() {
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Name
             </FormLabel>
-            <InputField placeholder="Your full name" radius="medium" onChange={(e) => setName(e.target.value)} />
+            <InputField
+              placeholder="Your full name"
+              radius="medium"
+              onChange={(e) => setName(e.target.value)}
+            />
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Email
             </FormLabel>
-            <InputField placeholder="Your email address" radius="medium" onChange={(e) => setEmail(e.target.value)} />
+            <InputField
+              placeholder="Your email address"
+              radius="medium"
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
               Password
             </FormLabel>
@@ -203,7 +215,10 @@ export default function Register() {
                 Remember me
               </FormLabel>
             </FormControl>
-            <SignInButton onClick={() => handleSignUp()} > Sign Up </SignInButton>
+            <SignInButton onClick={() => handleSignUp()}>
+              {" "}
+              Sign Up{" "}
+            </SignInButton>
           </FormControl>
           <Flex
             flexDirection="column"
