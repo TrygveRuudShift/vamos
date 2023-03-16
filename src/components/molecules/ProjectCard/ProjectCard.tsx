@@ -1,24 +1,25 @@
 import { Image, Flex, Button, Grid, GridItem, Text } from "@chakra-ui/react";
 import { Rating } from "../../atoms";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { TripTemplate } from "templates/tripTemplate";
+import { json } from "stream/consumers";
 
 interface Cardprops {
-  title: string;
-  price: string;
   reviewCount?: number;
-  description?: string;
-  img_url: any;
   rating: number;
+  trip : TripTemplate;
 }
 
 export const ProjectCard: React.FC<Cardprops> = ({
-  title,
-  price,
   reviewCount,
-  img_url,
-  description,
   rating,
+  trip,
 }) => {
   const bakgrunn = "";
+
+  const router = useRouter();
+
   return (
     <Flex w="260px" h="290px" borderRadius="2xl" overflow="hidden">
       <Grid
@@ -38,7 +39,7 @@ export const ProjectCard: React.FC<Cardprops> = ({
           borderRadius="2xl"
         >
           <Image
-            src={img_url}
+            src={trip?.pictures ? trip.pictures[0] : "gs://vamos-pu.appspot.com/images/spain3.webp"}
             alt="Your Image"
             boxSize="100%"
             borderRadius="2xl"
@@ -55,7 +56,7 @@ export const ProjectCard: React.FC<Cardprops> = ({
           position="relative"
           pt="5px"
         >
-          <Text ml="13px">{title}</Text>
+          <Text ml="13px">{trip?.title ? trip.title: "Trip title"}</Text>
           <Text
             mr="13px"
             textAlign="end"
@@ -65,7 +66,7 @@ export const ProjectCard: React.FC<Cardprops> = ({
             right="0px"
             top="6px"
           >
-            {price}
+            €{trip?.cost ? trip.cost: 0}
           </Text>
         </GridItem>
         <GridItem
@@ -77,7 +78,7 @@ export const ProjectCard: React.FC<Cardprops> = ({
           fontSize={8}
         >
           <Text ml="13px" textColor="gray.400">
-            {description}
+            {trip?.description ? trip.description: "Undefined description"}
           </Text>
         </GridItem>
         <GridItem colSpan={2} rowSpan={1} w="100%" h="100%" textAlign="center">
@@ -91,7 +92,12 @@ export const ProjectCard: React.FC<Cardprops> = ({
             fontSize="10px"
             alignItems={"center"}
             ml="13px"
-            onClick={() => console.log("clicked")}
+            onClick={() => {
+              router.push({
+                pathname: "/trip/" + trip.id,
+                query: { tripJSON: JSON.stringify(trip) },
+              })
+            }}
           >
             VIEW TRIP
           </Button>

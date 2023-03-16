@@ -49,7 +49,7 @@ export const TextArena: React.FC<TextArenaProps> = ({ text, length, ...props }) 
         colorScheme="black"
         onClick={toggleViewText}
       >
-        {viewText ? "Read More" : "Read Less"}
+        { text.length > length && (viewText ? "Read More" : "Read Less") }
       </Button>
     </Flex>
   );
