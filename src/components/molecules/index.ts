@@ -6,3 +6,6 @@ export { ProjectPanel } from './ProjectPanel/ProjectPanel';
 export { ReviewCard } from './ReviewCard/ReviewCard';
 export { ProfileReviews } from './ProfileReviews/ProfileReviews';
 export { ImageSlider } from './ImageSlider/ImageSlider';
+export { AddReview } from './AddReview/AddReview';
+
+
