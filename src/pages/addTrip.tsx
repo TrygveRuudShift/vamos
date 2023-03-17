@@ -1,4 +1,5 @@
 import { SettingsIcon } from "@chakra-ui/icons";
+import { FaToggleOff, FaToggleOn } from "react-icons/fa";
 import {
   Flex,
   SimpleGrid,
@@ -15,6 +16,8 @@ import {
   Image,
   Avatar,
   Textarea,
+  IconButton,
+  Switch,
 } from "@chakra-ui/react";
 import BgSignUp from "assets/img/BgSignUp.png";
 import { ContactUs, Logo } from "components/atoms";
@@ -32,10 +35,11 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // templates
 import { TripTemplate } from "templates/tripTemplate";
-
+  
 export default function Index() {
   // Logic to set user state
   const [user, setUser] = useState(auth.currentUser);
+  const [isToggled, setIsToggled] = useState(false);
 
   // add useeffect of onAuthStateChanged
   useEffect(() => {
@@ -249,7 +253,7 @@ export default function Index() {
                 }}
               />
             </Box>
-          </SimpleGrid>
+        </SimpleGrid>
 
           <Box>
             <Text fontSize="md">Destinations</Text>
@@ -305,6 +309,7 @@ export default function Index() {
               ))}
             </Flex>
           </Box>
+          
           <Flex flexWrap="wrap" gap="10px">
             {localTripTemplate?.pictures
               ? localTripTemplate?.pictures.map((image, index) => (
@@ -407,6 +412,100 @@ export default function Index() {
               }}
             />
           </Box>
+
+          <Box 
+            id="paymentBox" 
+            transition="max-height 0.5s ease-out" 
+            maxHeight="0px" 
+            overflow="hidden"
+          > 
+
+            <Text as="em" color="grey">Promote your post and reach out to more people for only €10</Text>
+            <Box
+              display="flex"
+              flexDirection="row"
+              justifyContent="space-between"
+              alignItems="center"
+              gap="20px"
+              width="100%"
+              mb="5px"
+              pl="2px"
+              pr="2px"
+              mt="10px"
+            >
+              <Box>
+                <Text fontSize="md">Credit card number</Text>
+                <Input
+                  type="number"
+                  placeholder="Enter card number"
+                  size="md"
+                  mt="3px"
+                  borderRadius="lg"
+                  id="cardnumber"/>
+              </Box>
+              <Box>
+                <Text fontSize="md">Card holder name</Text>
+                <Input
+                  placeholder="Enter full name"
+                  size="md"
+                  mt="3px"
+                  borderRadius="lg"
+                  id="nameOfCardholder"/>
+              </Box>
+              <Box>
+                <Text fontSize="md">Security code</Text>
+                <Input
+                  type="number"
+                  placeholder="Enter CVC"
+                  size="md"
+                  mt="3px"
+                  borderRadius="lg"
+                  id="securityCode"/>
+              </Box>
+              <Box>
+                <Text fontSize="md">Card expiration</Text>
+                <Input
+                  type="month"
+                  placeholder="Enter expiry date"
+                  size="md"
+                  mt="3px"
+                  borderRadius="lg"
+                  id="expiryDate"/>
+              </Box>
+            </Box>
+          </Box>
+
+          <Switch 
+            colorScheme="teal"
+            id="switch" 
+            mt="35px" 
+            //m="auto" 
+            position="absolute"
+            left="25px"
+            bottom="25px"
+
+            onChange = {() => {
+              const paymentBox = document.getElementById("paymentBox");
+              if (paymentBox){
+                if(isToggled){
+                  paymentBox.style.maxHeight = "0";
+                } else {
+                  paymentBox.style.maxHeight = "110px";
+                }
+                // paymentBox.style.maxHeight = paymentBox.style.maxHeight == "0px" ? "110px" : "0px";
+                setIsToggled(!isToggled);
+              }
+            }}
+          >
+            <Text 
+            width="120px" 
+            position="absolute" 
+            left="50px" 
+            bottom="10px"
+            >
+              Promote post
+            </Text>
+          </Switch>
 
           {/* Add cancel and upload button */}
           <Flex justifyContent="flex-end" gap="10px">
