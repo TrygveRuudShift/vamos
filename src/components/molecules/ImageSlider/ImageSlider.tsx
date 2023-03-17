@@ -27,10 +27,11 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
         {slideImagesWithNumber.map((slideImage, index) => (
           <Box
             key={index}
-            h="300px"
+            h="400px"
             w="100%"
             bgImage={`url(${slideImage.url})`}
             position="relative"
+            bgSize="cover"
           >
             <Text
               position="absolute"
