@@ -16,12 +16,10 @@ export const ProjectCard: React.FC<Cardprops> = ({
   rating,
   trip,
 }) => {
-  const bakgrunn = "";
-
   const router = useRouter();
 
   return (
-    <Flex w="260px" h="290px" borderRadius="2xl" overflow="hidden" bg="hovComp">
+    <Flex w="260px" h="220px" borderRadius="2xl" overflow="hidden" shadow="md">
       <Grid
         h="100%"
         w="100%"
@@ -29,13 +27,15 @@ export const ProjectCard: React.FC<Cardprops> = ({
         templateRows="1fr 1fr 1fr 1fr"
         gap="5px"
         borderRadius="2xl"
+        borderColor="hovComp"
+        borderWidth="1px"
       >
         <GridItem
           colSpan={5}
           rowSpan={1}
           bg="teal.500"
           w="260px"
-          h="175px"
+          h="120px"
           borderRadius="2xl"
         >
           <Image
@@ -43,55 +43,57 @@ export const ProjectCard: React.FC<Cardprops> = ({
             alt="Your Image"
             boxSize="100%"
             borderRadius="2xl"
+            borderBottomRadius="0px"
             objectFit="cover"
           />
         </GridItem>
         <GridItem
-          colSpan={5}
+          colSpan={3}
           rowSpan={1}
-          bg={bakgrunn}
-          fontWeight="semibold"
+          bg="hovComp"
+          fontWeight="bold"
           lineHeight="tight"
           noOfLines={1}
           position="relative"
           pt="5px"
         >
           <Text ml="13px">{trip?.title ? trip.title: "Trip title"}</Text>
-          <Text
-            mr="13px"
-            textAlign="end"
-            fontWeight="bold"
-            fontSize="sm"
-            position="absolute"
-            right="0px"
-            top="6px"
-          >
-            €{trip?.cost ? trip.cost: 0}
-          </Text>
+        </GridItem>
+        <GridItem
+          colSpan={2}
+          rowSpan={1}
+          bg="hovComp"
+          w="100%"
+          h="100%"
+          lineHeight="tight"
+          pt="0px"
+          ml="40px"
+        >
+        <Rating stars={rating} size="small" mt="5px" fontWeight="semibold" lineHeight="tight" textalign="end"/>
         </GridItem>
         <GridItem
           colSpan={5}
           rowSpan={1}
-          bg={bakgrunn}
+          bg="hovComp"
           w="100%"
           h="100%"
           fontSize={8}
         >
-          <Text ml="13px" textColor="gray.400">
+          <Text ml="13px" textColor="gray.400" noOfLines={2}>
             {trip?.description ? trip.description: "Undefined description"}
           </Text>
         </GridItem>
         <GridItem colSpan={2} rowSpan={1} w="100%" h="100%" textAlign="center">
           <Button
-            w="95%"
-            h="100%"
+            w="85%"
+            h="80%"
             variant="outline"
             colorScheme="teal"
-            p="5px"
-            borderRadius="md"
-            fontSize="10px"
+            p="3px"
+            borderRadius="15"
+            fontSize="9px"
             alignItems={"center"}
-            ml="13px"
+            ml="8px"
             onClick={() => {
               router.push({
                 pathname: "/trip/" + trip.id,
@@ -103,28 +105,30 @@ export const ProjectCard: React.FC<Cardprops> = ({
           </Button>
         </GridItem>
         <GridItem
-          colSpan={1}
-          rowSpan={1}
-          bg={bakgrunn}
-          w="100%"
-          h="100%"
-          fontWeight="semibold"
-          ml="13px"
-        >
-          <Rating stars={rating} size="small" mt="5px" />
-        </GridItem>
-        <GridItem
-          colSpan={2}
+          colSpan={3}
           rowSpan={2}
-          bg={bakgrunn}
+          bg="hovComp"
           w="100%"
           h="100%"
           p="2px"
           fontSize={12}
-        >
-          <Text textAlign="end" mt="3px" mr="13px">
-            {reviewCount?.toString() + " reviews"}
-          </Text>
+          style={{ wordWrap: "break-word" }}
+          >
+          <Flex justifyContent="space-between">
+          {trip.duration && <Text 
+            mt="3px" 
+            ml="4px" fontWeight="bold" lineHeight="tight">
+            {trip.duration} {trip.duration === 1 ? 'day' : 'days'}
+          </Text>}
+          {trip.cost && <Text 
+            fontWeight="bold" 
+            lineHeight="tight" 
+            mr="20px"
+            mt="3px"
+            >
+            {trip.cost}€
+          </Text>}
+          </Flex>
         </GridItem>
       </Grid>
     </Flex>
