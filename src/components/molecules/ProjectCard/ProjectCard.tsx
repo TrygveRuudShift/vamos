@@ -79,7 +79,7 @@ export const ProjectCard: React.FC<Cardprops> = ({
             ml="13px"
             lineHeight={1}
             noOfLines={2}
-          >{"Trip title"}</Text>
+          >{`${trip?.title ? trip.title : "Trip Title"}`}</Text>
         </GridItem>
         <GridItem
           colSpan={2}
