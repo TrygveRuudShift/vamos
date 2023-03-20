@@ -48,7 +48,10 @@ const ProjectCards: React.FC<ProjectCardsProps> = ({
     <>
       {trips.map((trip, index) =>
         index < cardLimit ? (
-          <ProjectCard reviewCount={0} rating={0} trip={trip} />
+          <>
+            {index !== 0 && index % 3 === 0 ? <br /> : <></>}
+            <ProjectCard reviewCount={0} rating={0} trip={trip} />
+          </>
         ) : (
           <></>
         )
