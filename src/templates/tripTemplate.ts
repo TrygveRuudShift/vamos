@@ -9,4 +9,5 @@ export interface TripTemplate {
 	destinationsLowercase? : string[];
 	pictures? : string[];
 	favorites? : string[];
+	promote? : boolean;
 }
