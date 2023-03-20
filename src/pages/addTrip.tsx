@@ -86,6 +86,7 @@ export default function Index() {
       destinations: localTripTemplate?.destinations,
       destinationsLowercase: localTripTemplate?.destinations ? localTripTemplate?.destinations.map((destination) => destination.toLowerCase()) : [],
       pictures: localTripTemplate?.pictures,
+      promote: localTripTemplate?.promote ? localTripTemplate?.promote : false,
     }).then(() => {
       console.log("Document successfully written!");
     }).catch((error: Error) => {
@@ -494,6 +495,11 @@ export default function Index() {
                 }
                 // paymentBox.style.maxHeight = paymentBox.style.maxHeight == "0px" ? "110px" : "0px";
                 setIsToggled(!isToggled);
+                setLocalTripTemplate({
+                  ...localTripTemplate,
+                  promote: !isToggled,
+                });
+                console.log("Promote: " + !isToggled);
               }
             }}
           >

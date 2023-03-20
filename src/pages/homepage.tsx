@@ -72,6 +72,18 @@ export default function Index() {
         {/* PROJECT PANELS */}
         <Flex mt="70px" flexDirection="column" gap="20px" w="full">
           <ProjectPanel
+            title="Promoted"
+            tripQuery={query(
+              collection(db, "trips"),
+              where(
+                "promote",
+                "==",
+                true
+              ),
+              limit(3)
+            )}
+          />
+          <ProjectPanel
             title="USA"
             tripQuery={query(
               collection(db, "trips"),
