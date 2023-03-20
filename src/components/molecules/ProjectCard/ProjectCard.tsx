@@ -37,7 +37,7 @@ export const ProjectCard: React.FC<Cardprops> = ({
       <Grid
         h="100%"
         w="100%"
-        templateColumns="1fr 1fr 1fr 1fr 1fr"
+        templateColumns="1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr"
         templateRows="1fr 1fr 1fr 1fr"
         gap="5px"
         borderRadius="2xl"
@@ -45,7 +45,7 @@ export const ProjectCard: React.FC<Cardprops> = ({
         borderWidth="1px"
       >
         <GridItem
-          colSpan={5}
+          colSpan={10}
           rowSpan={1}
           bg="teal.500"
           w="260px"
@@ -66,16 +66,20 @@ export const ProjectCard: React.FC<Cardprops> = ({
           />
         </GridItem>
         <GridItem
-          colSpan={3}
-          rowSpan={1}
+          colSpan={8}
+          rowSpan={4}
           bg="hovComp"
           fontWeight="bold"
           lineHeight="tight"
-          noOfLines={1}
+          noOfLines={2}
           position="relative"
           pt="5px"
         >
-          <Text ml="13px">{trip?.title ? trip.title : "Trip title"}</Text>
+          <Text
+            ml="13px"
+            lineHeight={1}
+            noOfLines={2}
+          >{"Trip title"}</Text>
         </GridItem>
         <GridItem
           colSpan={2}
@@ -85,7 +89,6 @@ export const ProjectCard: React.FC<Cardprops> = ({
           h="100%"
           lineHeight="tight"
           pt="0px"
-          ml="40px"
         >
           <Rating
             stars={rating}
@@ -93,22 +96,22 @@ export const ProjectCard: React.FC<Cardprops> = ({
             mt="5px"
             fontWeight="semibold"
             lineHeight="tight"
-            textalign="end"
+            marginTop="5px"
           />
         </GridItem>
         <GridItem
-          colSpan={5}
+          colSpan={10}
           rowSpan={1}
           bg="hovComp"
           w="100%"
           h="100%"
           fontSize={8}
         >
-          <Text ml="13px" textColor="gray.400" noOfLines={2}>
+          <Text ml="13px" textColor="gray.400" noOfLines={1}>
             {trip?.description ? trip.description : "Undefined description"}
           </Text>
         </GridItem>
-        <GridItem colSpan={2} rowSpan={1} w="100%" h="100%" textAlign="center">
+        <GridItem colSpan={4} rowSpan={1} w="100%" h="100%" textAlign="center">
           <Button
             w="85%"
             h="80%"
@@ -130,7 +133,7 @@ export const ProjectCard: React.FC<Cardprops> = ({
           </Button>
         </GridItem>
         <GridItem
-          colSpan={3}
+          colSpan={6}
           rowSpan={2}
           bg="hovComp"
           w="100%"
