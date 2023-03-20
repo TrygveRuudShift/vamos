@@ -1,4 +1,12 @@
-import { Image, Flex, Button, Grid, GridItem, Text } from "@chakra-ui/react";
+import {
+  Image,
+  Flex,
+  Button,
+  Grid,
+  GridItem,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { Rating } from "../../atoms";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -8,7 +16,7 @@ import { json } from "stream/consumers";
 interface Cardprops {
   reviewCount?: number;
   rating: number;
-  trip : TripTemplate;
+  trip: TripTemplate;
 }
 
 export const ProjectCard: React.FC<Cardprops> = ({
@@ -19,7 +27,13 @@ export const ProjectCard: React.FC<Cardprops> = ({
   const router = useRouter();
 
   return (
-    <Flex w="260px" h="220px" borderRadius="2xl" overflow="hidden" shadow="md">
+    <Flex
+      w="260px"
+      h="220px"
+      borderRadius="2xl"
+      overflow="hidden"
+      boxShadow="md"
+    >
       <Grid
         h="100%"
         w="100%"
@@ -39,7 +53,11 @@ export const ProjectCard: React.FC<Cardprops> = ({
           borderRadius="2xl"
         >
           <Image
-            src={trip?.pictures ? trip.pictures[0] : "gs://vamos-pu.appspot.com/images/spain3.webp"}
+            src={
+              trip?.pictures
+                ? trip.pictures[0]
+                : "gs://vamos-pu.appspot.com/images/spain3.webp"
+            }
             alt="Your Image"
             boxSize="100%"
             borderRadius="2xl"
@@ -57,7 +75,7 @@ export const ProjectCard: React.FC<Cardprops> = ({
           position="relative"
           pt="5px"
         >
-          <Text ml="13px">{trip?.title ? trip.title: "Trip title"}</Text>
+          <Text ml="13px">{trip?.title ? trip.title : "Trip title"}</Text>
         </GridItem>
         <GridItem
           colSpan={2}
@@ -69,7 +87,14 @@ export const ProjectCard: React.FC<Cardprops> = ({
           pt="0px"
           ml="40px"
         >
-        <Rating stars={rating} size="small" mt="5px" fontWeight="semibold" lineHeight="tight" textalign="end"/>
+          <Rating
+            stars={rating}
+            size="small"
+            mt="5px"
+            fontWeight="semibold"
+            lineHeight="tight"
+            textalign="end"
+          />
         </GridItem>
         <GridItem
           colSpan={5}
@@ -80,7 +105,7 @@ export const ProjectCard: React.FC<Cardprops> = ({
           fontSize={8}
         >
           <Text ml="13px" textColor="gray.400" noOfLines={2}>
-            {trip?.description ? trip.description: "Undefined description"}
+            {trip?.description ? trip.description : "Undefined description"}
           </Text>
         </GridItem>
         <GridItem colSpan={2} rowSpan={1} w="100%" h="100%" textAlign="center">
@@ -98,7 +123,7 @@ export const ProjectCard: React.FC<Cardprops> = ({
               router.push({
                 pathname: "/trip/" + trip.id,
                 query: { tripJSON: JSON.stringify(trip) },
-              })
+              });
             }}
           >
             VIEW TRIP
@@ -113,21 +138,18 @@ export const ProjectCard: React.FC<Cardprops> = ({
           p="2px"
           fontSize={12}
           style={{ wordWrap: "break-word" }}
-          >
+        >
           <Flex justifyContent="space-between">
-          {trip.duration && <Text 
-            mt="3px" 
-            ml="4px" fontWeight="bold" lineHeight="tight">
-            {trip.duration} {trip.duration === 1 ? 'day' : 'days'}
-          </Text>}
-          {trip.cost && <Text 
-            fontWeight="bold" 
-            lineHeight="tight" 
-            mr="20px"
-            mt="3px"
-            >
-            {trip.cost}€
-          </Text>}
+            {trip.duration && (
+              <Text mt="3px" ml="4px" fontWeight="bold" lineHeight="tight">
+                {trip.duration} {trip.duration === 1 ? "day" : "days"}
+              </Text>
+            )}
+            {trip.cost && (
+              <Text fontWeight="bold" lineHeight="tight" mr="20px" mt="3px">
+                {trip.cost}€
+              </Text>
+            )}
           </Flex>
         </GridItem>
       </Grid>

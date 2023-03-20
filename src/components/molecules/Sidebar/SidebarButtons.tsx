@@ -75,17 +75,9 @@ export const SidebarButtons: React.FC<ButtonsProps> = ({
           icon={MdBackpack}
           selected={dir["mytrips"]}
           size={props.size}
-          href=""
+          href="/trips"
         >
-          My Trips
-        </SidepanelButton>
-        <SidepanelButton
-          icon={AiFillStar}
-          selected={dir["ratedtrips"]}
-          size={props.size}
-          href=""
-        >
-          Rated Trips
+          Trips
         </SidepanelButton>
         <SidepanelButton
           icon={BsPlusLg}
