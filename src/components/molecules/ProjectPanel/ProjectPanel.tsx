@@ -28,30 +28,31 @@ import { useEffect, useState } from "react";
 interface ProjectCardsProps {
   trips: TripTemplate[];
   descriptionWordLimit?: number;
-  cardLimit?: number;
+  cardLimit: number;
 }
 interface ProjectPanelProps {
   title: string;
   tripQuery: Query<DocumentData> | CollectionReference<DocumentData>;
   cardLimit?: number;
   onClick?: () => void;
+  viewAll?: boolean;
   [key: string]: any;
 }
 
 const ProjectCards: React.FC<ProjectCardsProps> = ({
   trips,
   descriptionWordLimit = 200,
-  cardLimit = 3,
+  cardLimit,
 }) => {
   return (
     <>
-      {trips.map((trip, index) => (
-        index < cardLimit ? <ProjectCard
-          reviewCount={0}
-          rating={0}
-          trip={trip}
-        /> : <></>
-      ))}
+      {trips.map((trip, index) =>
+        index < cardLimit ? (
+          <ProjectCard reviewCount={0} rating={0} trip={trip} />
+        ) : (
+          <></>
+        )
+      )}
     </>
   );
 };
@@ -61,12 +62,21 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
   tripQuery,
   cardLimit,
   onClick,
+  viewAll,
   children,
   ...props
 }) => {
   const textColor = useColorModeValue("gray.700", "white");
 
   const [tripsArray, setTripsArray] = useState([] as TripTemplate[]);
+
+  if (!cardLimit) {
+    cardLimit = 3;
+  }
+
+  if (viewAll) {
+    cardLimit = 100;
+  }
 
   useEffect(() => {
     if (!tripQuery) {
@@ -115,24 +125,33 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
           ) : (
             <ProjectCards trips={tripsArray} cardLimit={cardLimit} />
           )}
-          <Button
-            p="0px"
-            bg="transparent"
-            color="gray.500"
-            border="1px solid lightgray"
-            borderRadius="15px"
-            minHeight="100px"
-            h="100%"
-          >
-            <Flex direction="column" justifyContent="center" align="center">
-              <Text fontSize="lg" mb="12px">
-                ...
-              </Text>
-              <Text fontSize="lg" fontWeight="bold">
-                More trips
-              </Text>
-            </Flex>
-          </Button>
+
+          {!viewAll ? (
+            <Button
+              p="0px"
+              bg="transparent"
+              color="gray.500"
+              border="1px solid lightgray"
+              borderRadius="15px"
+              minHeight="100px"
+              h="100%"
+              // onclick make a href redirect to /trips
+              onClick={() => {
+                window.location.href = "/trips";
+              }}
+            >
+              <Flex direction="column" justifyContent="center" align="center">
+                <Text fontSize="lg" mb="12px">
+                  ...
+                </Text>
+                <Text fontSize="lg" fontWeight="bold">
+                  More trips
+                </Text>
+              </Flex>
+            </Button>
+          ) : (
+            <></>
+          )}
         </Grid>
       </CardBody>
     </Card>

@@ -27,14 +27,14 @@ export const Logo: React.FC<LogoProps> = ({
     if (darkMode === "true") {
       mainColor = "#628ae1";
       secondaryColor = "#EB5676";
-    } else { 
+    } else {
       mainColor = "#15316F";
       secondaryColor = "#EB5676";
     }
   }
 
   return (
-    <Box {...props}>
+    <Box {...props} onClick={() => (window.location.href = "/homepage")} cursor="pointer">
       <Box h="100%" w="100%">
         <Box display="inline-block" h="100%">
           <svg

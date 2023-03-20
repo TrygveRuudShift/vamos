@@ -92,16 +92,6 @@ export default function Index() {
           </Card> */}
           <ProfileInformation email={user?.email || "Email is undefined"} />
 
-          <Card width="32%" borderRadius="2xl" bg="hovComp">
-            <CardHeader>
-              <Flex justifyContent="space-between">
-                <Text fontWeight="bold" fontSize="lg">
-                  Favorite trips
-                </Text>
-              </Flex>
-            </CardHeader>
-          </Card>
-
           {/*<Card width="32%" borderRadius="2xl">
             <CardHeader>
               <Flex justifyContent="space-between">
@@ -129,16 +119,18 @@ export default function Index() {
               tripQuery={query(
                 collection(db, "trips"),
                 where("userEmailAddress", "==", user?.email),
-                limit(3)
+                limit(20)
               )}
+              cardLimit={20}
             />
             <ProjectPanel
               title="Favorites"
               tripQuery={query(
                 collection(db, "trips"),
                 where("favorites", "array-contains", user?.email),
-                limit(3)
+                limit(100)
               )}
+              cardLimit={100}
             />
           </Flex>
         )}

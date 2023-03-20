@@ -12,7 +12,7 @@ interface ProfileInformation {
 export const ProfileInformation: React.FC<ProfileInformation> = ({ ...props }) => {
     let textColor = "#868e98";
   return (
-    <Card width="32%" 
+    <Card width="64%" 
         minH="250px"
         borderRadius="2xl"
         pt="20px"
