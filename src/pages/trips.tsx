@@ -22,6 +22,9 @@ export default function Index() {
   // Logic to set user state
   const [user, setUser] = useState(auth.currentUser);
 
+  const [filter, setFilter] = useState("Recommendation");
+  const [price, setPrice] = useState("any");
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       setUser(user);
@@ -30,7 +33,7 @@ export default function Index() {
   }, []);
 
   return (
-    <Flex pt="5px">
+    <Flex>
       {/* SIDEPANEL */}
       <Flex
         minH={"100vh"}
@@ -66,10 +69,11 @@ export default function Index() {
           profilePic={user ? user.photoURL : undefined}
           img_src={`url(${BgSignUp.src})`}
           title={user ? `Hello ${user.displayName}` : "You are not logged in"}
+          pb="50px"
         />
 
         {/* PROJECT PANELS */}
-        <Flex mt="60px" flexDirection="column" gap="20px" w="full">
+        <Flex flexDirection="column" gap="20px" w="full">
           {/* Box for filter */}
           <Flex
             w="100%"
@@ -79,28 +83,42 @@ export default function Index() {
             p="20px"
             flexDirection="column"
             gap="15px"
+            mt="60px"
           >
             <Flex gap="15px">
-              <Select placeholder="Filter by;" w="180px">
-                <option value="option1" selected>
-                  Filter by: A-Z
+              <Select
+                placeholder="Filter by;"
+                w="180px"
+                value={filter}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setFilter(e.target.value);
+                }}
+              >
+                <option value="A-Z">Filter by: A-Z</option>
+                <option value="Price">Filter by: Price Low-High</option>
+                <option value="Price2">Filter by: Price High-Low</option>
+                <option value="Recommendation">
+                  Filter by: Recommendation
                 </option>
-                <option value="option2">Filter by: Price</option>
-                <option value="option3">Filter by: Rating</option>
               </Select>
-              <Select placeholder="Select Price" w="180px">
-                <option value="option1" selected>
+              <Select
+                placeholder="Select Price"
+                w="180px"
+                value={price}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setPrice(e.target.value);
+                }}
+              >
+                <option value="any" selected>
                   Any price
                 </option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
               </Select>
               <Select placeholder="Select distance" w="180px">
                 <option value="option1" selected>
                   World wide
                 </option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
               </Select>
               <Flex
                 w="80px"
@@ -121,20 +139,47 @@ export default function Index() {
             <Input placeholder="Search for trips" />
           </Flex>
 
-          <ProjectPanel
-            title="USA"
-            viewAll={true}
-            tripQuery={query(
-              collection(db, "trips"),
-              where(
-                "destinationsLowercase",
-                "array-contains-any",
-                queryFilter.USA
-              ),
-              limit(100)
-            )}
-          />
-          {/* <ProjectPanel title="Most popular" tripQuery={query(collection(db, "trips"), orderBy("rating", "desc"), limit(3))} /> */}
+          {/* Change to big if */}
+          {filter == "A-Z" && (
+            <ProjectPanel
+              title="A-Z"
+              viewAll={true}
+              tripQuery={query(
+                collection(db, "trips"),
+                orderBy("title", "asc")
+              )}
+            />
+          )}
+
+          {filter == "Price" && (
+            <ProjectPanel
+              title="Price Low-High"
+              viewAll={true}
+              tripQuery={query(collection(db, "trips"), orderBy("cost", "asc"))}
+            />
+          )}
+
+          {filter == "Price2" && (
+            <ProjectPanel
+              title="Price High-Low"
+              viewAll={true}
+              tripQuery={query(
+                collection(db, "trips"),
+                orderBy("cost", "desc")
+              )}
+            />
+          )}
+
+          {filter == "Recommendation" && (
+            <ProjectPanel
+              title="Recommendation"
+              viewAll={true}
+              tripQuery={query(
+                collection(db, "trips"),
+              )}
+              recommended={true}
+            />
+          )}
         </Flex>
       </Flex>
     </Flex>
