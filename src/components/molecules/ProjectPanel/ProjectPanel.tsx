@@ -22,6 +22,7 @@ import {
   CollectionReference,
   getDoc,
   doc,
+  setDoc,
 } from "firebase/firestore";
 import { auth, db } from "../../../firebase/clientApp";
 import { TripTemplate } from "templates/tripTemplate";
@@ -77,6 +78,23 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
     [] as TripTemplate[]
   );
 
+  const topDestinations = {
+    "new york": 4,
+    "los angeles": 2,
+    chicago: 3,
+    houston: 4,
+    philadelphia: 2,
+    phoenix: 1,
+    "san antonio": 1,
+    "san diego": 2,
+    dallas: 3,
+    "san jose": 1,
+    austin: 8,
+    jacksonville: 1,
+    "san francisco": 4,
+    columbus: 11,
+  };
+
   if (!cardLimit) {
     cardLimit = 3;
   }
@@ -108,10 +126,32 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
     });
   }, []);
 
+  const handleUpload = () => {
+    // Upload to firestore in users/{user.email}/topDestinations, top destinations should be a map containing the values of topDestinations
+    if (user) {
+      const dbRef = doc(db, "users", user.email || "undefined");
+      setDoc(dbRef, { topDestinations: topDestinations }, { merge: true })
+        .then(() => {
+          console.log("Document successfully written!");
+        })
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+    } else {
+      console.log("User not logged in");
+    }
+  };
+
   useEffect(() => {
     console.log(tripsArray);
 
     const dbRef = doc(db, "users", user?.email || "undefined");
+    getDoc(dbRef).then((doc) => {
+      if (!doc.exists()) {
+        handleUpload();
+      }
+    });
+
     getDoc(dbRef)
       .then((doc) => {
         if (doc.exists()) {
