@@ -1,8 +1,7 @@
 import { Text, Box, Button, Card} from "@chakra-ui/react";
 
 interface ProfileInformation {
-   firstName?: string; 
-   lastName?: string;
+   name?: string; 
    email?: string;
    location?: string;
    socialMedia?: string;
@@ -42,8 +41,7 @@ export const ProfileInformation: React.FC<ProfileInformation> = ({ ...props }) =
                 fontSize="12"
                 mt="5px"
                 mb="10px">
-                Lorem ipsum ,deodedkoedokeko
-                oswlswo swolofjrg wkdowkdo
+                Make changes and save them to update your profile.
             </Text>
         </Box>
         <Box>
@@ -53,21 +51,12 @@ export const ProfileInformation: React.FC<ProfileInformation> = ({ ...props }) =
                     mr="5px"
                     mt="5px"
                     fontSize="12">
-                    First Name: </Text>
+                    Name: </Text>
                 <Text display="flex"
                     color={textColor}
-                    fontSize="12">{props.firstName}</Text>
-            </Box>
-            <Box display={"flex"}>
-                <Text fontWeight={"bold"}
-                    color={textColor}
+                    fontSize="12"
                     mr="5px"
-                    mt="5px"
-                    fontSize="12">
-                    Last Name: </Text>
-                <Text
-                    color={textColor}
-                    fontSize="12">{props.lastName}</Text>
+                    mt="5px">{props.name}</Text>
             </Box>
             <Box display={"flex"}>
                 <Text fontWeight={"bold"}
@@ -78,7 +67,10 @@ export const ProfileInformation: React.FC<ProfileInformation> = ({ ...props }) =
                     Email: </Text>
                 <Text
                     color={textColor}
-                    fontSize="12">{props.email}</Text>
+                    fontSize="12"
+                    mr="5px"
+                    mt="5px"
+                >{props.email}</Text>
             </Box>
             <Box display={"flex"}>
                 <Text fontWeight={"bold"}
@@ -90,7 +82,9 @@ export const ProfileInformation: React.FC<ProfileInformation> = ({ ...props }) =
                     </Text>
                 <Text
                     color={textColor}
-                    fontSize="12">{props.location}</Text>
+                    fontSize="12"
+                    mr="5px"
+                    mt="5px">{props.location}</Text>
             </Box>
             <Box display={"flex"}>
                 <Text fontWeight={"bold"}
@@ -102,7 +96,9 @@ export const ProfileInformation: React.FC<ProfileInformation> = ({ ...props }) =
                 </Text>
                 <Text
                     color={textColor}
-                    fontSize="12">{props.socialMedia}</Text>
+                    fontSize="12"
+                    mr="5px"
+                    mt="5px">{props.socialMedia}</Text>
             </Box>
         </Box>
     </Card>

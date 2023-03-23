@@ -26,8 +26,8 @@ interface ButtonsProps {
     | "mytrips"
     | "ratedtrips"
     | "addtrips"
-    | "billing"
-    | "profile";
+    | "profile"
+    | "billing";
 }
 
 export const SidebarButtons: React.FC<ButtonsProps> = ({
@@ -46,8 +46,8 @@ export const SidebarButtons: React.FC<ButtonsProps> = ({
     mytrips: false,
     ratedtrips: false,
     addtrips: false,
-    billing: false,
     profile: false,
+    billing: false,
   };
 
   if (!selected) {
@@ -95,6 +95,7 @@ export const SidebarButtons: React.FC<ButtonsProps> = ({
         >
           Billing
         </SidepanelButton>
+
       </Flex>
       <Text fontSize="xl" mb="20px" mt="60px">
         Account Pages

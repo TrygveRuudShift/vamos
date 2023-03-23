@@ -90,7 +90,11 @@ export default function Index() {
               <Text>Your email: <i>{user?.email || "Email is undefined"}</i></Text>
             </CardHeader>
           </Card> */}
-          <ProfileInformation email={user?.email || "Email is undefined"} />
+          <ProfileInformation
+            email={user?.email || ""}
+            name={user?.displayName || ""}
+          
+          />
 
           {/*<Card width="32%" borderRadius="2xl">
             <CardHeader>
@@ -100,13 +104,11 @@ export default function Index() {
             </CardHeader>
         </Card>*/}
           <ProfileReviews
-            userNames={["User1", "User2", "User3", "User4"]}
-            reviews={[1, 2, 3, 4]}
+            userNames={["Ole Mo", "Josefine"]}
+            reviews={[4, 5, 3, 4]}
             description={[
               "Description1",
               "Description2",
-              "Description3",
-              "Description4",
             ]}
             profileURL={BgSignUp.src}
           />
