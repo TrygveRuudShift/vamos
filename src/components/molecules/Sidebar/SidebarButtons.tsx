@@ -91,7 +91,7 @@ export const SidebarButtons: React.FC<ButtonsProps> = ({
           icon={BsFillCreditCardFill}
           selected={dir["billing"]}
           size={props.size}
-          href=""
+          href="/billing"
         >
           Billing
         </SidepanelButton>
