@@ -20,8 +20,10 @@ import {
   Query,
   DocumentData,
   CollectionReference,
+  getDoc,
+  doc,
 } from "firebase/firestore";
-import { db } from "../../../firebase/clientApp";
+import { auth, db } from "../../../firebase/clientApp";
 import { TripTemplate } from "templates/tripTemplate";
 import { useEffect, useState } from "react";
 
@@ -34,6 +36,7 @@ interface ProjectPanelProps {
   title: string;
   tripQuery: Query<DocumentData> | CollectionReference<DocumentData>;
   cardLimit?: number;
+  recommended?: boolean;
   onClick?: () => void;
   viewAll?: boolean;
   [key: string]: any;
@@ -64,11 +67,15 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
   onClick,
   viewAll,
   children,
+  recommended,
   ...props
 }) => {
   const textColor = useColorModeValue("gray.700", "white");
 
   const [tripsArray, setTripsArray] = useState([] as TripTemplate[]);
+  const [recommendedTrips, setRecommendedTrips] = useState(
+    [] as TripTemplate[]
+  );
 
   if (!cardLimit) {
     cardLimit = 3;
@@ -77,6 +84,14 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
   if (viewAll) {
     cardLimit = 100;
   }
+
+  const [user, setUser] = useState(auth.currentUser);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+  }, []);
 
   useEffect(() => {
     if (!tripQuery) {
@@ -92,6 +107,51 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
       console.log(tempArray);
     });
   }, []);
+
+  useEffect(() => {
+    console.log(tripsArray);
+
+    const dbRef = doc(db, "users", user?.email || "undefined");
+    getDoc(dbRef)
+      .then((doc) => {
+        if (doc.exists()) {
+          const topDestinations = doc.data()?.topDestinations;
+          const top = Object.keys(topDestinations).sort(
+            (a, b) => topDestinations[b] - topDestinations[a]
+          );
+          console.log("TOOOP");
+          // filter tripsArray to recommendedTrips
+
+          const tempArray: TripTemplate[] = [];
+
+          top.forEach((dest) => {
+            tripsArray.forEach((trip) => {
+              if (
+                trip.destinations &&
+                trip.destinations.includes(dest) &&
+                !tempArray.includes(trip)
+              ) {
+                tempArray.push(trip);
+              }
+            });
+          });
+
+          tripsArray.forEach((trip) => {
+            if (!tempArray.includes(trip)) {
+              tempArray.push(trip);
+            }
+          });
+
+          setRecommendedTrips(tempArray);
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
+  }, [tripsArray]);
 
   return (
     <Card p="16px" borderRadius="2xl" w="full" bg="hovComp">
@@ -122,6 +182,8 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
           {/* Project Card */}
           {children ? (
             children
+          ) : recommended ? (
+            <ProjectCards trips={recommendedTrips} cardLimit={cardLimit} />
           ) : (
             <ProjectCards trips={tripsArray} cardLimit={cardLimit} />
           )}
