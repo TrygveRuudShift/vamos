@@ -98,6 +98,7 @@ export default function Index() {
                 <option value="A-Z">Filter by: A-Z</option>
                 <option value="Price">Filter by: Price Low-High</option>
                 <option value="Price2">Filter by: Price High-Low</option>
+                <option value="Promoted">Filter by: Promoted</option>
                 <option value="Recommendation">
                   Filter by: Recommendation
                 </option>
@@ -178,6 +179,21 @@ export default function Index() {
                 collection(db, "trips"),
               )}
               recommended={true}
+            />
+          )}
+
+          {filter == "Promoted" && (
+            <ProjectPanel
+              title="Promoted"
+              viewAll={true}
+              tripQuery={query(
+                collection(db, "trips"),
+                where(
+                  "promote",
+                  "==",
+                  true
+                )
+              )}
             />
           )}
         </Flex>
