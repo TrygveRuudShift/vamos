@@ -104,6 +104,11 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
   }
 
   const [user, setUser] = useState(auth.currentUser);
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -210,7 +215,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
           templateColumns={{
             sm: "1fr",
             md: "1fr 1fr",
-            xl: "repeat(4, 1fr)",
+            xl: (windowWidth < 1420 && viewAll ) ? "1fr 1fr 1fr" : "1fr 1fr 1fr 1fr",
           }}
           templateRows={{
             sm: "1fr 1fr 1fr auto",
