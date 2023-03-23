@@ -215,7 +215,10 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
           templateColumns={{
             sm: "1fr",
             md: "1fr 1fr",
-            xl: (windowWidth < 1420 && viewAll ) ? "1fr 1fr 1fr" : "1fr 1fr 1fr 1fr",
+            xl:
+              windowWidth < 1420 && (viewAll || tripsArray.length <= cardLimit)
+                ? "1fr 1fr 1fr" 
+                : "1fr 1fr 1fr 1fr",
           }}
           templateRows={{
             sm: "1fr 1fr 1fr auto",
@@ -233,7 +236,9 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
             <ProjectCards trips={tripsArray} cardLimit={cardLimit} />
           )}
 
-          {!viewAll ? (
+          {viewAll || tripsArray.length <= cardLimit ? (
+            <></>
+          ) : (
             <Button
               p="0px"
               bg="transparent"
@@ -256,8 +261,6 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
                 </Text>
               </Flex>
             </Button>
-          ) : (
-            <></>
           )}
         </Grid>
       </CardBody>
