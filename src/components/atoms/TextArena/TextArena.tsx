@@ -42,7 +42,12 @@ export const TextArena: React.FC<TextArenaProps> = ({ text, length, ...props }) 
   };
   return (
     <Flex flexDirection="column" position={"relative"} alignItems="start">
-      <Text>{viewText ? text.slice(0, length) + "..." : text}</Text>
+      {/* <Text>{viewText ? text.slice(0, length) + "..." : text}</Text> */}
+      <Text>
+        {
+          viewText && text.length > length ? text.slice(0, length) + "..." : text
+        }
+      </Text>
       <Button
         variant="link"
         mt="4px"

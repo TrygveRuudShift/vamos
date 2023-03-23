@@ -56,10 +56,10 @@ export const DefaultHeader: React.FC<HeaderProps> = ({
         justifyContent="space-between"
       >
         <Box>
-          <Text> Pages / Backpack Trips</Text>
-          <Text fontWeight="bold"> Backpack Trips</Text>
+          <Text> Pages / Add Trip</Text>
+          <Text fontWeight="bold"> Add Trip</Text>
         </Box>
-        <Flex alignItems="center">
+        <Flex alignItems="center" onClick={() => { window.location.href = "/profile" }} style={{ cursor: "pointer" }}>
           {title === "You are logged out" ? null : <AvatarIcon src={profilePic} name={title} />}
           <Text fontWeight="bold" mr="10px">
             {title}
@@ -88,7 +88,7 @@ export const DefaultHeader: React.FC<HeaderProps> = ({
             Backpack Trips
           </Text>
         </Box>
-        <Flex color="white" alignItems="center" mt="20px">
+        <Flex color="white" alignItems="center" mt="20px" onClick={() => { window.location.href = "/profile" }} style={{ cursor: "pointer" }}>
           {type === "profile" ? null : (
             title === "You are logged out" ? null : <AvatarIcon src={profilePic} name={title} />
           )}

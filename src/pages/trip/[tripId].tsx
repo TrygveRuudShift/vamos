@@ -226,26 +226,28 @@ export default function Index() {
           </Text>
 
           <ReviewCard
-            name="Ola Nordman"
+            name="Kari Nordman"
             age="3 weeks ago"
-            rating={4.6}
-            length={520}
-            avatar="https://bit.ly/dan-abramov"
-            info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet..."
+            rating={5}
+            length={360}
+            avatar="https://i.pinimg.com/280x280_RS/c0/f9/77/c0f977bcd3a674f429463950b4c6428a.jpg"
+            info="The journey of a lifetime! This trip exceeded my expectations and left me with unforgettable memories. The diverse landscapes, rich culture, and welcoming locals made this adventure an experience like no other. Highly recommend for anyone seeking a unique and immersive travel experience."
           />
           <ReviewCard
-            name="Ola Nordman"
+            name="Jesper Eriksen"
             age="3 weeks ago"
-            rating={4.6}
-            avatar="https://bit.ly/dan-abramov"
+            rating={4}
+            length={360}
+            avatar="https://in4adventure.com/wp-content/uploads/2021/04/ericprofile.jpg"
+            info="If you're looking for an adventure that will leave you with unforgettable memories, then is is the perfect choice for you. With its stunning landscapes, rich history, and unique cultural experiences, this destination is sure to capture your heart and leave you wanting more. From exploring ancient landmarks to embarking on thrilling outdoor activities, there's something for everyone. Whether you're a solo traveler, a couple, or a family, you'll find plenty of opportunities to connect with the local culture and create memories that will last a lifetime."
           />
           <ReviewCard
-            name="Ola Nordman"
+            name="Mei Lin"
             age="3 weeks ago"
-            rating={4.6}
-            length={520}
-            avatar="https://bit.ly/dan-abramov"
-            info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet nisl. Sed tincidunt, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, et aliquam nisl nisl sit amet..."
+            rating={5}
+            length={360}
+            avatar="https://img.freepik.com/premium-photo/vintage-photo-back-view-young-asian-woman-hiker-enjoy-nature-view-mountain-peak-cliff-big-sur-chinese-girl-backpacker-sitting-relaxing-rock-top-seeing-pacific-ocean-california-usa_678158-7001.jpg"
+            info="An absolute must-do for any adventurous traveler! This trip offers a perfect balance of exploring new cultures, stunning landscapes, and exciting activities. I can't imagine a more rewarding way to experience a new country."
           />
 
           {user && (

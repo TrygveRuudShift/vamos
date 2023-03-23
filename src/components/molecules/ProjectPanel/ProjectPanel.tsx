@@ -52,7 +52,7 @@ const ProjectCards: React.FC<ProjectCardsProps> = ({
     <>
       {trips.map((trip, index) =>
         index < cardLimit ? (
-          <ProjectCard reviewCount={0} rating={0} trip={trip} />
+          <ProjectCard reviewCount={0} rating={5} trip={trip} />
         ) : (
           <></>
         )
@@ -95,13 +95,19 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
     columbus: 11,
   };
 
-  if (!cardLimit) {
-    cardLimit = 3;
-  }
+  // if (!cardLimit) {
+  //   cardLimit = 3;
+  // }
 
-  if (viewAll) {
-    cardLimit = 100;
-  }
+  // if (viewAll) {
+  //   cardLimit = 100;
+  // }
+
+  // Attempt to fix hydration issue, not sure if it works or if this caused the issue in the first place
+  const actualCardLimit = viewAll ? 100 
+    : cardLimit ? cardLimit
+    : 3;
+
 
   const [user, setUser] = useState(auth.currentUser);
   const [windowWidth, setWindowWidth] = useState(0);
@@ -231,9 +237,9 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
           {children ? (
             children
           ) : recommended ? (
-            <ProjectCards trips={recommendedTrips} cardLimit={cardLimit} />
+            <ProjectCards trips={recommendedTrips} cardLimit={actualCardLimit} />
           ) : (
-            <ProjectCards trips={tripsArray} cardLimit={cardLimit} />
+            <ProjectCards trips={tripsArray} cardLimit={actualCardLimit} />
           )}
 
           {viewAll || tripsArray.length <= cardLimit ? (

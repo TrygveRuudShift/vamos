@@ -28,17 +28,17 @@ export const Default = {
       <>
         <ProjectCard
           reviewCount={0}
-          rating={0}
+          rating={5}
           trip={trip}
         />
         <ProjectCard
           reviewCount={0}
-          rating={0}
+          rating={5}
           trip={trip}
         />
         <ProjectCard
           reviewCount={0}
-          rating={0}
+          rating={5}
           trip={trip}
         />
         
