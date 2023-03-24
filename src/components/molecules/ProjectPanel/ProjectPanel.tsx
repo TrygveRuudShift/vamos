@@ -222,7 +222,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
             sm: "1fr",
             md: "1fr 1fr",
             xl:
-              windowWidth < 1420 && (viewAll || tripsArray.length <= cardLimit)
+              windowWidth < 1420 && viewAll
                 ? "1fr 1fr 1fr" 
                 : "1fr 1fr 1fr 1fr",
           }}
@@ -242,7 +242,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
             <ProjectCards trips={tripsArray} cardLimit={actualCardLimit} />
           )}
 
-          {viewAll || tripsArray.length <= cardLimit ? (
+          {viewAll ? (
             <></>
           ) : (
             <Button
